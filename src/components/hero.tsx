@@ -4,6 +4,7 @@ import { PageProps, useStaticQuery, graphql } from 'gatsby'
 import StyledButton from '../components/styledButton'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import sharedStyles from '../styles/global'
+import moment from 'moment'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Hero = (props: PageProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
+   const age = moment().diff('1979-09-14', 'years')
 
    const data = useStaticQuery(graphql`
       query {
@@ -66,13 +68,15 @@ const Hero = (props: PageProps) => {
             }}
          >
             <h1 className={css.center}>
-               <div className={[css.pt80].join(' ')}>I'm Andre Young</div>
-               <span className={css.pt85}>
-                  Senior Software Engineering Manager
+               <div className={[css.pt85, css.wt100].join(' ')}>
+                  I'm Andre Young
+               </div>
+               <span className={[css.pt70, css.wt700].join(' ')}>
+                  Sr. Software Engineering Manager
                </span>
             </h1>
-            <div className={[css.pt30, css.textSpacing].join(' ')}>
-               40 years young, husband and father, code addict
+            <div className={[css.pt25, css.textSpacing].join(' ')}>
+               {age} years young, husband and father, code addict
             </div>
             <StyledButton text="Know me better"></StyledButton>
          </div>
