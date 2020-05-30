@@ -1,4 +1,30 @@
 body {
    background-color: black;
    color: rgba(255, 255, 255, 0.85);
+   font-family: 'Open Sans';
+}
+
+@font-face {
+   font-family: 'Source Sans Pro';
+   src: url('../styles/fonts/SourceSansPro-Regular.ttf');
+}
+
+@font-face {
+   font-family: 'Source Sans Pro Bold';
+   src: url('../styles/fonts/SourceSansPro-Bold.ttf');
+}
+
+@font-face {
+   font-family: 'Source Sans Pro SemiBold';
+   src: url('../styles/fonts/SourceSansPro-SemiBold.ttf');
+}
+
+@font-face {
+   font-family: 'Open Sans';
+   src: url('../styles/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+   font-family: 'Open Sans Bold';
+   src: url('../styles/fonts/OpenSans-Bold.ttf');
 }

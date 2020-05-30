@@ -17,6 +17,9 @@ const sharedStyles = (theme: Theme) => ({
    pt80: {
       fontSize: '3rem',
    },
+   pt75: {
+      fontSize: '2.8rem',
+   },
    pt70: {
       fontSize: '2.6rem',
    },
@@ -58,6 +61,36 @@ const sharedStyles = (theme: Theme) => ({
    },
    pt14: {
       fontSize: '0.45rem',
+   },
+
+   wt100: {
+      fontWeight: 200,
+   },
+   wt200: {
+      fontWeight: 200,
+   },
+   wt400: {
+      fontWeight: 200,
+   },
+   wt700: {
+      fontWeight: 200,
+   },
+
+   //-- fonts
+   sansProBold: {
+      fontFamily: 'Source Sans Pro Bold',
+   },
+   sansPro: {
+      fontFamily: 'Source Sans Pro',
+   },
+   sansProSemiBold: {
+      fontFamily: 'Source Sans Pro SemiBold',
+   },
+   openSans: {
+      fontFamily: 'Open Sans',
+   },
+   openSansBold: {
+      fontFamily: 'Open Sans Bold',
    },
 
    //-- Text Transformations
