@@ -12,6 +12,9 @@ import './layout.css'
 
 const theme = createMuiTheme({
    palette: {
+      primary: {
+         main: '#ffffff',
+      },
       secondary: {
          main: '#c80a48',
       },
