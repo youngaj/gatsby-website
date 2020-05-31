@@ -1,30 +1,23 @@
 import React from 'react'
-import { PageProps } from 'gatsby'
-import { Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import sharedStyles from '../styles/global'
 
 const useStyles = makeStyles((theme) => ({
    button: {
-      fontFamily: 'Raleway',
-      backgroundColor: theme.palette.secondary.main,
       letterSpacing: '1px',
-      borderRadius: '3px',
-      color: 'white',
-      paddingRight: '1.5 rem',
+      borderRadius: '5px',
    },
 }))
 
 const StyledButton = (props: any) => {
    const theme = useTheme()
-   const localCss = useStyles(theme)
-   const shared = { ...sharedStyles(theme) }
-   const css = { ...localCss, ...shared }
-
-   const text = props.text
+   const css = useStyles(theme)
+   const { children } = props
    return (
       <>
-         <Button className={css.button}>{text}</Button>
+         <Button color="secondary" variant="contained" className={css.button}>
+            {children}
+         </Button>
       </>
    )
 }
