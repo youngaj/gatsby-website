@@ -42,17 +42,20 @@ const Hero = (props: PageProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const age = moment().diff('1979-09', 'years')
-   const viewHeight = useWindowSize().windowHeight
+   const dimensions = useWindowSize()
+
+   //-- leave room for the menu on larger screens
+   const heroHeight =
+      dimensions.windowWidth > 600
+         ? dimensions.windowHeight - 75
+         : dimensions.windowHeight
+
    const imageCss = {
       text: {
          textAlign: 'center',
       },
       image: {
-         border: '1px solid pink',
-         height: `${viewHeight}px`,
-      },
-      container: {
-         border: '1px solid green',
+         height: `${heroHeight}px`,
       },
    }
 
