@@ -92,17 +92,6 @@ const sharedStyles = (theme: Theme) => ({
    openSansBold: {
       fontFamily: 'Open Sans Bold',
    },
-
-   //-- Text Transformations
-   uppercase: {
-      textTransform: 'uppercase',
-   },
-   capitalize: {
-      textTransform: 'capitalize',
-   },
-   center: {
-      textAlign: 'center',
-   },
 })
 
 export default sharedStyles

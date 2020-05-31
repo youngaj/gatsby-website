@@ -2,7 +2,7 @@
 import React from 'react'
 import { PageProps, useStaticQuery, graphql } from 'gatsby'
 import StyledButton from '../components/styledButton'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import sharedStyles from '../styles/global'
 import moment from 'moment'
 
@@ -67,7 +67,7 @@ const Hero = (props: PageProps) => {
                textAlign: 'center',
             }}
          >
-            <h1 className={css.center}>
+            <h1>
                <div className={[css.pt85, css.wt100].join(' ')}>
                   I'm Andre Young
                </div>
@@ -75,10 +75,10 @@ const Hero = (props: PageProps) => {
                   Sr. Software Engineering Manager
                </span>
             </h1>
-            <div className={[css.pt25, css.textSpacing].join(' ')}>
+            <div className={[css.pt22, css.textSpacing].join(' ')}>
                {age} years young, husband and father, code addict
             </div>
-            <StyledButton text="Know me better"></StyledButton>
+            <StyledButton>Know me better</StyledButton>
          </div>
       </header>
    )
