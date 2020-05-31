@@ -1,5 +1,5 @@
 // Gatsby supports TypeScript natively!
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { PageProps, useStaticQuery, graphql } from 'gatsby'
 import StyledButton from '../components/styledButton'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
@@ -14,17 +14,42 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
+//-- helps calculate the window size
+let defaultWidth
+let defaultHeight
+if (typeof window !== `undefined`) {
+   defaultHeight = window.innerHeight
+   defaultWidth = window.innerWidth
+}
+const useWindowSize = () => {
+   const [dimensions, setDimensions] = useState({
+      windowHeight: defaultHeight,
+      windowWidth: defaultWidth,
+   })
+   useEffect(() => {
+      const handler = () =>
+         setDimensions({
+            windowHeight: window.innerHeight,
+            windowWidth: window.innerWidth,
+         })
+      window.addEventListener(`resize`, handler)
+      return () => window.removeEventListener(`resize`, handler)
+   }, [])
+   return dimensions
+}
+
 const Hero = (props: PageProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const age = moment().diff('1979-09', 'years')
+   const viewHeight = useWindowSize().windowHeight
    const imageCss = {
       text: {
          textAlign: 'center',
       },
       image: {
          border: '1px solid pink',
-         height: '1200px',
+         height: `${viewHeight}px`,
       },
       container: {
          border: '1px solid green',
