@@ -1,12 +1,12 @@
 import React from 'react'
 import Img from 'gatsby-image'
-import StyledButton from './styledButton'
 import { useStaticQuery, graphql } from 'gatsby'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import sharedStyles from '../styles/global'
 import info from '../data/info'
 import moment from 'moment'
 import useWindowSize from '../utils/useWindowSize'
+import ContactDetail from './contactDetails'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -39,9 +39,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.secondary.main,
       height: '2px',
       width: '150px',
-   },
-   textGray: {
-      color: 'rgb(161, 161, 161)',
    },
 }))
 
@@ -94,7 +91,7 @@ const Hello = () => {
                learned with anyone willing to listen. See my resume and other
                interests below.
             </p>{' '}
-            <StyledButton>Download Resume</StyledButton>
+            <ContactDetail />
          </div>
          {dimensions.windowWidth > theme.breakpoints.values.md && (
             <div>

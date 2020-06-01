@@ -92,6 +92,10 @@ const sharedStyles = (theme: Theme) => ({
    openSansBold: {
       fontFamily: 'Open Sans Bold',
    },
+
+   textGray: {
+      color: 'rgb(161, 161, 161)',
+   },
 })
 
 export default sharedStyles
