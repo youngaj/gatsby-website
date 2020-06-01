@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
    container: {
       height: '75px',
-      width: '75%',
+      width: '85%',
       margin: 'auto',
       display: 'grid',
       gridGap: '25px',
