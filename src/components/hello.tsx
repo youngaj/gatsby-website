@@ -7,7 +7,8 @@ import info from '../data/info'
 import moment from 'moment'
 import useWindowSize from '../utils/useWindowSize'
 import ContactDetail from './contactDetails'
-import Divider from './divider'
+import Divider from './presntation/divider'
+import SubHeading from './presntation/subHeading'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -57,7 +58,7 @@ const Hello = () => {
       <div className={css.container}>
          <div>
             <h2 className={css.heading}>
-               Hello, My name is {info.me.firstName}.
+               <SubHeading>Hello, My name is {info.me.firstName}.</SubHeading>
             </h2>
             <p>
                Andre Young, {age} years young, born and raised in the Washington
