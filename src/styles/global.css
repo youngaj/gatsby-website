@@ -10,6 +10,11 @@ body {
    font-family: 'Open Sans';
 }
 
+a {
+   color: #c80a48;
+   text-decoration: none;
+}
+
 @font-face {
    font-family: 'Source Sans Pro';
    src: url('../styles/fonts/SourceSansPro-Regular.ttf');
