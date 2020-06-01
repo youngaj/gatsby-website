@@ -7,6 +7,7 @@ import info from '../data/info'
 import moment from 'moment'
 import useWindowSize from '../utils/useWindowSize'
 import ContactDetail from './contactDetails'
+import Divider from './divider'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -32,14 +33,6 @@ const useStyles = makeStyles((theme: Theme) => ({
          marginBottom: '10px',
       },
    },
-   divider: {
-      display: 'block',
-      marginTop: '35px',
-      marginBottom: '35px',
-      backgroundColor: theme.palette.secondary.main,
-      height: '2px',
-      width: '150px',
-   },
 }))
 
 const Hello = () => {
@@ -63,14 +56,16 @@ const Hello = () => {
    return (
       <div className={css.container}>
          <div>
-            <h2 className={css.heading}>Hello, My name is Andre.</h2>
+            <h2 className={css.heading}>
+               Hello, My name is {info.me.firstName}.
+            </h2>
             <p>
                Andre Young, {age} years young, born and raised in the Washington
                D.C. metro area. Highly motivated senior software engineering
                manager and tech lead with over {yearsOfExperience} years of
                development experience.
             </p>
-            <span className={css.divider}></span>
+            <Divider />
             <p className={css.textGray}>
                As of April 2020 I started a new job with Capital One. Very
                excited to be joining an awesome team doing awesome work!
