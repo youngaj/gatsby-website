@@ -36,6 +36,7 @@ const Nav = () => {
             const color = item.active ? 'secondary' : 'primary'
             return (
                <div
+                  key={`nav-${item.title}`}
                   style={{
                      textAlign: 'center',
                      opacity: '0.9',
