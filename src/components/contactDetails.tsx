@@ -3,7 +3,7 @@ import sharedStyles from '../styles/global'
 import StyledButton from '../components/styledButton'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import info from '../data/info'
-import useWindowSize from '../utils/useWindowSize'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -51,7 +51,10 @@ const ContactDetail = () => {
                ))}
             </div>
             <div className={css.buttonArea}>
-               <StyledButton>Download Resume</StyledButton>
+               <StyledButton>
+                  <CloudDownloadIcon />
+                  &nbsp; Download Resume
+               </StyledButton>
             </div>
          </div>
       </div>
