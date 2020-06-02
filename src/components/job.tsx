@@ -20,9 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       //   border: '1px solid red',
       display: 'grid',
       gridTemplateColumns: '150px 55px 1fr',
-      marginLeft: theme.spacing(5),
       marginRight: theme.spacing(5),
-      padding: theme.spacing(2),
    },
    expansionBox: {
       color: 'rgb(23, 23, 23)',
@@ -39,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.secondary.main,
       width: '120px',
       height: '40px',
+      lineHeight: '40px',
       display: 'block',
       verticalAlign: 'center',
       borderRadius: '8px',
@@ -60,7 +59,7 @@ const Job = (props) => {
 
    return (
       <div className={css.jobLayout}>
-         <div className={css.yearBox}>
+         <div className={[css.yearBox, css.wt700].join(' ')}>
             {start} - {end}
          </div>
          <div className={css.expansionBox} onClick={toggleDetails}>
