@@ -7,7 +7,7 @@ import Hero from '../components/hero'
 import Nav from '../components/nav'
 import Hello from '../components/hello'
 import LatestWork from '../components/LatestWork'
-import WorkHistory from '../components/workHistory'
+import Resume from '../components/resume'
 
 const IndexPage = () => (
    <Layout>
@@ -16,7 +16,7 @@ const IndexPage = () => (
       <Nav />
       <Hello />
       <LatestWork />
-      <WorkHistory />
+      <Resume />
       <Link to="/page-2/">Go to page 2</Link>
    </Layout>
 )
