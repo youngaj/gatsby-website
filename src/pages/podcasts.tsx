@@ -1,12 +1,13 @@
 // Gatsby supports TypeScript natively!
 import React, { useEffect, useState } from 'react'
-import { PageProps, Link } from 'gatsby'
+import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
 import { getPodcasts } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import sharedStyles from '../styles/global'
+import Podcast from '../components/podcast'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -14,16 +15,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridGap: theme.spacing(2),
       gridTemplateColumns: '1fr 1fr',
-   },
-   podcastBlock: {
-      gridGap: theme.spacing(2),
-      border: `1px solid ${theme.palette.primary.main}`,
-      padding: theme.spacing(2),
-      '& div': {
-         textAlign: 'left',
-      },
+      margin: theme.spacing(4),
    },
 }))
+
+const podcastSort = (a, b) => {
+   return (
+      Date.parse(b.lastEpisodePublished) - Date.parse(a.lastEpisodePublished)
+   )
+}
 
 const PodcastPage = (props: PageProps) => {
    const theme = useTheme()
@@ -41,22 +41,8 @@ const PodcastPage = (props: PageProps) => {
          <Nav></Nav>
          <h1>Podcasts</h1>
          <div className={css.container}>
-            {podcastData.podcasts.map((show, index) => (
-               <div
-                  key={`episode-${show.title}-${index}`}
-                  className={css.podcastBlock}
-               >
-                  <div>
-                     <img
-                        src={`https://static.pocketcasts.com/discover/images/130/${show.uuid}.jpg`}
-                        alt="{show.title}"
-                     />
-                  </div>
-                  <div>
-                     <a href={show.url}>{show.title}</a>
-                  </div>
-                  <div>{show.description}</div>
-               </div>
+            {podcastData.podcasts.sort(podcastSort).map((show, index) => (
+               <Podcast data={show} key={`episode-${show.title}-${index}`} />
             ))}
          </div>
       </Layout>
