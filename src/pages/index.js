@@ -8,6 +8,7 @@ import Nav from '../components/nav'
 import Hello from '../components/hello'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
+import PodcastQueue from '../components/podcastQueue'
 
 const IndexPage = () => (
    <Layout>
@@ -17,6 +18,7 @@ const IndexPage = () => (
       <Hello />
       <LatestWork />
       <Resume />
+      <PodcastQueue />
       <Link to="/page-2/">Go to page 2</Link>
    </Layout>
 )
