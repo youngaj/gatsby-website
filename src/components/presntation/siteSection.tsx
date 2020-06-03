@@ -25,7 +25,7 @@ const SiteSection = (props) => {
    const children = props.children
    const bg: bgTone = props.bg
 
-   const conditionalStyles = { backgroundColor: colors.muted }
+   const conditionalStyles = { backgroundColor: 'rgb(23, 23, 23)' }
    if (bg === 'dark') {
       conditionalStyles.backgroundColor = 'black'
    }

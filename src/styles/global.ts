@@ -100,4 +100,5 @@ export const sharedStyles = (theme: Theme) => ({
 
 export const colors = {
    muted: 'rgb(161, 161, 161)',
+   accent: '#c80a48',
 }

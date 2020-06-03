@@ -8,6 +8,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { colors } from '../styles/global'
 import './layout.css'
 
 const theme = createMuiTheme({
@@ -16,7 +17,7 @@ const theme = createMuiTheme({
          main: '#ffffff',
       },
       secondary: {
-         main: '#c80a48',
+         main: colors.accent,
       },
    },
 })
