@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import Nav from '../components/nav'
 import { getPodcasts } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -5,7 +5,7 @@ import info from '../data/info'
 import Job from './job'
 import CenterDivider from './presntation/centerDivider'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),

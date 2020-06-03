@@ -1,5 +1,6 @@
 import React from 'react'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
+
 import StyledButton from '../components/styledButton'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import info from '../data/info'

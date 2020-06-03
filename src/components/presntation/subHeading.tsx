@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import sharedStyles from '../../styles/global'
+import { sharedStyles } from '../../styles/global'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),

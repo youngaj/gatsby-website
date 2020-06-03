@@ -1,7 +1,8 @@
 import React from 'react'
 import Img from 'gatsby-image'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
+
 import MissingImage from './missingImage'
 
 //--- Base CSS

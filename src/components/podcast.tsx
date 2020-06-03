@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
-import sharedStyles, { colors } from '../styles/global'
+import { sharedStyles, colors } from '../styles/global'
 import moment from 'moment'
 
 const useStyles = makeStyles((theme: Theme) => ({

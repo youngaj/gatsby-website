@@ -1,6 +1,6 @@
 import { Theme } from '@material-ui/core'
 
-const sharedStyles = (theme: Theme) => ({
+export const sharedStyles = (theme: Theme) => ({
    content: {
       width: '80%',
       maxWidth: '1000px',
@@ -101,5 +101,3 @@ const sharedStyles = (theme: Theme) => ({
 export const colors = {
    muted: 'rgb(161, 161, 161)',
 }
-
-export default sharedStyles

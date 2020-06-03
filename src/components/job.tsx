@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
+
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 

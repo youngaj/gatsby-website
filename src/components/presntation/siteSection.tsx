@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
-import sharedStyles from '../../styles/global'
+import { sharedStyles, colors } from '../../styles/global'
 
 type bgTone = 'dark' | 'light'
 
@@ -25,7 +25,7 @@ const SiteSection = (props) => {
    const children = props.children
    const bg: bgTone = props.bg
 
-   const conditionalStyles = { backgroundColor: 'rgb(23, 23, 23)' }
+   const conditionalStyles = { backgroundColor: colors.muted }
    if (bg === 'dark') {
       conditionalStyles.backgroundColor = 'black'
    }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import sharedStyles from '../styles/global'
+import { sharedStyles } from '../styles/global'
+
 import { Button } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({

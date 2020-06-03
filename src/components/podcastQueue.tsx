@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import sharedStyles, { colors } from '../styles/global'
+import { sharedStyles, colors } from '../styles/global'
 import SubHeading from './presntation/subHeading'
 import CenterDivider from './presntation/centerDivider'
 import SiteSection from './presntation/siteSection'
