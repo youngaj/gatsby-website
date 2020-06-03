@@ -18,7 +18,7 @@ const LatestWork = () => {
          <h2>
             <SubHeading>My Latest Work</SubHeading>
          </h2>
-         <p className={css.textGray}>
+         <p className={css.mutedText}>
             Most of my work is proprietary but I'm looking to expand my open
             source portfolio soon. Stay tuned!
          </p>

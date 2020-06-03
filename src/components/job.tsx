@@ -74,7 +74,7 @@ const Job = (props) => {
                {job.title} - {job.company}
             </p>
             {job.expanded && (
-               <div className={css.textGray}>
+               <div className={css.mutedText}>
                   Responsibilities: <br />
                   <ul>
                      {job.responsibilities.map((duty, index) => (

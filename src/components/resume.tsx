@@ -26,7 +26,7 @@ const Resume = () => {
          <h2>
             <SubHeading>My resume</SubHeading>
          </h2>
-         <p className={css.textGray}>
+         <p className={css.mutedText}>
             I have a strong belief that you should never stop learning. Below
             lists my formal education.
          </p>

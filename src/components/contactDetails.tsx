@@ -34,7 +34,7 @@ const ContactDetail = () => {
       <div>
          <h3 className={css.heading}>Contact Details</h3>
          <div>
-            <div className={css.textGray}>
+            <div className={css.mutedText}>
                <p>
                   {info.me.firstName} {info.me.lastName}
                </p>

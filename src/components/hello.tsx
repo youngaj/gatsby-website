@@ -67,22 +67,22 @@ const Hello = () => {
                development experience.
             </p>
             <Divider />
-            <p className={css.textGray}>
+            <p className={css.mutedText}>
                As of April 2020 I started a new job with Capital One. Very
                excited to be joining an awesome team doing awesome work!
             </p>
-            <p className={css.textGray}>
+            <p className={css.mutedText}>
                Formerly I worked at NASA's Goddard Space Flight Center, where I
                spent most of my time crafting and working on cool (and sometimes
                important but not so cool) projects.
             </p>
-            <p className={css.textGray}>
+            <p className={css.mutedText}>
                I also ran a bi-weekly developer meetup at NASA, where we
                discussed various development topics ranging from code
                architecture to knowing how to say "No" to a customer and having
                them say "thank you" afterwards.
             </p>
-            <p className={css.textGray}>
+            <p className={css.mutedText}>
                I love development, love learning and sharing the things I've
                learned with anyone willing to listen. See my resume and other
                interests below.

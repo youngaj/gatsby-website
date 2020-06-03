@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import sharedStyles from '../styles/global'
+import sharedStyles, { colors } from '../styles/global'
 import SubHeading from './presntation/subHeading'
 import CenterDivider from './presntation/centerDivider'
 import SiteSection from './presntation/siteSection'
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridTemplateColumns: '1fr 3fr',
       gridGap: theme.spacing(2),
-      border: `1px solid ${theme.palette.primary.main}`,
+      border: `1px solid ${colors.muted}`,
       padding: theme.spacing(2),
       '& div': {
          textAlign: 'left',
@@ -44,7 +44,7 @@ const PodcastQueue = () => {
          <h2>
             <SubHeading>What's in my podcast queue?</SubHeading>
          </h2>
-         <p className={css.textGray}>
+         <p className={css.mutedText}>
             I subscribe to {podcastData.podcasts.length} podcasts. Podcasts are
             a great way to keep up with the latest around the industry. They are
             also a great way not to go insane duing long commutes. Below is a
