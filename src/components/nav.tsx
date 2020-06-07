@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       gridGap: '25px',
       gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       alignItems: 'center',
+      backgroundColor: 'black',
    },
 }))
 
@@ -32,21 +33,25 @@ const Nav = () => {
    ]
 
    return (
-      <div className={css.container}>
-         {menuItems.map((item) => {
-            const color = item.active ? 'secondary' : 'primary'
-            return (
-               <div
-                  key={`nav-${item.title}`}
-                  style={{
-                     textAlign: 'center',
-                     opacity: '0.9',
-                  }}
-               >
-                  <Button color={color}>{item.title}</Button>
-               </div>
-            )
-         })}
+      <div style={{ backgroundColor: 'black' }}>
+         <div className={css.container}>
+            {menuItems.map((item) => {
+               const color = item.active ? 'secondary' : 'primary'
+               return (
+                  <div
+                     key={`nav-${item.title}`}
+                     style={{
+                        textAlign: 'center',
+                        opacity: '0.9',
+                     }}
+                  >
+                     <a href={`${item.target}`}>
+                        <Button color={color}>{item.title}</Button>
+                     </a>
+                  </div>
+               )
+            })}
+         </div>
       </div>
    )
 }
