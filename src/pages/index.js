@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -27,19 +27,18 @@ const IndexPage = () => {
    return (
       <Layout>
          <SEO />
-         <a name="home"></a>
-         <Hero name="hero" />
-
+         <span name="home"></span>
+         <Hero />
          <div className={css.sticky}>
             <Nav />
          </div>
-         <a name="profile"></a>
+         <span name="profile"></span>
          <Hello />
-         <a name="skills"></a>
+         <span name="skills"></span>
          <LatestWork />
-         <a name="resume"></a>
+         <span name="resume"></span>
          <Resume />
-         <a name="podcast"></a>
+         <span name="podcast"></span>
          <PodcastQueue name="queue" />
       </Layout>
    )
