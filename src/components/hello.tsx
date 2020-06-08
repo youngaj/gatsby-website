@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
 
-import info from '../data/info'
+import { info } from '../data/info'
 import moment from 'moment'
 import useWindowSize from '../utils/useWindowSize'
 import ContactDetail from './contactDetails'
@@ -41,8 +41,7 @@ const Hello = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const dimensions = useWindowSize()
-   const age = moment().diff(info.me.dob, 'years')
-   const yearsOfExperience = moment().diff('1999-06-1', 'years')
+   const yearsOfExperience = moment().diff('1999-06-01', 'years')
    const data = useStaticQuery(graphql`
       query {
          profile: file(relativePath: { eq: "profile-1.jpg" }) {
@@ -62,10 +61,10 @@ const Hello = () => {
                <SubHeading>Hello, My name is {info.me.firstName}.</SubHeading>
             </h2>
             <p>
-               Andre Young, {age} years young, born and raised in the Washington
-               D.C. metro area. Highly motivated senior software engineering
-               manager and tech lead with over {yearsOfExperience} years of
-               development experience.
+               Andre Young, {info.me.age} years young, born and raised in the
+               Washington D.C. metro area. Highly motivated senior software
+               engineering manager and tech lead with over {yearsOfExperience}{' '}
+               years of development experience.
             </p>
             <Divider />
             <p className={css.mutedText}>

@@ -4,6 +4,7 @@ import { PageProps, useStaticQuery, graphql } from 'gatsby'
 import StyledButton from '../components/styledButton'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
+import { info } from '../data/info'
 
 import moment from 'moment'
 import ImageOverlay from './imageOverlay'
@@ -19,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Hero = (props: PageProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const age = moment().diff('1979-09', 'years')
    const dimensions = useWindowSize()
 
    //-- leave room for the menu on larger screens
@@ -60,7 +60,7 @@ const Hero = (props: PageProps) => {
             </span>
          </h1>
          <div className={[css.pt22, css.textSpacing].join(' ')}>
-            {age} years young, husband and father, code addict
+            {info.me.age} years young, husband and father, code addict
          </div>
          <StyledButton>Know me better</StyledButton>
       </ImageOverlay>

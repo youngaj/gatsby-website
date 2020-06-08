@@ -1,9 +1,11 @@
-const info = {
+import moment from 'moment'
+
+export const info = {
    me: {
       firstName: 'Andre',
       lastName: 'Young',
       email: 'andrejyoung@gmail.com',
-      dob: '1979-09',
+      age: moment().diff(moment('1979-09', 'YYYY-MM'), 'years'),
       workExperience: [
          {
             company: 'Capital One',
@@ -77,5 +79,3 @@ const info = {
       lastDay: '2020/04/20',
    },
 }
-
-export default info

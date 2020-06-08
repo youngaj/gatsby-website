@@ -6,7 +6,7 @@ import CenterDivider from './presntation/centerDivider'
 import SiteSection from './presntation/siteSection'
 import { getPodcasts } from '../utils/podcastService'
 import StyledButton from './styledButton'
-import info from '../data/info'
+import { info } from '../data/info'
 import { Link } from 'gatsby'
 
 const useStyles = makeStyles((theme: Theme) => ({

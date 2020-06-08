@@ -3,7 +3,7 @@ import { sharedStyles } from '../styles/global'
 
 import StyledButton from '../components/styledButton'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
-import info from '../data/info'
+import { info } from '../data/info'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 
 const useStyles = makeStyles((theme: Theme) => ({

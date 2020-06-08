@@ -1,7 +1,7 @@
 import React from 'react'
 import SubHeading from './presntation/subHeading'
 import SiteSection from './presntation/siteSection'
-import info from '../data/info'
+import { info } from '../data/info'
 import Job from './job'
 import CenterDivider from './presntation/centerDivider'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
