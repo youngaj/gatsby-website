@@ -8,6 +8,7 @@ import CenterDivider from '../presntation/centerDivider'
 import { getVideos } from '../../utils/devGroupService'
 import StyledButton from '../styledButton'
 import { Link } from 'gatsby'
+import ColorBox from '../presntation/colorBox'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -18,13 +19,16 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    episode: {
       display: 'grid',
+      gridTemplateColumns: '1fr',
+      gridGap: theme.spacing(2),
+      padding: theme.spacing(2),
+   },
+   details: {
+      display: 'grid',
       gridTemplateColumns: '1fr 3fr',
       gridGap: theme.spacing(2),
       border: `1px solid ${colors.muted}`,
       padding: theme.spacing(2),
-      '& div': {
-         textAlign: 'left',
-      },
    },
 }))
 
@@ -34,7 +38,6 @@ const DevGroupPreview = () => {
    const [videos, setVideos] = useState([])
    useEffect(() => {
       getVideos().then((data) => {
-         console.log(data)
          const subset = data.slice(0, 12)
          setVideos(subset)
       })
@@ -67,8 +70,24 @@ const DevGroupPreview = () => {
                         alt="{episode.title}"
                      />
                   </div>
-                  <div>
-                     <a href={episode.link}>{episode.title}</a>
+                  <div className={css.details}>
+                     <ColorBox>
+                        <div>
+                           <div className={[css.pt65, css.wt700].join(' ')}>
+                              {episode.day}
+                           </div>
+                           <div>{episode.monthYear}</div>
+                        </div>
+                     </ColorBox>
+                     <span style={{ textAlign: 'left' }}>
+                        <a
+                           href={episode.link}
+                           target="_blank"
+                           className={css.mutedText}
+                        >
+                           {episode.title}
+                        </a>
+                     </span>
                   </div>
                </div>
             ))}
