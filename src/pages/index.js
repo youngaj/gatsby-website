@@ -9,6 +9,7 @@ import Hello from '../components/hello'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
 import PodcastQueue from '../components/podcastQueue'
+import DevGroupPreview from '../components/preview/devGroup'
 import { sharedStyles } from '../styles/global'
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +40,9 @@ const IndexPage = () => {
          <span name="resume"></span>
          <Resume />
          <span name="podcast"></span>
-         <PodcastQueue name="queue" />
+         <PodcastQueue />
+         <span name="devGroup"></span>
+         <DevGroupPreview />
       </Layout>
    )
 }
