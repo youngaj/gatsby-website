@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 
-import { sharedStyles } from '../../styles/global'
-import SiteSection from '../presntation/siteSection'
-import SubHeading from '../presntation/subHeading'
-import CenterDivider from '../presntation/centerDivider'
-import { getVideos } from '../../utils/devGroupService'
-import StyledButton from '../styledButton'
-import { Link } from 'gatsby'
-import DevGroupSession from '../devGroupSession'
+import { sharedStyles } from '../styles/global'
+import SiteSection from '../components/presntation/siteSection'
+import SubHeading from '../components/presntation/subHeading'
+import CenterDivider from '../components/presntation/centerDivider'
+import { getVideos } from '../utils/devGroupService'
+import StyledButton from '../components/styledButton'
+import { Link, PageProps } from 'gatsby'
+import DevGroupSession from '../components/devGroupSession'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -19,14 +19,13 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const DevGroupPreview = () => {
+const DevGroup = (props: PageProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const [videos, setVideos] = useState([])
    useEffect(() => {
       getVideos().then((data) => {
-         const subset = data.slice(0, 12)
-         setVideos(subset)
+         setVideos(data)
       })
    }, [])
 
@@ -50,13 +49,8 @@ const DevGroupPreview = () => {
                <DevGroupSession session={session} />
             ))}
          </div>
-         <div>
-            <Link to="/devGroup">
-               <StyledButton>See All Sessions</StyledButton>
-            </Link>
-         </div>
       </SiteSection>
    )
 }
 
-export default DevGroupPreview
+export default DevGroup
