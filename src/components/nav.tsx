@@ -6,6 +6,11 @@ import { Button } from '@material-ui/core'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
+   sticky: {
+      position: '-webkit-sticky',
+      position: 'sticky',
+      top: 0,
+   },
    container: {
       height: '75px',
       width: '85%',
@@ -18,24 +23,29 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const Nav = () => {
+const Nav = (props) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const menuItems = [
-      { title: 'Home', target: '#home', active: 'true' },
-      { title: 'Profile', target: '#profile' },
-      { title: 'Services', target: '#services' },
-      { title: 'Resume', target: '#resume' },
-      { title: 'Podcasts', target: '#podcast' },
-      { title: 'Skills', target: '#skills' },
-      { title: 'Dev Group', target: '#devGroup' },
-      { title: 'Contact', target: '#contact' },
-   ]
+   const links = props.links
+   const defaultMenuOptions = {
+      home: { title: 'Home', target: '/', active: 'true' },
+      profile: { title: 'Profile', target: '/#profile' },
+      services: { title: 'Services', target: '/#services' },
+      resume: { title: 'Resume', target: '/#resume' },
+      podcasts: { title: 'Podcasts', target: '/podcasts' },
+      skilss: { title: 'Skills', target: '/#skills' },
+      devGroup: { title: 'Dev Group', target: '/devGroup' },
+      contact: { title: 'Contact', target: '/' },
+   }
+   const menuItems = links
+      ? { ...defaultMenuOptions, ...links }
+      : defaultMenuOptions
 
    return (
-      <div style={{ backgroundColor: 'black' }}>
+      <div className={css.sticky} style={{ backgroundColor: 'black' }}>
          <div className={css.container}>
-            {menuItems.map((item) => {
+            {Object.keys(menuItems).map((key) => {
+               const item = menuItems[key]
                const color = item.active ? 'secondary' : 'primary'
                return (
                   <div
