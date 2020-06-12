@@ -26,9 +26,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Nav = (props) => {
    const theme = useTheme()
    const css = useStyles(theme)
+   const active = props.active
    const links = props.links
    const defaultMenuOptions = {
-      home: { title: 'Home', target: '/', active: 'true' },
+      home: { title: 'Home', target: '/' },
       profile: { title: 'Profile', target: '/#profile' },
       services: { title: 'Services', target: '/#services' },
       resume: { title: 'Resume', target: '/#resume' },
@@ -40,6 +41,12 @@ const Nav = (props) => {
    const menuItems = links
       ? { ...defaultMenuOptions, ...links }
       : defaultMenuOptions
+
+   if (active) {
+      menuItems[active].active = 'true'
+   } else {
+      menuItems.home.active = 'true'
+   }
 
    return (
       <div

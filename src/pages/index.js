@@ -20,7 +20,7 @@ const IndexPage = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const menuItems = {
-      home: { title: 'Home', target: '#home', active: 'true' },
+      home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
       services: { title: 'Services', target: '#services' },
       resume: { title: 'Resume', target: '#resume' },

@@ -9,6 +9,7 @@ import { getVideos } from '../utils/devGroupService'
 import { PageProps } from 'gatsby'
 import DevGroupSession from '../components/devGroupSession'
 import Nav from '../components/nav'
+import Layout from '../components/layout'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -30,8 +31,8 @@ const DevGroup = (props: PageProps) => {
    }, [])
 
    return (
-      <>
-         <Nav />
+      <Layout>
+         <Nav active="devGroup" />
          <SiteSection bg="dark">
             <h2>
                <SubHeading>Dev Group Sessions</SubHeading>
@@ -52,7 +53,7 @@ const DevGroup = (props: PageProps) => {
                ))}
             </div>
          </SiteSection>
-      </>
+      </Layout>
    )
 }
 
