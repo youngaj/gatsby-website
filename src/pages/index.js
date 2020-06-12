@@ -9,7 +9,7 @@ import Hello from '../components/hello'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
 import PodcastQueue from '../components/podcastQueue'
-import DevGroupPreview from '../components/preview/devGroup'
+import DevGroupPreview from '../components/preview/devGroupPreview'
 import { sharedStyles } from '../styles/global'
 
 const useStyles = makeStyles((theme) => ({

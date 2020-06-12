@@ -47,7 +47,10 @@ const DevGroupPreview = () => {
          </span>
          <div className={css.container}>
             {videos.map((session, index) => (
-               <DevGroupSession session={session} />
+               <DevGroupSession
+                  session={session}
+                  key={`session-preview-${session.id}-${index}`}
+               />
             ))}
          </div>
          <div>
