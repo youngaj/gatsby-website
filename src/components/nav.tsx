@@ -42,7 +42,10 @@ const Nav = (props) => {
       : defaultMenuOptions
 
    return (
-      <div className={css.sticky} style={{ backgroundColor: 'black' }}>
+      <div
+         className={css.sticky}
+         style={{ backgroundColor: 'black', zIndex: 10 }}
+      >
          <div className={css.container}>
             {Object.keys(menuItems).map((key) => {
                const item = menuItems[key]
