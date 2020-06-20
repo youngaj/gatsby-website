@@ -5,11 +5,12 @@ import { sharedStyles } from '../styles/global'
 import SiteSection from '../components/presntation/siteSection'
 import SubHeading from '../components/presntation/subHeading'
 import CenterDivider from '../components/presntation/centerDivider'
-import { getVideos } from '../utils/devGroupService'
-import { PageProps } from 'gatsby'
+import { getVideos, formatVideo } from '../utils/devGroupService'
+import { graphql } from 'gatsby'
 import DevGroupSession from '../components/devGroupSession'
 import Nav from '../components/nav'
 import Layout from '../components/layout'
+import { Video } from '../types/video'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -20,10 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const DevGroup = (props: PageProps) => {
+const DevGroup = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [videos, setVideos] = useState([])
+   const initialState = data.sessions.nodes.map((x: Video) => formatVideo(x))
+   const [videos, setVideos] = useState(initialState)
    useEffect(() => {
       getVideos().then((data) => {
          setVideos(data)
@@ -58,3 +60,28 @@ const DevGroup = (props: PageProps) => {
 }
 
 export default DevGroup
+
+export const pageQuery = graphql`
+   query SessionQuery {
+      sessions: allDevGroupSession(sort: { order: DESC, fields: publishedAt }) {
+         nodes {
+            id
+            link
+            title
+            description
+            thumbnails {
+               default {
+                  url
+               }
+               high {
+                  url
+               }
+               medium {
+                  url
+               }
+            }
+            publishedAt(formatString: "MMMM D, YYYY")
+         }
+      }
+   }
+`
