@@ -11,14 +11,16 @@ import Resume from '../components/resume'
 import PodcastQueue from '../components/podcastQueue'
 import DevGroupPreview from '../components/preview/devGroupPreview'
 import { sharedStyles } from '../styles/global'
+import { formatVideo } from '../utils/devGroupService'
 
 const useStyles = makeStyles((theme) => ({
    ...sharedStyles(theme),
 }))
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
+   const sessions = data.sessions.nodes.map((video) => formatVideo(video))
    const menuItems = {
       home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
@@ -45,9 +47,34 @@ const IndexPage = () => {
          <span name="podcastQueue"></span>
          <PodcastQueue />
          <span name="devGroup"></span>
-         <DevGroupPreview />
+         <DevGroupPreview sessions={sessions} />
       </Layout>
    )
 }
 
 export default IndexPage
+
+export const pageQuery = graphql`
+   query IndexQuery {
+      sessions: allDevGroupSession(sort: { order: DESC, fields: publishedAt }) {
+         nodes {
+            id
+            link
+            title
+            description
+            thumbnails {
+               default {
+                  url
+               }
+               high {
+                  url
+               }
+               medium {
+                  url
+               }
+            }
+            publishedAt(formatString: "MMMM D, YYYY")
+         }
+      }
+   }
+`

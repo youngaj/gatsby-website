@@ -19,13 +19,21 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const DevGroupPreview = () => {
+const getSubset = (videos) => {
+   let subset = []
+   if (videos) {
+      subset = videos.slice(0, 12)
+   }
+   return subset
+}
+
+const DevGroupPreview = ({ sessions }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [videos, setVideos] = useState([])
+   const [videos, setVideos] = useState(getSubset(sessions))
    useEffect(() => {
       getVideos().then((data) => {
-         const subset = data.slice(0, 12)
+         const subset = getSubset(data)
          setVideos(subset)
       })
    }, [])
