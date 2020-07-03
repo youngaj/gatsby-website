@@ -2,6 +2,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
    const { createPage } = actions
 
    const blogPostTemplate = require.resolve(`./src/templates/blogTemplate.tsx`)
+   const mdxBlogPostTemplate = require.resolve(
+      `./src/templates/MdxBlogTemplate.tsx`
+   )
 
    const result = await graphql(`
       {
@@ -17,6 +20,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                }
             }
          }
+         blogPosts: allMdx {
+            nodes {
+               frontmatter {
+                  title
+                  slug
+                  date
+               }
+            }
+         }
       }
    `)
 
@@ -28,8 +40,19 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       createPage({
-         path: node.frontmatter.slug,
+         path: `blog/${node.frontmatter.slug}`,
          component: blogPostTemplate,
+         context: {
+            // additional data can be passed via context
+            slug: node.frontmatter.slug,
+         },
+      })
+   })
+
+   result.data.blogPosts.nodes.forEach(node => {
+      createPage({
+         path: `blog/mdx/${node.frontmatter.slug}`,
+         component: mdxBlogPostTemplate,
          context: {
             // additional data can be passed via context
             slug: node.frontmatter.slug,

@@ -1,5 +1,5 @@
 ---
-slug: '/blog/rebuiding-website'
+slug: 'rebuiding-website'
 date: '2020-06-20'
 title: 'Rebuildig my website in Gatsby'
 ---

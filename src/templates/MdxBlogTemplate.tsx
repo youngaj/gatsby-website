@@ -14,21 +14,22 @@ const useStyles = makeStyles((theme: Theme) => ({
    blogPostContent: {},
 }))
 
-export default function BlogTemplate({ data }) {
+export default function MdxBlogTemplate({ data }) {
    const theme = useTheme()
    const css = useStyles(theme)
 
-   const { markdownRemark } = data
-   const { frontmatter, html } = markdownRemark
+   console.log('Hello from blog template', data.mdx)
+
+   const { frontmatter, html, body } = data.mdx
    return (
       <div className={css.container}>
+         <h1 className={css.mutedText}>Hello World</h1>
          <div className={css.blogPost}>
             <h1>{frontmatter.title}</h1>
             <h2>{frontmatter.date}</h2>
-            <div
-               className={css.blogPostContent}
-               dangerouslySetInnerHTML={{ __html: html }}
-            />
+            <div className={[css.blogPostContent, css.mutedText].join(' ')}>
+               {html}
+            </div>
          </div>
       </div>
    )
@@ -36,13 +37,14 @@ export default function BlogTemplate({ data }) {
 
 export const pageQuery = graphql`
    query($slug: String!) {
-      markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-         html
+      mdx(frontmatter: { slug: { eq: $slug } }) {
          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            slug
             title
+            slug
+            date
          }
+         html
+         body
       }
    }
 `

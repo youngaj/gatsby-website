@@ -10,6 +10,7 @@ import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
 import PodcastQueue from '../components/podcastQueue'
 import DevGroupPreview from '../components/preview/devGroupPreview'
+import BlogPreview from '../components/preview/blogPreview'
 import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
 
@@ -21,6 +22,7 @@ const IndexPage = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const sessions = data.sessions.nodes.map((video) => formatVideo(video))
+   const blogPosts = data.blogPosts.nodes
    const menuItems = {
       home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
@@ -29,6 +31,7 @@ const IndexPage = ({ data }) => {
       podcasts: { title: 'Podcasts', target: '#podcastQueue' },
       skilss: { title: 'Skills', target: '#skills' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
+      blog: { title: 'Blog', target: '#blog' },
       contact: { title: 'Contact', target: '#contact' },
    }
 
@@ -48,6 +51,8 @@ const IndexPage = ({ data }) => {
          <PodcastQueue />
          <span name="devGroup"></span>
          <DevGroupPreview sessions={sessions} />
+         <span name="blog"></span>
+         <BlogPreview posts={blogPosts} />
       </Layout>
    )
 }
@@ -74,6 +79,17 @@ export const pageQuery = graphql`
                }
             }
             publishedAt(formatString: "MMMM D, YYYY")
+         }
+      }
+      blogPosts: allMdx {
+         nodes {
+            frontmatter {
+               title
+               slug
+               date
+            }
+            html
+            body
          }
       }
    }
