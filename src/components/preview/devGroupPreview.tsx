@@ -9,6 +9,7 @@ import { getVideos } from '../../utils/devGroupService'
 import StyledButton from '../styledButton'
 import { Link } from 'gatsby'
 import DevGroupSession from '../devGroupSession'
+import { getSubset } from '../../utils/generalUtils'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -19,21 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const getSubset = (videos) => {
-   let subset = []
-   if (videos) {
-      subset = videos.slice(0, 12)
-   }
-   return subset
-}
-
 const DevGroupPreview = ({ sessions }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [videos, setVideos] = useState(getSubset(sessions))
+   const [videos, setVideos] = useState(getSubset(sessions, 12))
    useEffect(() => {
       getVideos().then((data) => {
-         const subset = getSubset(data)
+         const subset = getSubset(data, 12)
          setVideos(subset)
       })
    }, [])
