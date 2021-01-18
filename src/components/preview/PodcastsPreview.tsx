@@ -79,7 +79,7 @@ const PodcastsPreview = () => {
                   <div>
                      <a href={episode.url}>{episode.title}</a>
                   </div>
-                  <div>{episode.showNotes}</div>
+                  {/* <div>{episode.showNotes}</div> */}
                </div>
             ))}
          </div>
