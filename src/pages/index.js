@@ -8,7 +8,7 @@ import Nav from '../components/nav'
 import Hello from '../components/hello'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
-import PodcastQueue from '../components/podcastQueue'
+import PodcastsPreview from '../components/preview/PodcastsPreview'
 import DevGroupPreview from '../components/preview/devGroupPreview'
 import BlogPreview from '../components/preview/blogPreview'
 import { sharedStyles } from '../styles/global'
@@ -48,7 +48,7 @@ const IndexPage = ({ data }) => {
          <span name="resume"></span>
          <Resume />
          <span name="podcastQueue"></span>
-         <PodcastQueue />
+         <PodcastsPreview />
          <span name="devGroup"></span>
          <DevGroupPreview sessions={sessions} />
          <span name="blog"></span>
