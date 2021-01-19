@@ -4,7 +4,7 @@ import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
-import { getPodcasts } from '../utils/podcastService'
+import { getPodcastInfo } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
@@ -35,7 +35,7 @@ const PodcastPage = (props: PageProps) => {
 
    const [podcastData, setData] = useState({ queue: [], podcasts: [] })
    useEffect(() => {
-      getPodcasts().then((data) => {
+      getPodcastInfo().then((data) => {
          setData({ ...data })
       })
    }, [])
