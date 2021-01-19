@@ -2,6 +2,7 @@
 slug: 'rebuiding-website'
 date: '2020-06-20'
 title: 'Rebuildig my website in Gatsby'
+publish: '2021-01-20'
 ---
 
 # Blog test

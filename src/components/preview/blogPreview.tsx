@@ -21,7 +21,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 const getSubset = (posts) => {
    let subset = []
    if (posts) {
-      subset = posts.slice(0, 12)
+      const today = new Date().getTime()
+      subset = posts
+         .filter((x) => {
+            let published = false
+            if (x.frontmatter.publish) {
+               const publishedDate = new Date(x.frontmatter.publish)
+               if (publishedDate.getTime() <= today) {
+                  published = true
+               }
+            }
+            console.log('Blog post:', published, x)
+            return published
+         })
+         .slice(0, 12)
    }
    return subset
 }
@@ -29,7 +42,11 @@ const getSubset = (posts) => {
 const BlogPreview = ({ posts }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [blogPosts, setBlogPosts] = useState(getSubset(posts))
+   const [blogPosts, setBlogPosts] = useState([])
+
+   useEffect(() => {
+      setBlogPosts(getSubset(posts))
+   }, [posts])
 
    return (
       <SiteSection>

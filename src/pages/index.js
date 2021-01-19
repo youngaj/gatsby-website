@@ -87,6 +87,7 @@ export const pageQuery = graphql`
                title
                slug
                date
+               publish
             }
             html
             body
