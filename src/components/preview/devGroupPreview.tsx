@@ -32,7 +32,7 @@ const DevGroupPreview = ({ sessions }) => {
    }, [])
 
    return (
-      <SiteSection>
+      <SiteSection bg="dark">
          <h2>
             <SubHeading>Dev Group Sessions</SubHeading>
          </h2>
