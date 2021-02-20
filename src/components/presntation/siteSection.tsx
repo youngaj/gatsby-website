@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
 import { sharedStyles, colors } from '../../styles/global'
 
-type bgTone = 'dark' | 'light'
+type BackgroundTone = 'dark' | 'light'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -18,12 +18,17 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const SiteSection = (props) => {
+interface SiteSectionProps {
+   bg: BackgroundTone
+   children?: React.ReactNode
+}
+
+const SiteSection = (props: SiteSectionProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
 
    const children = props.children
-   const bg: bgTone = props.bg
+   const bg: BackgroundTone = props.bg
 
    const conditionalStyles = { backgroundColor: 'rgb(23, 23, 23)' }
    if (bg === 'dark') {
@@ -32,7 +37,7 @@ const SiteSection = (props) => {
 
    return (
       <div className={css.container} style={conditionalStyles}>
-         {children}
+         <div className={css.content}>{children}</div>
       </div>
    )
 }
