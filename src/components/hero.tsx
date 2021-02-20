@@ -1,12 +1,11 @@
 // Gatsby supports TypeScript natively!
-import React, { useState, useEffect } from 'react'
-import { PageProps, useStaticQuery, graphql } from 'gatsby'
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import StyledButton from '../components/styledButton'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
 import { info } from '../data/info'
 
-import moment from 'moment'
 import ImageOverlay from './imageOverlay'
 import useWindowSize from '../utils/useWindowSize'
 
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const Hero = (props: PageProps) => {
+const Hero = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const dimensions = useWindowSize()

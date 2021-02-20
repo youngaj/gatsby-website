@@ -26,13 +26,12 @@ const IndexPage = ({ data }) => {
    const menuItems = {
       home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
-      services: { title: 'Services', target: '#services' },
       resume: { title: 'Resume', target: '#resume' },
       podcasts: { title: 'Podcasts', target: '#podcastQueue' },
-      skilss: { title: 'Skills', target: '#skills' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
       blog: { title: 'Blog', target: '#blog' },
       contact: { title: 'Contact', target: '#contact' },
+      uses: { title: 'Uses', target: '/uses' },
    }
 
    return (

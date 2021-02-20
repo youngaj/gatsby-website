@@ -8,7 +8,7 @@ import { getPodcastInfo, getShoweNotes } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
-import { useGlobalCss } from "../../utils/useGlobalCss";
+import { useGlobalCss } from '../../utils/useGlobalCss'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -46,7 +46,7 @@ const PodcastsPreview = () => {
    }, [])
 
    return (
-      <SiteSection>
+      <SiteSection bg="dark">
          <h2>
             <SubHeading>Podcasts</SubHeading>
          </h2>

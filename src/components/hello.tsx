@@ -5,11 +5,12 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
 
 import { info } from '../data/info'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import useWindowSize from '../utils/useWindowSize'
 import ContactDetail from './contactDetails'
 import Divider from './presntation/divider'
 import SubHeading from './presntation/subHeading'
+import SiteSection from './presntation/siteSection'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -41,7 +42,7 @@ const Hello = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const dimensions = useWindowSize()
-   const yearsOfExperience = moment().diff('1999-06-01', 'years')
+   const yearsOfExperience = dayjs().diff('1999-06-01', 'years')
    const data = useStaticQuery(graphql`
       query {
          profile: file(relativePath: { eq: "profile-1.jpg" }) {
@@ -55,49 +56,53 @@ const Hello = () => {
    `)
 
    return (
-      <div className={css.container}>
-         <div>
-            <h2 className={css.heading}>
-               <SubHeading>Hello, My name is {info.me.firstName}.</SubHeading>
-            </h2>
-            <p>
-               Andre Young, {info.me.age} years young, born and raised in the
-               Washington D.C. metro area. Highly motivated senior software
-               engineering manager and tech lead with over {yearsOfExperience}{' '}
-               years of development experience.
-            </p>
-            <Divider />
-            <p className={css.mutedText}>
-               As of April 2020 I started a new job with Capital One. Very
-               excited to be joining an awesome team doing awesome work!
-            </p>
-            <p className={css.mutedText}>
-               Formerly I worked at NASA's Goddard Space Flight Center, where I
-               spent most of my time crafting and working on cool (and sometimes
-               important but not so cool) projects.
-            </p>
-            <p className={css.mutedText}>
-               I also ran a bi-weekly developer meetup at NASA, where we
-               discussed various development topics ranging from code
-               architecture to knowing how to say "No" to a customer and having
-               them say "thank you" afterwards.
-            </p>
-            <p className={css.mutedText}>
-               I love development, love learning and sharing the things I've
-               learned with anyone willing to listen. See my resume and other
-               interests below.
-            </p>{' '}
-            <ContactDetail />
-         </div>
-         {dimensions.windowWidth > theme.breakpoints.values.md && (
+      <SiteSection bg="dark">
+         <div className={css.container}>
             <div>
-               <Img
-                  fluid={data.profile.childImageSharp.fluid}
-                  alt={'Profile picture'}
-               />
+               <h2 className={css.heading}>
+                  <SubHeading>
+                     Hello, My name is {info.me.firstName}.
+                  </SubHeading>
+               </h2>
+               <p>
+                  Andre Young, {info.me.age} years young, born and raised in the
+                  Washington D.C. metro area. Highly motivated senior software
+                  engineering manager and tech lead with over{' '}
+                  {yearsOfExperience} years of development experience.
+               </p>
+               <Divider />
+               <p className={css.mutedText}>
+                  As of April 2020 I started a new job with Capital One. Very
+                  excited to be joining an awesome team doing awesome work!
+               </p>
+               <p className={css.mutedText}>
+                  Formerly I worked at NASA's Goddard Space Flight Center, where
+                  I spent most of my time crafting and working on cool (and
+                  sometimes important but not so cool) projects.
+               </p>
+               <p className={css.mutedText}>
+                  I also ran a bi-weekly developer meetup at NASA, where we
+                  discussed various development topics ranging from code
+                  architecture to knowing how to say "No" to a customer and
+                  having them say "thank you" afterwards.
+               </p>
+               <p className={css.mutedText}>
+                  I love development, love learning and sharing the things I've
+                  learned with anyone willing to listen. See my resume and other
+                  interests below.
+               </p>{' '}
+               <ContactDetail />
             </div>
-         )}
-      </div>
+            {dimensions.windowWidth > theme.breakpoints.values.md && (
+               <div>
+                  <Img
+                     fluid={data.profile.childImageSharp.fluid}
+                     alt={'Profile picture'}
+                  />
+               </div>
+            )}
+         </div>
+      </SiteSection>
    )
 }
 

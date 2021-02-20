@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
-import moment from 'moment'
+import * as dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -53,7 +55,7 @@ const Podcast = ({ data }) => {
                <a href={show.url}>{show.title}</a>
             </div>
             <p className={[css.mutedText, css.pt20, css.subTitle].join(' ')}>
-               Lastest Episode: {moment(show.lastEpisodePublished).fromNow()}
+               Lastest Episode: {dayjs(show.lastEpisodePublished).fromNow()}
             </p>
             <p>
                {show.displayFullDetails || show.description.length < 200 ? (

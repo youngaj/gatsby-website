@@ -1,11 +1,11 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export const info = {
    me: {
       firstName: 'Andre',
       lastName: 'Young',
       email: 'andrejyoung@gmail.com',
-      age: moment().diff(moment('1979-09', 'YYYY-MM'), 'years'),
+      age: dayjs().diff(dayjs('1979-09', 'YYYY-MM'), 'years'),
       workExperience: [
          {
             company: 'Capital One',
