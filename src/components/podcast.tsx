@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       gridGap: theme.spacing(2),
       gridTemplateColumns: '1fr 2fr',
       border: `1px solid ${colors.muted}`,
+      borderRadius: '10px',
       padding: theme.spacing(2),
       '& div': {
          textAlign: 'left',

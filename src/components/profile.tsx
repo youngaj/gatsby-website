@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const Hello = () => {
+const Profile = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const dimensions = useWindowSize()
@@ -68,28 +68,34 @@ const Hello = () => {
                   Andre Young, {info.me.age} years young, born and raised in the
                   Washington D.C. metro area. Highly motivated senior software
                   engineering manager and tech lead with over{' '}
-                  {yearsOfExperience} years of development experience.
+                  {yearsOfExperience} years of hands on experience.
                </p>
                <Divider />
                <p className={css.mutedText}>
-                  As of April 2020 I started a new job with Capital One. Very
-                  excited to be joining an awesome team doing awesome work!
+                  As of April 2020 I joined the Focus Organization at Capital
+                  One where I have the pleasure of leading leading 2 teams as a
+                  Senior Software Egineering Manager.
                </p>
                <p className={css.mutedText}>
-                  Formerly I worked at NASA's Goddard Space Flight Center, where
-                  I spent most of my time crafting and working on cool (and
-                  sometimes important but not so cool) projects.
+                  Formerly I spent 16 years at NASA's Goddard Space Flight
+                  Center as the Application Development Lead for the PAAC
+                  contract, where I crafted A number of cool (and sometimes
+                  important but not so cool) projects. I also coached developers
+                  as well introduced, setup and operated a number of engineering
+                  principles and tools such as agile, automated testing,
+                  Continuous Integration, Continous Delivery and more.
                </p>
                <p className={css.mutedText}>
-                  I also ran a bi-weekly developer meetup at NASA, where we
-                  discussed various development topics ranging from code
-                  architecture to knowing how to say "No" to a customer and
-                  having them say "thank you" afterwards.
+                  In addition I ran a bi-weekly developer meetup at NASA, where
+                  we discussed various development topics ranging from AWS
+                  lessons learned, microservices architecture, and Imposter
+                  Syndrome to knowing how to say "No" to a customer and having
+                  them say "thank you" afterwards.
                </p>
                <p className={css.mutedText}>
-                  I love development, love learning and sharing the things I've
-                  learned with anyone willing to listen. See my resume and other
-                  interests below.
+                  I love growing teams, coaching, development, learning and
+                  sharing the things I've learned with anyone willing to listen.
+                  See my resume and other interests below.
                </p>{' '}
                <ContactDetail />
             </div>
@@ -106,4 +112,4 @@ const Hello = () => {
    )
 }
 
-export default Hello
+export default Profile

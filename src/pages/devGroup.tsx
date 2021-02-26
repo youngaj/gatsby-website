@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridGap: theme.spacing(2),
       gridTemplateColumns: '1fr 1fr 1fr',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
 }))
 

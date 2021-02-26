@@ -1,7 +1,7 @@
 // Gatsby supports TypeScript natively!
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import StyledButton from '../components/styledButton'
+import StyledButton from './styledButton'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
 import { info } from '../data/info'
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const Hero = () => {
+const Welcome = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const dimensions = useWindowSize()
@@ -61,9 +61,11 @@ const Hero = () => {
          <div className={[css.pt22, css.textSpacing].join(' ')}>
             {info.me.age} years young, husband and father, code addict
          </div>
-         <StyledButton>Know me better</StyledButton>
+         <a href="#profile">
+            <StyledButton>Know me better</StyledButton>
+         </a>
       </ImageOverlay>
    )
 }
 
-export default Hero
+export default Welcome

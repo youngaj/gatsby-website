@@ -13,7 +13,9 @@ export const info = {
             start: '2020-04',
             end: '',
             responsibilities: [
-               'Technical lead for a new project. Still getting up to speed but enjoying my new team!',
+               'Technical lead for the Safehouse and Discovery teams.',
+               'Talent and Performance management.',
+               'Development and coaching team members.',
             ],
          },
          {

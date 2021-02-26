@@ -3,9 +3,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Hero from '../components/hero'
+import Welcome from '../components/welcome'
 import Nav from '../components/nav'
-import Hello from '../components/hello'
+import Profile from '../components/profile'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
 import PodcastsPreview from '../components/preview/PodcastsPreview'
@@ -30,27 +30,26 @@ const IndexPage = ({ data }) => {
       podcasts: { title: 'Podcasts', target: '#podcastQueue' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
       blog: { title: 'Blog', target: '#blog' },
-      contact: { title: 'Contact', target: '#contact' },
       uses: { title: 'Uses', target: '/uses' },
    }
 
    return (
       <Layout>
          <SEO />
-         <span name="home"></span>
-         <Hero />
+         <a id="home"></a>
+         <Welcome />
          <Nav links={menuItems} />
-         <span name="profile"></span>
-         <Hello />
-         <span name="skills"></span>
+         <a id="profile"></a>
+         <Profile />
+         <a id="skills"></a>
          <LatestWork />
-         <span name="resume"></span>
+         <a id="resume"></a>
          <Resume />
-         <span name="podcastQueue"></span>
+         <a id="podcastQueue"></a>
          <PodcastsPreview />
-         <span name="devGroup"></span>
+         <a id="devGroup"></a>
          <DevGroupPreview sessions={sessions} />
-         <span name="blog"></span>
+         <a id="blog"></a>
          <BlogPreview posts={blogPosts} />
       </Layout>
    )

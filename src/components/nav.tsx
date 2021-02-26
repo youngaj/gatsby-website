@@ -13,11 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    container: {
       height: '75px',
-      width: '85%',
       margin: 'auto',
       display: 'grid',
       gridGap: '25px',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       alignItems: 'center',
       backgroundColor: 'black',
    },
@@ -35,7 +34,6 @@ const Nav = (props) => {
       podcasts: { title: 'Podcasts', target: '#podcastQueue' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
       blog: { title: 'Blog', target: '#blog' },
-      contact: { title: 'Contact', target: '#contact' },
       uses: { title: 'Uses', target: '/uses' },
    }
    const menuItems = links
@@ -60,7 +58,10 @@ const Nav = (props) => {
    return (
       <div
          className={css.sticky}
-         style={{ backgroundColor: 'black', zIndex: 10 }}
+         style={{
+            backgroundColor: 'black',
+            zIndex: 10,
+         }}
       >
          <div className={[css.container, css.content].join(' ')}>
             {Object.keys(menuItems).map((key) => {
