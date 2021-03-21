@@ -1,0 +1,191 @@
+import React from 'react'
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
+
+import { sharedStyles, colors } from '../styles/global'
+import Layout from '../components/layout'
+import Nav from '../components/nav'
+
+const useStyles = makeStyles((theme: Theme) => ({
+   ...sharedStyles(theme),
+   category: {
+      border: `2px solid ${theme.palette.primary}`,
+      borderRadius: '2rem',
+      margin: '2rem',
+      '& h2': {
+         marginBottom: theme.spacing(2),
+         textTransform: 'uppercase',
+      },
+   },
+   configuration: {
+      '& dt': {
+         marginTop: theme.spacing(2),
+         paddingLeft: theme.spacing(2),
+      },
+      '& dd': {
+         color: colors.muted,
+         paddingLeft: theme.spacing(4),
+         marginBottom: theme.spacing(2),
+      },
+   },
+   divider: {
+      display: 'block',
+      marginTop: '1rem',
+      marginBottom: '15px',
+      backgroundColor: theme.palette.secondary.main,
+      height: '2px',
+      width: '100px',
+   },
+}))
+
+const Uses = () => {
+   const theme = useTheme()
+   const css = useStyles(theme)
+
+   return (
+      <Layout>
+         <Nav active="uses" />
+         <div>
+            <h1 className={css.pt40}>Andre Young Uses</h1>
+            <p className={css.mutedText}>
+               This is a list of the technologies I use and prefer along with
+               configurations
+            </p>
+
+            <div className={css.category}>
+               <h2>
+                  Editor
+                  <span className={css.divider}></span>
+               </h2>
+               <p className={css.mutedText}>
+                  My editor of choice is VS Code. Below are a few of the
+                  extenstions I recommend using with VS Code.
+               </p>
+               <dl className={css.configuration}>
+                  <dt>GitLens</dt>
+                  <dd>
+                     GitLens supercharges the Git capabilities built into Visual
+                     Studio Code. It helps you to visualize code authorship at a
+                     glance via Git blame annotations and code lens, seamlessly
+                     navigate and explore Git repositories, gain valuable
+                     insights via powerful comparison commands, and so much
+                     more.
+                  </dd>
+                  <dt>Live Share Extension Pack</dt>
+                  <dd>
+                     This extension pack includes everything you need to start
+                     collaboratively editing and debugging in real time,
+                     including integrated audio and text chat. This provides you
+                     and your team/class with a one-click installation, in order
+                     to begin pair programming, performing remote code reviews,
+                     driving interactive lectures, and more, without needing to
+                     leave Visual Studio Code.
+                  </dd>
+                  <dt>Docker</dt>
+                  <dd>
+                     The Docker extension makes it easy to build, manage, and
+                     deploy containerized applications from Visual Studio Code.
+                     It also provides one-click debugging of Node.js, Python,
+                     and .NET Core inside a container.
+                  </dd>
+                  <dt>Better Comments</dt>
+                  <dd>
+                     The Better Comments extension will help you create more
+                     human-friendly comments in your code. With this extension,
+                     you will be able to categorise your annotations into:
+                     Alerts Queries TODOs Highlights Commented out code can also
+                     be styled to make it clear the code shouldn't be there Any
+                     other comment styles you'd like can be specified in the
+                     settings
+                  </dd>
+                  <dt>Bracket Pair Colorizer</dt>
+                  <dd>
+                     This extension allows matching brackets to be identified
+                     with colours. The user can define which characters to
+                     match, and which colours to use.
+                  </dd>
+                  <dt>Remote Development</dt>
+                  <dd>
+                     The Remote Development extension pack allows you to open
+                     any folder in a container, on a remote machine, or in the
+                     Windows Subsystem for Linux (WSL) and take advantage of VS
+                     Code's full feature set. Since this lets you set up a
+                     full-time development environment anywhere, you can:
+                     <ul>
+                        <li>
+                           Develop on the same operating system you deploy to or
+                           use larger, faster, or more specialized hardware than
+                           your local machine.
+                        </li>
+                        <li>
+                           Quickly swap between different, isolated development
+                           environments and safely make updates without worrying
+                           about impacting your local machine.
+                        </li>
+                        <li>
+                           Help new team members / contributors get productive
+                           quickly with easily spun up, consistent development
+                           containers.
+                        </li>
+                        <li>
+                           Take advantage of a Linux based tool-chain right from
+                           the comfort of Windows from a full-featured
+                           development tool.
+                        </li>
+                     </ul>
+                  </dd>
+                  <dt>Import Cost</dt>
+                  <dd>
+                     This extension will display inline in the editor the size
+                     of the imported package. The extension utilizes webpack
+                     with babili-webpack-plugin in order to detect the imported
+                     size.
+                  </dd>
+               </dl>
+            </div>
+
+            <div className={css.category}>
+               <h2>
+                  Languages
+                  <span className={css.divider}></span>
+               </h2>
+               <p className={css.mutedText}>
+                  "Right" language for the "right" job. Right may mean different
+                  things in different scenarios. For example it depends on the
+                  knowledge on the team, the problem at hand, the existing
+                  ecosystem, the time constraints, etc.
+               </p>
+               <dl className={css.configuration}>
+                  <dt>TypeScript / JavaScript</dt>
+                  <dd>
+                     JavaScript is eating the world and TypeScript just makes it
+                     even better. I've recently dove deeper into TypeScript and
+                     think this is an awesome choice.
+                  </dd>
+                  <dt>C#</dt>
+                  <dd>
+                     I think C# is an excellent backend language. The language
+                     features, tooling, platform support, ecosystem, etc. makes
+                     it my #2 choice behind Typescript for anything that's not
+                     in the browser.
+                  </dd>
+               </dl>
+            </div>
+
+            <div className={css.category}>
+               <h2>
+                  Docker
+                  <span className={css.divider}></span>
+               </h2>
+               <p className={css.mutedText}>
+                  Docker makes it possible and easier to run applications
+                  locally in the same (or similar) to the way it would be run in
+                  a production deployed environment.
+               </p>
+               <dl className={css.configuration}></dl>
+            </div>
+         </div>
+      </Layout>
+   )
+}
+
+export default Uses
