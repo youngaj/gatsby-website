@@ -13,6 +13,7 @@ import DevGroupPreview from '../components/preview/devGroupPreview'
 import BlogPreview from '../components/preview/blogPreview'
 import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
+import { graphql } from 'gatsby'
 
 const useStyles = makeStyles((theme) => ({
    ...sharedStyles(theme),
