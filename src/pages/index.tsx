@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
 const IndexPage = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const sessions = data.sessions.nodes.map((video) => formatVideo(video))
+   const sessions = data.sessions.nodes
+      .slice(0, 6)
+      .map((video) => formatVideo(video))
    const blogPosts = data.blogPosts.nodes
    const menuItems = {
       home: { title: 'Home', target: '#home' },
