@@ -15,7 +15,7 @@ const LatestWork = () => {
    const css = useStyles(theme)
 
    return (
-      <SiteSection>
+      <SiteSection bg="light">
          <h2>
             <SubHeading>My Latest Work</SubHeading>
          </h2>

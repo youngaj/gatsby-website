@@ -79,11 +79,11 @@ const Profile = () => {
                <p className={css.mutedText}>
                   Formerly I spent 16 years at NASA's Goddard Space Flight
                   Center as the Application Development Lead for the PAAC
-                  contract, where I crafted A number of cool (and sometimes
+                  contract, where I crafted a number of cool (and sometimes
                   important but not so cool) projects. I also coached developers
-                  as well introduced, setup and operated a number of engineering
-                  principles and tools such as agile, automated testing,
-                  Continuous Integration, Continous Delivery and more.
+                  as well introduced, setup and operated engineering principles
+                  and tools such as agile, automated testing, Continuous
+                  Integration, Continous Delivery and more.
                </p>
                <p className={css.mutedText}>
                   In addition I ran a bi-weekly developer meetup at NASA, where

@@ -104,7 +104,7 @@ const PodcastsPreview = () => {
    const largeScreen =
       windowSize.windowWidth > theme.breakpoints.values.sm ? true : false
    return (
-      <SiteSection bg="dark">
+      <SiteSection bg="light">
          <h2>
             <SubHeading>Podcasts</SubHeading>
          </h2>
