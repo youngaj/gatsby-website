@@ -40,9 +40,18 @@ const PodcastPage = (props: PageProps) => {
       })
    }, [])
 
+   const links = {
+      home: { title: 'Home', target: '/' },
+      profile: { title: 'Profile', target: '/#profile' },
+      resume: { title: 'Resume', target: '/#resume' },
+      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
+      devGroup: { title: 'Dev Group', target: '/#devGroup' },
+      blog: { title: 'Blog', target: '/#blog' },
+   }
+
    return (
       <Layout>
-         <Nav active="podcasts"></Nav>
+         <Nav active="podcasts" links={links}></Nav>
          <SiteSection bg="dark">
             <SubHeading>Podcasts</SubHeading>
             <p className={css.mutedText}>
