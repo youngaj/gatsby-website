@@ -5,7 +5,6 @@ import { sharedStyles } from '../../styles/global'
 import SiteSection from '../presntation/siteSection'
 import SubHeading from '../presntation/subHeading'
 import CenterDivider from '../presntation/centerDivider'
-import { getVideos } from '../../utils/devGroupService'
 import StyledButton from '../styledButton'
 import { Link } from 'gatsby'
 import DevGroupSession from '../devGroupSession'
@@ -17,22 +16,24 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridGap: theme.spacing(2),
       gridTemplateColumns: '1fr 1fr 1fr',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
 }))
 
 const DevGroupPreview = ({ sessions }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [videos, setVideos] = useState(getSubset(sessions, 12))
+   const maxPreview = 12
+   const [videos, setVideos] = useState(getSubset(sessions, maxPreview))
    useEffect(() => {
-      getVideos().then((data) => {
-         const subset = getSubset(data, 12)
-         setVideos(subset)
-      })
-   }, [])
+      const subset = getSubset(sessions, maxPreview)
+      setVideos(subset)
+   }, [sessions])
 
    return (
-      <SiteSection>
+      <SiteSection bg="dark">
          <h2>
             <SubHeading>Dev Group Sessions</SubHeading>
          </h2>

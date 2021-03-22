@@ -8,6 +8,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { colors } from '../styles/global'
 import './layout.css'
 
@@ -22,15 +23,24 @@ const theme = createMuiTheme({
    },
 })
 
+const useStyles = makeStyles((theme: Theme) => ({
+   container: {
+      //maxWidth: '1440px',
+      margin: 'auto',
+      //border: '1px solid red',
+      backgroundColor: 'black',
+   },
+}))
+
 const Layout = ({ children }) => {
+   const css = useStyles(theme)
+
    return (
-      <>
-         <div>
-            <ThemeProvider theme={theme}>
-               <main>{children}</main>
-            </ThemeProvider>
-         </div>
-      </>
+      <div className={css.container}>
+         <ThemeProvider theme={theme}>
+            <main>{children}</main>
+         </ThemeProvider>
+      </div>
    )
 }
 

@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridGap: theme.spacing(2),
       gridTemplateColumns: '1fr 1fr 1fr',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
 }))
 
@@ -32,9 +35,18 @@ const DevGroup = ({ data }) => {
       })
    }, [])
 
+   const links = {
+      home: { title: 'Home', target: '/' },
+      profile: { title: 'Profile', target: '/#profile' },
+      resume: { title: 'Resume', target: '/#resume' },
+      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
+      devGroup: { title: 'Dev Group', target: '/#devGroup' },
+      blog: { title: 'Blog', target: '/#blog' },
+   }
+
    return (
       <Layout>
-         <Nav active="devGroup" />
+         <Nav active="devGroup" links={links} />
          <SiteSection bg="dark">
             <h2>
                <SubHeading>Dev Group Sessions</SubHeading>

@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       gridTemplateColumns: '1fr 3fr',
       gridGap: theme.spacing(2),
       border: `1px solid ${colors.muted}`,
+      borderRadius: '10px',
       padding: theme.spacing(2),
    },
 }))

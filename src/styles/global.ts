@@ -2,8 +2,8 @@ import { Theme } from '@material-ui/core'
 
 export const sharedStyles = (theme: Theme) => ({
    content: {
-      width: '80%',
-      maxWidth: '1000px',
+      maxWidth: '1440px',
+      margin: 'auto',
    },
    pt100: {
       fontSize: '5rem',

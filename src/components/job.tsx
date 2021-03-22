@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridTemplateColumns: '150px 55px 1fr',
       marginRight: theme.spacing(5),
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
    expansionBox: {
       color: 'rgb(23, 23, 23)',
@@ -42,6 +45,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'block',
       verticalAlign: 'center',
       borderRadius: '8px',
+      [theme.breakpoints.down('sm')]: {
+         margin: 'auto',
+      },
    },
 }))
 

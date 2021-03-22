@@ -1,11 +1,11 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export const info = {
    me: {
       firstName: 'Andre',
       lastName: 'Young',
       email: 'andrejyoung@gmail.com',
-      age: moment().diff(moment('1979-09', 'YYYY-MM'), 'years'),
+      age: dayjs().diff(dayjs('1979-09', 'YYYY-MM'), 'years'),
       workExperience: [
          {
             company: 'Capital One',
@@ -13,7 +13,9 @@ export const info = {
             start: '2020-04',
             end: '',
             responsibilities: [
-               'Technical lead for a new project. Still getting up to speed but enjoying my new team!',
+               'Technical lead for the Safehouse and Discovery teams.',
+               'Talent and Performance management.',
+               'Development and coaching team members.',
             ],
          },
          {

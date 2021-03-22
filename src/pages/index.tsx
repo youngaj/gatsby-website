@@ -3,9 +3,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Hero from '../components/hero'
+import Welcome from '../components/welcome'
 import Nav from '../components/nav'
-import Hello from '../components/hello'
+import Profile from '../components/profile'
 import LatestWork from '../components/LatestWork'
 import Resume from '../components/resume'
 import PodcastsPreview from '../components/preview/PodcastsPreview'
@@ -13,6 +13,7 @@ import DevGroupPreview from '../components/preview/devGroupPreview'
 import BlogPreview from '../components/preview/blogPreview'
 import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
+import { graphql } from 'gatsby'
 
 const useStyles = makeStyles((theme) => ({
    ...sharedStyles(theme),
@@ -21,37 +22,37 @@ const useStyles = makeStyles((theme) => ({
 const IndexPage = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const sessions = data.sessions.nodes.map((video) => formatVideo(video))
+   const sessions = data.sessions.nodes
+      .slice(0, 6)
+      .map((video) => formatVideo(video))
    const blogPosts = data.blogPosts.nodes
    const menuItems = {
       home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
-      services: { title: 'Services', target: '#services' },
       resume: { title: 'Resume', target: '#resume' },
       podcasts: { title: 'Podcasts', target: '#podcastQueue' },
-      skilss: { title: 'Skills', target: '#skills' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
       blog: { title: 'Blog', target: '#blog' },
-      contact: { title: 'Contact', target: '#contact' },
+      uses: { title: 'Uses', target: '/uses' },
    }
 
    return (
       <Layout>
          <SEO />
-         <span name="home"></span>
-         <Hero />
+         <a id="home"></a>
+         <Welcome />
          <Nav links={menuItems} />
-         <span name="profile"></span>
-         <Hello />
-         <span name="skills"></span>
+         <a id="profile"></a>
+         <Profile />
+         <a id="skills"></a>
          <LatestWork />
-         <span name="resume"></span>
+         <a id="resume"></a>
          <Resume />
-         <span name="podcastQueue"></span>
+         <a id="podcastQueue"></a>
          <PodcastsPreview />
-         <span name="devGroup"></span>
+         <a id="devGroup"></a>
          <DevGroupPreview sessions={sessions} />
-         <span name="blog"></span>
+         <a id="blog"></a>
          <BlogPreview posts={blogPosts} />
       </Layout>
    )

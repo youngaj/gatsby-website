@@ -5,11 +5,6 @@ import { sharedStyles } from '../styles/global'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
-   container: {
-      maxWidth: '1000px',
-      marginLeft: theme.spacing(4),
-      marginRight: theme.spacing(4),
-   },
    blogPost: {},
    blogPostContent: {},
 }))
@@ -22,7 +17,7 @@ export default function MdxBlogTemplate({ data }) {
 
    const { frontmatter, html } = data.markdownRemark
    return (
-      <div className={css.container}>
+      <div className={css.content}>
          <div className={css.mutedText}>MDX tempate</div>
          {frontmatter && (
             <div className={css.blogPost}>

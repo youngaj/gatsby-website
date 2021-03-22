@@ -1,5 +1,5 @@
 import axios from 'axios'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export const getVideos = async () => {
    const response = await axios.get(
@@ -13,8 +13,8 @@ export const getVideos = async () => {
 
 export const formatVideo = (video) => {
    if (video) {
-      video.day = moment(video.publishedAt).format('D')
-      video.monthYear = moment(video.publishedAt).format('MMM-YYYY')
+      video.day = dayjs(video.publishedAt).format('D')
+      video.monthYear = dayjs(video.publishedAt).format('MMM-YYYY')
    }
    return video
 }
