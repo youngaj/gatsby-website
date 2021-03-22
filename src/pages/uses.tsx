@@ -7,6 +7,11 @@ import Nav from '../components/nav'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
+   header: {
+      color: colors.accent,
+      marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(5),
+   },
    category: {
       border: `2px solid ${theme.palette.primary}`,
       borderRadius: '2rem',
@@ -33,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: '15px',
       backgroundColor: theme.palette.secondary.main,
       height: '2px',
-      width: '100px',
+      width: '150px',
    },
 }))
 
@@ -53,13 +58,16 @@ const Uses = () => {
    return (
       <Layout>
          <Nav active="uses" links={links} />
-         <div>
-            <h1 className={css.pt40}>Andre Young Uses</h1>
+         <div className={css.content}>
+            <h1 className={[css.pt40, css.header].join(' ')}>
+               Andre Young Uses
+            </h1>
             <p className={css.mutedText}>
                This is a list of the technologies I use and prefer along with
                configurations
             </p>
 
+            <div className={css.divider}></div>
             <div className={css.category}>
                <h2>
                   Hardware
@@ -137,10 +145,8 @@ const Uses = () => {
                      and .NET Core inside a container.
                   </dd>
                   <dt>Prettier</dt>
-                  <dd></dd>
-                  <dt>ES Lint</dt>
                   <dd>
-                     An opinionated code formatter Settings:
+                     An opinionated code formatter
                      {/* <code>
                           {
                             "arrowParens": "avoid",
@@ -150,6 +156,8 @@ const Uses = () => {
                           }
                       </code> */}
                   </dd>
+                  <dt>ES Lint</dt>
+                  <dd></dd>
                   <dt>Better Comments</dt>
                   <dd>
                      The Better Comments extension will help you create more
