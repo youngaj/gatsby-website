@@ -41,15 +41,64 @@ const Uses = () => {
    const theme = useTheme()
    const css = useStyles(theme)
 
+   const links = {
+      home: { title: 'Home', target: '/' },
+      profile: { title: 'Profile', target: '/#profile' },
+      resume: { title: 'Resume', target: '/#resume' },
+      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
+      devGroup: { title: 'Dev Group', target: '/#devGroup' },
+      blog: { title: 'Blog', target: '/#blog' },
+   }
+
    return (
       <Layout>
-         <Nav active="uses" />
+         <Nav active="uses" links={links} />
          <div>
             <h1 className={css.pt40}>Andre Young Uses</h1>
             <p className={css.mutedText}>
                This is a list of the technologies I use and prefer along with
                configurations
             </p>
+
+            <div className={css.category}>
+               <h2>
+                  Hardware
+                  <span className={css.divider}></span>
+               </h2>
+               <p className={css.mutedText}>
+                  I'm not very knowledgable when it comes to hardware but here
+                  is what I use.
+               </p>
+               <dl className={css.configuration}>
+                  <dt>Dell XPS 15 9560</dt>
+                  <dd>
+                     This computer is a few years old but still works great.
+                     <ul>
+                        <li>32 GB of Ram</li>
+                        <li>Intel i7-7700HQ</li>
+                        <li>1 TB Solid State Drive</li>
+                        <li>NVIDIA GeForce GTX 1050</li>
+                     </ul>
+                  </dd>
+                  <dt>Monitors</dt>
+                  <dd>
+                     I run a 3 monitor setup with a 32-inch Smasung in the
+                     center and 2 17-inch Dell flipped vertically on both sides.
+                     All 3 monitors are mounted on a 3 arm vesa mount.
+                  </dd>
+                  <dt>Logitech -MK550 Wireless Wave Keyboard and Mouse</dt>
+                  <dd>
+                     The MK550 Combo includes the K350 keyboard and M510 mouse.
+                     Ergonomic wave design: The MK550 uses Logitech’s Constant
+                     Curve layout for reduced stress and better, more natural
+                     typing
+                  </dd>
+                  <dt>Logitech Webcam C930e</dt>
+                  <dd></dd>
+                  <dt>Blue Yehti</dt>
+                  <dd></dd>
+               </dl>
+            </div>
 
             <div className={css.category}>
                <h2>
@@ -86,6 +135,20 @@ const Uses = () => {
                      deploy containerized applications from Visual Studio Code.
                      It also provides one-click debugging of Node.js, Python,
                      and .NET Core inside a container.
+                  </dd>
+                  <dt>Prettier</dt>
+                  <dd></dd>
+                  <dt>ES Lint</dt>
+                  <dd>
+                     An opinionated code formatter Settings:
+                     {/* <code>
+                          {
+                            "arrowParens": "avoid",
+                            "semi": false,
+                            "tabWidth": 3,
+                            "printWidth": 120
+                          }
+                      </code> */}
                   </dd>
                   <dt>Better Comments</dt>
                   <dd>
