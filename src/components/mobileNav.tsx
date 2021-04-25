@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import { sharedStyles } from '../styles/global'
+import { colors, sharedStyles } from '../styles/global'
 
-import { Button } from '@material-ui/core'
+import { Button, Menu, MenuItem } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+
 import { useWindowSize } from '../hooks/useWindowSize'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
    sticky: {
-      position: '-webkit-sticky',
-      position: 'sticky',
+      position: 'fixed',
+      width: '100%',
       top: 0,
-   },
-   container: {
-      height: '75px',
-      margin: 'auto',
-      display: 'grid',
-      gridGap: '25px',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-      alignItems: 'center',
+      zIndex: 10,
+      textAlign: 'right',
       backgroundColor: 'black',
+      padding: theme.spacing(1),
+      paddingBottom: theme.spacing(3),
    },
 }))
 
-const Nav = (props) => {
+const MobileNav = (props) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const [active, setActive] = useState(props.active)
-   const windowSize = useWindowSize()
    const links = props.links
    const defaultMenuOptions = {
       home: { title: 'Home', target: '/' },
@@ -37,6 +34,17 @@ const Nav = (props) => {
       devGroup: { title: 'Dev Group', target: '/devGroup' },
       blog: { title: 'Blog', target: '/blogs' },
       uses: { title: 'Uses', target: '/uses' },
+   }
+
+   const windowSize = useWindowSize()
+   const [anchorEl, setAnchorEl] = React.useState(null)
+
+   const handleClick = (event) => {
+      setAnchorEl(event.currentTarget)
+   }
+
+   const handleClose = () => {
+      setAnchorEl(null)
    }
    const menuItems = links
       ? { ...defaultMenuOptions, ...links }
@@ -59,15 +67,23 @@ const Nav = (props) => {
 
    return (
       <div>
-         {windowSize.width >= theme.breakpoints.values.md && (
-            <div
-               className={css.sticky}
-               style={{
-                  backgroundColor: 'black',
-                  zIndex: 10,
-               }}
-            >
-               <div className={[css.container, css.content].join(' ')}>
+         {windowSize.width < theme.breakpoints.values.md && (
+            <div className={css.sticky}>
+               <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  color={'primary'}
+               >
+                  <MenuIcon style={{ fill: colors.accent }} />
+               </Button>
+               <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+               >
                   {Object.keys(menuItems).map((key) => {
                      const item = menuItems[key]
                      const color = item.active ? 'secondary' : 'primary'
@@ -83,16 +99,18 @@ const Nav = (props) => {
                               href={`${item.target}`}
                               onClick={() => selectLink(key)}
                            >
-                              <Button color={color}>{item.title}</Button>
+                              <MenuItem onClick={handleClose}>
+                                 {item.title}
+                              </MenuItem>
                            </a>
                         </div>
                      )
-                  })}
-               </div>
+                  })}{' '}
+               </Menu>
             </div>
          )}
       </div>
    )
 }
 
-export default Nav
+export default MobileNav

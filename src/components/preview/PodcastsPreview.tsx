@@ -7,8 +7,8 @@ import { getPodcastInfo } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
-import { useGlobalCss } from '../../utils/useGlobalCss'
-import useWindowSize from '../../utils/useWindowSize'
+import { useGlobalCss } from '../../hooks/useGlobalCss'
+import { useWindowSize } from '../../hooks/useWindowSize'
 import Podcast from '../podcast'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -102,7 +102,7 @@ const PodcastsPreview = () => {
 
    const windowSize = useWindowSize()
    const largeScreen =
-      windowSize.windowWidth > theme.breakpoints.values.sm ? true : false
+      windowSize.width > theme.breakpoints.values.sm ? true : false
    return (
       <SiteSection bg="light">
          <h2>

@@ -11,6 +11,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { colors } from '../styles/global'
 import './layout.css'
+import { useWindowSize } from '../hooks/useWindowSize'
 
 const theme = createMuiTheme({
    palette: {
@@ -34,9 +35,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Layout = ({ children }) => {
    const css = useStyles(theme)
+   const windowSize = useWindowSize()
 
    return (
-      <div className={css.container}>
+      <div className={css.container} style={{ height: '100%' }}>
          <ThemeProvider theme={theme}>
             <main>{children}</main>
          </ThemeProvider>

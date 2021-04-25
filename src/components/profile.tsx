@@ -6,7 +6,7 @@ import { sharedStyles } from '../styles/global'
 
 import { info } from '../data/info'
 import dayjs from 'dayjs'
-import useWindowSize from '../utils/useWindowSize'
+import { useWindowSize } from '../hooks/useWindowSize'
 import ContactDetail from './contactDetails'
 import Divider from './presntation/divider'
 import SubHeading from './presntation/subHeading'
@@ -99,7 +99,7 @@ const Profile = () => {
                </p>{' '}
                <ContactDetail />
             </div>
-            {dimensions.windowWidth > theme.breakpoints.values.md && (
+            {dimensions.width > theme.breakpoints.values.md && (
                <div>
                   <Img
                      fluid={data.profile.childImageSharp.fluid}
