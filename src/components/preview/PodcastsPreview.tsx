@@ -10,6 +10,7 @@ import { Link } from 'gatsby'
 import { useGlobalCss } from '../../hooks/useGlobalCss'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import Podcast from '../podcast'
+import { Tab, TabEnum } from '../../types'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -76,19 +77,14 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-enum Tab {
-   Starred = 'Starred',
-   Queue = 'Queue',
-   Subscribed = 'Subscribed',
-}
-
 const PodcastsPreview = () => {
    const theme = useTheme()
    const css = useStyles(theme)
    const globalCss = useGlobalCss()
    const twitter = info.me.social.find((x) => x.name === 'Twitter')
    const displayCount = 6
-   const [visibleTab, setVisibleTab] = useState<Tab>(Tab.Starred)
+   const [tabs, setTabs] = useState<Tab[]>([])
+   const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Starred)
    const [podcastData, setData] = useState({
       queue: [],
       podcasts: [],
@@ -97,6 +93,23 @@ const PodcastsPreview = () => {
    useEffect(() => {
       getPodcastInfo().then((data) => {
          setData({ ...data })
+         setTabs([
+            {
+               title: `Stared`,
+               count: data.starred?.length,
+               value: TabEnum.Starred,
+            },
+            {
+               title: `In Queue`,
+               count: data.queue?.length,
+               value: TabEnum.Queue,
+            },
+            {
+               title: `Subscribed`,
+               count: data.podcasts?.length,
+               value: TabEnum.Subscribed,
+            },
+         ])
       })
    }, [])
 
@@ -120,37 +133,25 @@ const PodcastsPreview = () => {
             suggestions at <a href={twitter.link}>{twitter.username}</a>
          </p>
          <div className={css.tabs}>
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Starred)}
-            >
-               Starred{' '}
-               <span className={css.count}>({podcastData.starred.length})</span>
-               <span className={css.divider}></span>
-            </span>{' '}
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Queue)}
-            >
-               In Queue{' '}
-               <span className={css.count}>
-                  ({podcastData.queue?.length || 0})
-               </span>
-               <span className={css.divider}></span>
-            </span>{' '}
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Subscribed)}
-            >
-               Subscribed{' '}
-               <span className={css.count}>
-                  ({podcastData.podcasts?.length || 0})
-               </span>
-               <span className={css.divider}></span>
-            </span>
+            {tabs.map((tab) => {
+               const isActive = tab.value === visibleTab
+               const headerCss = isActive
+                  ? css.tabHeader
+                  : [css.tabHeader, css.mutedText].join(' ')
+               return (
+                  <span
+                     className={headerCss}
+                     onClick={(e) => setVisibleTab(tab.value)}
+                  >
+                     {tab.title}
+                     <span className={css.count}> ({tab.count})</span>
+                     {isActive && <span className={css.divider}></span>}
+                  </span>
+               )
+            })}
          </div>
 
-         {visibleTab === Tab.Queue && (
+         {visibleTab === TabEnum.Queue && (
             <div className={css.container}>
                {podcastData.queue
                   .slice(0, displayCount)
@@ -189,7 +190,7 @@ const PodcastsPreview = () => {
                   ))}
             </div>
          )}
-         {visibleTab === Tab.Subscribed && (
+         {visibleTab === TabEnum.Subscribed && (
             <div className={css.container}>
                {podcastData.podcasts
                   .slice(0, displayCount)
@@ -201,7 +202,7 @@ const PodcastsPreview = () => {
                   ))}
             </div>
          )}
-         {visibleTab === Tab.Starred && (
+         {visibleTab === TabEnum.Starred && (
             <div className={css.container}>
                {podcastData.starred
                   .slice(0, displayCount)
