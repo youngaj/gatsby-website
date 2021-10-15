@@ -8,9 +8,9 @@ import { info } from '../data/info'
 import dayjs from 'dayjs'
 import { useWindowSize } from '../hooks/useWindowSize'
 import ContactDetail from './contactDetails'
-import Divider from './presntation/divider'
-import SubHeading from './presntation/subHeading'
-import SiteSection from './presntation/siteSection'
+import Divider from './presentation/divider'
+import SubHeading from './presentation/subHeading'
+import SiteSection from './presentation/siteSection'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),

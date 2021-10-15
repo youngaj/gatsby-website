@@ -75,6 +75,11 @@ export const info = {
             link:
                'https://www.youtube.com/channel/UCr-_BId5w_QTTKcthhNRVlw/videos',
          },
+         {
+            name: 'LinkedIn',
+            username: 'Andre Young',
+            link: 'https://www.linkedin.com/in/andre-young-b9a9b5b/',
+         },
       ],
    },
    nasa: {

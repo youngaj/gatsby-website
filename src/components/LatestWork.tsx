@@ -2,9 +2,9 @@ import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles } from '../styles/global'
 
-import SubHeading from './presntation/subHeading'
-import CenterDivider from './presntation/centerDivider'
-import SiteSection from './presntation/siteSection'
+import SubHeading from './presentation/subHeading'
+import CenterDivider from './presentation/centerDivider'
+import SiteSection from './presentation/siteSection'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),

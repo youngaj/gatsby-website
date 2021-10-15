@@ -1,9 +1,9 @@
 import React from 'react'
-import SubHeading from './presntation/subHeading'
-import SiteSection from './presntation/siteSection'
+import SubHeading from './presentation/subHeading'
+import SiteSection from './presentation/siteSection'
 import { info } from '../data/info'
 import Job from './job'
-import CenterDivider from './presntation/centerDivider'
+import CenterDivider from './presentation/centerDivider'
 import { useTheme, makeStyles, Theme } from '@material-ui/core'
 import { sharedStyles } from '../styles/global'
 

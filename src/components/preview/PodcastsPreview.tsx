@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles, colors } from '../../styles/global'
-import SubHeading from '../presntation/subHeading'
-import SiteSection from '../presntation/siteSection'
+import SubHeading from '../presentation/subHeading'
+import SiteSection from '../presentation/siteSection'
 import { getPodcastInfo } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    tabHeader: {
       fontSize: '1.5rem',
+      [theme.breakpoints.down('sm')]: {
+         fontSize: '1.0rem',
+      },
    },
    divider: {
       display: 'block',
@@ -70,10 +73,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '150px',
       marginLeft: 'auto',
       marginRight: 'auto',
+      [theme.breakpoints.down('sm')]: {
+         width: '100px',
+      },
    },
    count: {
       fontSize: '1.2rem',
       color: colors.muted,
+      [theme.breakpoints.down('sm')]: {
+         display: 'none',
+      },
    },
 }))
 

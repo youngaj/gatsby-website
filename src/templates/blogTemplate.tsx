@@ -2,6 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles } from '../styles/global'
+import Layout from '../components/layout'
+import Nav from '../components/nav'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -14,6 +16,15 @@ const useStyles = makeStyles((theme: Theme) => ({
    blogPostContent: {},
 }))
 
+const links = {
+   home: { title: 'Home', target: '/' },
+   profile: { title: 'Profile', target: '/#profile' },
+   resume: { title: 'Resume', target: '/#resume' },
+   podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
+   devGroup: { title: 'Dev Group', target: '/#devGroup' },
+   blog: { title: 'Blog', target: '/#blog' },
+}
+
 export default function BlogTemplate({ data }) {
    const theme = useTheme()
    const css = useStyles(theme)
@@ -21,16 +32,19 @@ export default function BlogTemplate({ data }) {
    const { markdownRemark } = data
    const { frontmatter, html } = markdownRemark
    return (
-      <div className={css.container}>
-         <div className={css.blogPost}>
-            <h1>{frontmatter.title}</h1>
-            <h2>{frontmatter.date}</h2>
-            <div
-               className={css.blogPostContent}
-               dangerouslySetInnerHTML={{ __html: html }}
-            />
+      <Layout>
+         <Nav active="blog" links={links}></Nav>
+         <div className={css.container}>
+            <div className={css.blogPost}>
+               <h1>{frontmatter.title}</h1>
+               <h2>{frontmatter.date}</h2>
+               <div
+                  className={css.blogPostContent}
+                  dangerouslySetInnerHTML={{ __html: html }}
+               />
+            </div>
          </div>
-      </div>
+      </Layout>
    )
 }
 

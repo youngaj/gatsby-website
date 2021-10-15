@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       '& div': {
          textAlign: 'left',
       },
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+         '& div': {
+            textAlign: 'center',
+         },
+      },
    },
    title: {
       marginBottom: theme.spacing(2),

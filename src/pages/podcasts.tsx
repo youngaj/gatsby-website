@@ -8,9 +8,9 @@ import { getPodcastInfo } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { colors, sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
-import SiteSection from '../components/presntation/siteSection'
+import SiteSection from '../components/presentation/siteSection'
 import { info } from '../data/info'
-import SubHeading from '../components/presntation/subHeading'
+import SubHeading from '../components/presentation/subHeading'
 import { Tab, TabEnum } from '../types'
 import { useWindowSize } from '../hooks/useWindowSize'
 
@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    tabHeader: {
       fontSize: '1.5rem',
+      [theme.breakpoints.down('sm')]: {
+         fontSize: '1.0rem',
+      },
    },
    divider: {
       display: 'block',
@@ -73,10 +76,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '150px',
       marginLeft: 'auto',
       marginRight: 'auto',
+      [theme.breakpoints.down('sm')]: {
+         width: '100px',
+      },
    },
    count: {
       fontSize: '1.2rem',
       color: colors.muted,
+      [theme.breakpoints.down('sm')]: {
+         display: 'none',
+      },
    },
 }))
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
-import ColorBox from '../components/presntation/colorBox'
+import ColorBox from '../components/presentation/colorBox'
 import { Link } from 'gatsby'
 
 const useStyles = makeStyles((theme: Theme) => ({

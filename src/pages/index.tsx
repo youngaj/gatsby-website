@@ -44,17 +44,17 @@ const IndexPage = ({ data }) => {
          <a id="home"></a>
          <Welcome />
          <Nav links={menuItems} />
-         <a id="profile"></a>
+         <a id="profile" name="profile"></a>
          <Profile />
          <a id="skills"></a>
          <LatestWork />
-         <a id="resume"></a>
+         <a id="resume" name="resume"></a>
          <Resume />
-         <a id="podcastQueue"></a>
+         <a id="podcastQueue" name="podcastQueue"></a>
          <PodcastsPreview />
-         <a id="devGroup"></a>
+         <a id="devGroup" name="devGroup"></a>
          <DevGroupPreview sessions={sessions} />
-         <a id="blog"></a>
+         <a id="blog" name="blog"></a>
          <BlogPreview posts={blogPosts} />
       </Layout>
    )

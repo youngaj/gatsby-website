@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 
 import { sharedStyles } from '../styles/global'
-import SiteSection from '../components/presntation/siteSection'
-import SubHeading from '../components/presntation/subHeading'
-import CenterDivider from '../components/presntation/centerDivider'
+import SiteSection from '../components/presentation/siteSection'
+import SubHeading from '../components/presentation/subHeading'
+import CenterDivider from '../components/presentation/centerDivider'
 import { getVideos, formatVideo } from '../utils/devGroupService'
 import { graphql } from 'gatsby'
 import DevGroupSession from '../components/devGroupSession'
 import Nav from '../components/nav'
 import Layout from '../components/layout'
-import { Video } from '../types/video'
+import { Video } from '../types'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
