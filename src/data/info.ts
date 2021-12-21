@@ -41,7 +41,7 @@ interface Code {
 }
 
 interface PodcastAppearance {
-   pocketCastUUID: string
+   uuid: string
    podcastName: string
    topic: string
    description?: string
@@ -159,18 +159,20 @@ export const info: Info = {
       ],
       podcastAppearances: [
          {
-            pocketCastUUID: '3414c425-da9f-4b6d-82bf-2062b636d03d',
+            uuid: '3414c425-da9f-4b6d-82bf-2062b636d03d',
             podcastName: 'Web Rush',
             topic: 'From IC to PL',
-            description: '',
+            description:
+               'This was my second ever guest appearance on a podcast.  The initial episode was postponed due to end of year activities and the host graciously allowed me to reschedule.  This is a topic near and dear to my heart and perhaps on the minds of many who have a bit of seniority in their careers and are considering making the jump from an IC (Individual Contributor) to a People Leader (PL).  Hope you enjoy the episode.  We only touched the surface of this topic so if you would like to learn more or chat about it reach out to me on Twitter.',
             url:
                'https://webrush.io/episodes/episode-164-rising-stumbling-and-getting-up-again-life-as-a-tech-manager',
          },
          {
-            pocketCastUUID: '358e82f0-a54e-0136-7b93-27f978dac4db',
+            uuid: '3d2522c1-668f-4c2b-899f-801d7259cb3c',
             podcastName: 'Web Rush',
             topic: 'Testing',
-            description: '',
+            description:
+               'This was my first time on a podcast.  The hosts of Web Rush are engineers that I have listened to and followed for years.  It was truly a honor to be invited to share my thoughts with their audience.  The topic of my episode was testing.  This topic was inspired by my experience testing, the myths and the reality and talk I gave to the Focus Organization at Capital One shortly before the episode.  I hope you enjoy listening to this episode as much as I enjoyed making it.',
             url:
                'https://webrush.simplecast.com/episodes/episode-143-old-man-yells-at-tests-andre-young',
          },

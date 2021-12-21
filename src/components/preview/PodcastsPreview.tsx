@@ -3,7 +3,7 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles, colors } from '../../styles/global'
 import SubHeading from '../presentation/subHeading'
 import SiteSection from '../presentation/siteSection'
-import { getPodcastInfo } from '../../utils/podcastService'
+import { getPodcastInfo, PodcastData } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       gap: '1rem',
       margin: '1rem',
       marginTop: '2rem',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
    tabHeader: {
       fontSize: '1.5rem',
@@ -94,10 +97,11 @@ const PodcastsPreview = () => {
    const displayCount = 6
    const [tabs, setTabs] = useState<Tab[]>([])
    const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Starred)
-   const [podcastData, setData] = useState({
+   const [podcastData, setData] = useState<PodcastData>({
       queue: [],
       podcasts: [],
       starred: [],
+      appearances: [],
    })
    useEffect(() => {
       getPodcastInfo().then((data) => {

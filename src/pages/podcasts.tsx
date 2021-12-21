@@ -4,7 +4,7 @@ import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
-import { getPodcastInfo } from '../utils/podcastService'
+import { getPodcastInfo, PodcastData } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { colors, sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
@@ -56,10 +56,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
    tabs: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gap: '1rem',
       margin: '1rem',
       marginTop: '2rem',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr 1fr',
+      },
    },
    tabHeader: {
       fontSize: '1.5rem',
@@ -100,13 +103,14 @@ const PodcastPage = (props: PageProps) => {
    const css = useStyles(theme)
    const twitter = info.me.social.find((x) => x.name === 'Twitter')
 
-   const [podcastData, setData] = useState({
+   const [podcastData, setData] = useState<PodcastData>({
       queue: [],
       podcasts: [],
       starred: [],
+      appearances: [],
    })
    const [tabs, setTabs] = useState<Tab[]>([])
-   const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Starred)
+   const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Appearances)
    const windowSize = useWindowSize()
    const largeScreen =
       windowSize.width > theme.breakpoints.values.sm ? true : false
@@ -115,6 +119,11 @@ const PodcastPage = (props: PageProps) => {
       getPodcastInfo().then((data) => {
          setData({ ...data })
          setTabs([
+            {
+               title: `Appearances`,
+               count: data.appearances?.length,
+               value: TabEnum.Appearances,
+            },
             {
                title: `Stared`,
                count: data.starred?.length,
@@ -194,7 +203,7 @@ const PodcastPage = (props: PageProps) => {
                               <a href={episode.url}>{episode.title}</a>
                            </h3>
                            {largeScreen && (
-                              <div
+                              <p
                                  style={{
                                     display: 'block',
                                     maxHeight: '200px',
@@ -241,7 +250,7 @@ const PodcastPage = (props: PageProps) => {
                               <a href={episode.url}>{episode.title}</a>
                            </h3>
                            {largeScreen && (
-                              <div
+                              <p
                                  style={{
                                     display: 'block',
                                     maxHeight: '200px',
@@ -253,6 +262,41 @@ const PodcastPage = (props: PageProps) => {
                                     __html: episode.showNotes,
                                  }}
                               />
+                           )}
+                        </div>
+                     </div>
+                  ))}
+               </div>
+            )}
+            {visibleTab === TabEnum.Appearances && (
+               <div className={css.container}>
+                  {podcastData.appearances.map((episode, index) => (
+                     <div
+                        key={`appearance-episode-${episode.title}-${index}`}
+                        className={css.episode}
+                     >
+                        <div>
+                           <img
+                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
+                              alt="{episode.title}"
+                              className={css.episodeIcon}
+                           />
+                        </div>
+                        <div style={{ marginLeft: theme.spacing(2) }}>
+                           <h3 className={css.episodeTitle}>
+                              <a href={episode.url}>{episode.title}</a>
+                           </h3>
+                           <p>Topic: {episode.topic}</p>
+                           {largeScreen && (
+                              <p
+                                 style={{
+                                    display: 'block',
+                                    maxHeight: '200px',
+                                    overflowY: 'auto',
+                                 }}
+                              >
+                                 {episode.description}
+                              </p>
                            )}
                         </div>
                      </div>
