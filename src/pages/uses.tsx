@@ -74,7 +74,7 @@ const Uses = () => {
                   <span className={css.divider}></span>
                </h2>
                <p className={css.mutedText}>
-                  I'm not very knowledgable when it comes to hardware but here
+                  I'm not very knowledgeable when it comes to hardware but here
                   is what I use.
                </p>
                <dl className={css.configuration}>
@@ -90,7 +90,7 @@ const Uses = () => {
                   </dd>
                   <dt>Monitors</dt>
                   <dd>
-                     I run a 3 monitor setup with a 32-inch Smasung in the
+                     I run a 3 monitor setup with a 32-inch Samsung in the
                      center and 2 17-inch Dell flipped vertically on both sides.
                      All 3 monitors are mounted on a 3 arm vesa mount.
                   </dd>
@@ -103,8 +103,37 @@ const Uses = () => {
                   </dd>
                   <dt>Logitech Webcam C930e</dt>
                   <dd></dd>
-                  <dt>Blue Yehti</dt>
-                  <dd></dd>
+                  <dt>Blue Yei and Blue Yeti X</dt>
+                  <dd>
+                     I own both a Blue Yeti and a{' '}
+                     <a
+                        href="https://www.bluemic.com/en-us/products/yeti-x/"
+                        target="_blank"
+                     >
+                        Blue Yeti X
+                     </a>
+                     . Blue Yeti is a good quality microphone at an affordable
+                     price. You can control the gain, headphone level, blend,
+                     metering and mute from the microphone directly. It also
+                     comes with nice software from Logitech (
+                     <a
+                        href="https://www.bluemic.com/en-us/products/blue-voice/"
+                        target="_blank"
+                     >
+                        Blue Voice
+                     </a>
+                     ) that can be used to adjust your sound even more.
+                  </dd>
+                  <dt>
+                     <a href="https://www.sony.com/ug/electronics/headband-headphones/wh-1000xm3">
+                        Sony WH-100X M3
+                     </a>
+                  </dt>
+                  <dd>
+                     I bought this headphone for my daughter and had to buy
+                     another one for myself. It is extremely comfortable, has
+                     great noise cancelling properties and good audio quality.
+                  </dd>
                </dl>
             </div>
 
@@ -115,7 +144,7 @@ const Uses = () => {
                </h2>
                <p className={css.mutedText}>
                   My editor of choice is VS Code. Below are a few of the
-                  extenstions I recommend using with VS Code.
+                  extensions I recommend using with VS Code.
                </p>
                <dl className={css.configuration}>
                   <dt>GitLens</dt>
@@ -146,7 +175,7 @@ const Uses = () => {
                   </dd>
                   <dt>Prettier</dt>
                   <dd>
-                     An opinionated code formatter
+                     An opinionated code formatter.
                      {/* <code>
                           {
                             "arrowParens": "avoid",
@@ -158,11 +187,26 @@ const Uses = () => {
                   </dd>
                   <dt>ES Lint</dt>
                   <dd></dd>
+                  <dt>
+                     <a
+                        href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker"
+                        target="_blank"
+                     >
+                        Code Spell Checker
+                     </a>
+                  </dt>
+                  <dd>
+                     I was introduced to this extension by one of the engineers
+                     on my team. For someone with constant spelling mistakes
+                     this extension has been a game changer. The goal of this
+                     spell checker is to help catch common spelling errors while
+                     keeping the number of false positives low.
+                  </dd>
                   <dt>Better Comments</dt>
                   <dd>
                      The Better Comments extension will help you create more
                      human-friendly comments in your code. With this extension,
-                     you will be able to categorise your annotations into:
+                     you will be able to categorize your annotations into:
                      Alerts Queries TODOs Highlights Commented out code can also
                      be styled to make it clear the code shouldn't be there Any
                      other comment styles you'd like can be specified in the

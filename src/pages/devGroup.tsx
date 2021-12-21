@@ -55,8 +55,8 @@ const DevGroup = ({ data }) => {
                Attending developer meet ups are a great way of expanding your
                knowledge and skills. But many of us have family and other
                obligations outside of work so I created and hosted a bi-weekly
-               NASA wide developer group that ran for over 8 years. Below are an
-               excert from those sessions.
+               NASA wide developer group that ran for over 8 years. Below are
+               excerpts from those sessions.
             </p>
             <span>
                <CenterDivider />

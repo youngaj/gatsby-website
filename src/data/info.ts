@@ -1,6 +1,58 @@
 import dayjs from 'dayjs'
+interface Info {
+   me: AboutMeInfo
+   nasa: NASAInfo
+}
 
-export const info = {
+interface AboutMeInfo {
+   firstName: string
+   lastName: string
+   email: string
+   age: number
+   workExperience: WorkExperience[]
+   social: Social[]
+   projects: Project[]
+   podcastAppearances: PodcastAppearance[]
+}
+
+interface WorkExperience {
+   company: string
+   title: string
+   start: string
+   end: string
+   responsibilities: string[]
+}
+
+interface Social {
+   name: string
+   username: string
+   link: string
+}
+
+interface Project {
+   title: string
+   description: string
+   code?: Code
+}
+
+interface Code {
+   repo: string
+   url: string
+}
+
+interface PodcastAppearance {
+   pocketCastUUID: string
+   podcastName: string
+   topic: string
+   description?: string
+   url?: string
+}
+
+interface NASAInfo {
+   lastDay: string
+}
+
+export const info: Info = {
    me: {
       firstName: 'Andre',
       lastName: 'Young',
@@ -20,13 +72,13 @@ export const info = {
          },
          {
             company: 'ASRC Inuteq (NASA)',
-            title: 'Application Developement Lead & IT Lead',
-            start: '2012',
+            title: 'Application Development Lead & IT Lead',
+            start: '2012-07',
             end: '2020-04',
             responsibilities: [
                'I served as the Application Development Lead for the contract, participating in senior management discussions and setting development goals and standards for the contract.',
                'I mentored developers at all levels, providing feedback on code and career coaching.',
-               'I also served as the Lead developer and primary point of contact for 5 active projects with 3 separate customers including a redesign and replatforming of the Exploration & Space Communications (ESC) public website from Drupal to Gatsby, NodeJS and ASP.NET Core.',
+               'I also served as the Lead developer and primary point of contact for 5 active projects with 3 separate customers including a redesign and re-platforming of the Exploration & Space Communications (ESC) public website from Drupal to Gatsby, NodeJS and ASP.NET Core.',
                'Lastly I served as the IT manager for the Exploration & Space Communications Division (Code 450) managing both development and operation activities.',
             ],
          },
@@ -36,7 +88,7 @@ export const info = {
             start: '2011-07',
             end: '2012-07',
             responsibilities: [
-               `Designed and implemented new features for an online intern registration and selection (SOLAR) system. Provided architectural design support for the next version a large configuration management (CM) tool used by multiple flight projects at NASA's Goddard Space Flight Center (GSFC). Assited with other applications as needed.`,
+               `Designed and implemented new features for an online intern registration and selection (SOLAR) system. Provided architectural design support for the next version a large configuration management (CM) tool used by multiple flight projects at NASA's Goddard Space Flight Center (GSFC). Assisted with other applications as needed.`,
             ],
          },
          {
@@ -79,6 +131,48 @@ export const info = {
             name: 'LinkedIn',
             username: 'Andre Young',
             link: 'https://www.linkedin.com/in/andre-young-b9a9b5b/',
+         },
+      ],
+      projects: [
+         {
+            title: 'Commercial Real Estate Management (CREM)',
+            description: 'Improve rent collection and property management',
+         },
+         {
+            title: 'OneStream & Snowflake',
+            description:
+               'Gain insights into the Focus Platform by recording events via OneStream (Kafka) into Snowflake and internal C1 data lake.',
+         },
+         {
+            title: 'Conveyor Belt (CB)',
+            description:
+               'Meta-platform to enable internal development teams to onboard and easily use internal platforms.  Drives down cycle times and ensures governance by preventing intents without the appropriate approvals from being deployed into protected environments.',
+         },
+         {
+            title: 'Website',
+            description: 'Gatsby redesign of this website',
+            code: {
+               repo: 'gatsby-website',
+               url: 'https://github.com/youngaj/gatsby-website',
+            },
+         },
+      ],
+      podcastAppearances: [
+         {
+            pocketCastUUID: '3414c425-da9f-4b6d-82bf-2062b636d03d',
+            podcastName: 'Web Rush',
+            topic: 'From IC to PL',
+            description: '',
+            url:
+               'https://webrush.io/episodes/episode-164-rising-stumbling-and-getting-up-again-life-as-a-tech-manager',
+         },
+         {
+            pocketCastUUID: '358e82f0-a54e-0136-7b93-27f978dac4db',
+            podcastName: 'Web Rush',
+            topic: 'Testing',
+            description: '',
+            url:
+               'https://webrush.simplecast.com/episodes/episode-143-old-man-yells-at-tests-andre-young',
          },
       ],
    },

@@ -135,7 +135,7 @@ const PodcastsPreview = () => {
             <Link to="/podcasts">{podcastData.podcasts.length}</Link> podcasts
             with {podcastData.queue.length} currently in my podcasts listening
             queue. Podcasts are a great way to keep up with the latest around
-            the industry. They are also a great way not to go insane duing long
+            the industry. They are also a great way not to go insane during long
             commutes. Below is a list of {podcastData.starred.length} podcasts
             episodes that I have starred over the years. Hope you enjoy. If you
             know of other podcasts you would recommend please send me your

@@ -151,7 +151,7 @@ const PodcastPage = (props: PageProps) => {
             <p className={css.mutedText}>
                I subscribe to {podcastData.podcasts.length} podcasts. Podcasts
                are a great way to keep up with the latest around the industry.
-               They are also a great way not to go insane duing long commutes.
+               They are also a great way not to go insane during long commutes.
                Below is a list of the podcasts I currently subscribe to. Follow
                along and/or send me suggestions{' '}
                <a href={twitter.link}>{twitter.username}</a>
