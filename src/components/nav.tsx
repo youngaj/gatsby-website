@@ -58,15 +58,16 @@ const Nav = (props) => {
    }
 
    return (
-      <div>
+      <div
+         id="sticky"
+         className={css.sticky}
+         style={{
+            backgroundColor: 'black',
+            zIndex: 10,
+         }}
+      >
          {windowSize.width >= theme.breakpoints.values.md && (
-            <div
-               className={css.sticky}
-               style={{
-                  backgroundColor: 'black',
-                  zIndex: 10,
-               }}
-            >
+            <div>
                <div className={[css.container, css.content].join(' ')}>
                   {Object.keys(menuItems).map((key) => {
                      const item = menuItems[key]

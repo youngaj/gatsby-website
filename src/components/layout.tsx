@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
    const windowSize = useWindowSize()
 
    return (
-      <div className={css.container} style={{ height: '100%' }}>
+      <div className={css.container} style={{ height: windowSize.height }}>
          <ThemeProvider theme={theme}>
             <main>{children}</main>
          </ThemeProvider>
