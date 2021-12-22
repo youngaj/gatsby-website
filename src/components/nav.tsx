@@ -38,23 +38,32 @@ const Nav = (props) => {
       blog: { title: 'Blog', target: '/blogs' },
       uses: { title: 'Uses', target: '/uses' },
    }
-   const menuItems = links
+   const initialMenuItems = links
       ? { ...defaultMenuOptions, ...links }
       : defaultMenuOptions
-
    if (active) {
-      menuItems[active].active = 'true'
-   } else {
-      menuItems.home.active = 'true'
+      initialMenuItems[active].active = true
    }
 
-   const selectLink = (key: string) => {
-      setActive(key)
-      if (key) {
-         menuItems[key].active = 'true'
-      } else {
-         menuItems.home.active = 'true'
+   const [menuItems, setMenuItems] = useState(initialMenuItems)
+
+   const selectLink = (selectedKey: string) => {
+      let selectionFound = false
+      setActive(selectedKey)
+
+      Object.keys(menuItems).map((key) => {
+         if (key === selectedKey) {
+            menuItems[key].active = true
+            selectionFound = true
+         } else {
+            menuItems[key].active = false
+         }
+      })
+
+      if (!selectionFound) {
+         menuItems.home.active = true
       }
+      setMenuItems({ ...menuItems })
    }
 
    return (
