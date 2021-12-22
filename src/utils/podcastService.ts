@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { InferProps } from 'prop-types'
 import { info } from '../data/info'
 
 export interface PodcastData {
@@ -45,6 +44,9 @@ export const getPodcastInfo = async (): Promise<PodcastData> => {
 
    const data: PodcastData = response.data
    //retrieve appearances
+   data.podcasts.forEach(
+      (x) => (x.lastEpisodePublished = new Date(x.lastEpisodePublished))
+   )
    const appearanceIds = info.me.podcastAppearances.map((x) => x.uuid)
    data.appearances = data.starred
       .filter((x) => appearanceIds.includes(x.uuid))
@@ -57,9 +59,11 @@ export const getPodcastInfo = async (): Promise<PodcastData> => {
             description: episodeInfo.description,
             topic: episodeInfo.topic,
             url: episodeInfo.url,
+            published: new Date(x.published),
          }
          return appearance
       })
+      .sort((a, b) => b.published.getTime() - a.published.getTime())
 
    return data
 }

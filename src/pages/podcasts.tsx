@@ -90,13 +90,18 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
+   episodeBlock: {
+      display: 'block',
+      maxHeight: '200px',
+      overflowY: 'auto',
+   },
+   emphasize: {
+      color: colors.accent,
+   },
+   topic: {
+      marginTop: theme.spacing(2),
+   },
 }))
-
-const podcastSort = (a, b) => {
-   return (
-      Date.parse(b.lastEpisodePublished) - Date.parse(a.lastEpisodePublished)
-   )
-}
 
 const PodcastPage = (props: PageProps) => {
    const theme = useTheme()
@@ -158,11 +163,22 @@ const PodcastPage = (props: PageProps) => {
          <SiteSection bg="dark">
             <SubHeading>Podcasts</SubHeading>
             <p className={css.mutedText}>
-               I subscribe to {podcastData.podcasts.length} podcasts. Podcasts
-               are a great way to keep up with the latest around the industry.
-               They are also a great way not to go insane during long commutes.
-               Below is a list of the podcasts I currently subscribe to. Follow
-               along and/or send me suggestions{' '}
+               I subscribe to{' '}
+               <a onClick={(e) => setVisibleTab(TabEnum.Subscribed)}>
+                  {podcastData.podcasts.length}
+               </a>{' '}
+               podcasts and have appeared on{' '}
+               <a onClick={(e) => setVisibleTab(TabEnum.Appearances)}>
+                  {podcastData.appearances.length}
+               </a>{' '}
+               episodes thus far. Podcasts are a great way to keep up with the
+               latest around the industry. They are also a great way avoid going
+               insane during long commutes. You will also find the podcast that
+               are currently in my{' '}
+               <a onClick={(e) => setVisibleTab(TabEnum.Queue)}>
+                  listening queue
+               </a>
+               . Follow along and/or send me suggestions{' '}
                <a href={twitter.link}>{twitter.username}</a>
             </p>
             <div className={css.tabs}>
@@ -204,13 +220,10 @@ const PodcastPage = (props: PageProps) => {
                            </h3>
                            {largeScreen && (
                               <p
-                                 style={{
-                                    display: 'block',
-                                    maxHeight: '200px',
-                                    //border: '1px solid yellow',
-                                    //maxWidth: '450px',
-                                    overflowY: 'auto',
-                                 }}
+                                 className={[
+                                    css.episodeBlock,
+                                    css.mutedText,
+                                 ].join(' ')}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,
                                  }}
@@ -223,12 +236,18 @@ const PodcastPage = (props: PageProps) => {
             )}
             {visibleTab === TabEnum.Subscribed && (
                <div className={css.container}>
-                  {podcastData.podcasts.map((show, index) => (
-                     <Podcast
-                        data={show}
-                        key={`episode-${show.title}-${index}`}
-                     />
-                  ))}
+                  {podcastData.podcasts
+                     .sort(
+                        (a, b) =>
+                           b.lastEpisodePublished.getTime() -
+                           a.lastEpisodePublished.getTime()
+                     )
+                     .map((show, index) => (
+                        <Podcast
+                           data={show}
+                           key={`episode-${show.title}-${index}`}
+                        />
+                     ))}
                </div>
             )}
             {visibleTab === TabEnum.Starred && (
@@ -251,13 +270,10 @@ const PodcastPage = (props: PageProps) => {
                            </h3>
                            {largeScreen && (
                               <p
-                                 style={{
-                                    display: 'block',
-                                    maxHeight: '200px',
-                                    //border: '1px solid yellow',
-                                    //maxWidth: '450px',
-                                    overflowY: 'auto',
-                                 }}
+                                 className={[
+                                    css.episodeBlock,
+                                    css.mutedText,
+                                 ].join(' ')}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,
                                  }}
@@ -285,15 +301,17 @@ const PodcastPage = (props: PageProps) => {
                         <div style={{ marginLeft: theme.spacing(2) }}>
                            <h3 className={css.episodeTitle}>
                               <a href={episode.url}>{episode.title}</a>
+                              <p className={[css.topic].join(' ')}>
+                                 <span className={css.mutedText}>Topic:</span>{' '}
+                                 {episode.topic}
+                              </p>
                            </h3>
-                           <p>Topic: {episode.topic}</p>
                            {largeScreen && (
                               <p
-                                 style={{
-                                    display: 'block',
-                                    maxHeight: '200px',
-                                    overflowY: 'auto',
-                                 }}
+                                 className={[
+                                    css.episodeBlock,
+                                    css.mutedText,
+                                 ].join(' ')}
                               >
                                  {episode.description}
                               </p>
