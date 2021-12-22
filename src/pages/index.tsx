@@ -14,6 +14,7 @@ import BlogPreview from '../components/preview/blogPreview'
 import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
 import { graphql } from 'gatsby'
+import MobileNav from '../components/mobileNav'
 
 const useStyles = makeStyles((theme) => ({
    ...sharedStyles(theme),
@@ -39,20 +40,21 @@ const IndexPage = ({ data }) => {
    return (
       <Layout>
          <SEO />
+         <MobileNav links={menuItems} />
          <a id="home"></a>
          <Welcome />
          <Nav links={menuItems} />
-         <a id="profile"></a>
+         <a id="profile" name="profile"></a>
          <Profile />
          <a id="skills"></a>
          <LatestWork />
-         <a id="resume"></a>
+         <a id="resume" name="resume"></a>
          <Resume />
-         <a id="podcastQueue"></a>
+         <a id="podcastQueue" name="podcastQueue"></a>
          <PodcastsPreview />
-         <a id="devGroup"></a>
+         <a id="devGroup" name="devGroup"></a>
          <DevGroupPreview sessions={sessions} />
-         <a id="blog"></a>
+         <a id="blog" name="blog"></a>
          <BlogPreview posts={blogPosts} />
       </Layout>
    )

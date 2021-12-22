@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles, colors } from '../../styles/global'
-import SubHeading from '../presntation/subHeading'
-import SiteSection from '../presntation/siteSection'
-import { getPodcastInfo } from '../../utils/podcastService'
+import SubHeading from '../presentation/subHeading'
+import SiteSection from '../presentation/siteSection'
+import { getPodcastInfo, PodcastData } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
-import { useGlobalCss } from '../../utils/useGlobalCss'
-import useWindowSize from '../../utils/useWindowSize'
+import { useGlobalCss } from '../../hooks/useGlobalCss'
+import { useWindowSize } from '../../hooks/useWindowSize'
 import Podcast from '../podcast'
+import { Tab, TabEnum } from '../../types'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -56,9 +57,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       gap: '1rem',
       margin: '1rem',
       marginTop: '2rem',
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
    tabHeader: {
       fontSize: '1.5rem',
+      [theme.breakpoints.down('sm')]: {
+         fontSize: '1.0rem',
+      },
    },
    divider: {
       display: 'block',
@@ -69,18 +76,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '150px',
       marginLeft: 'auto',
       marginRight: 'auto',
+      [theme.breakpoints.down('sm')]: {
+         width: '100px',
+      },
    },
    count: {
       fontSize: '1.2rem',
       color: colors.muted,
+      [theme.breakpoints.down('sm')]: {
+         display: 'none',
+      },
    },
 }))
-
-enum Tab {
-   Starred = 'Starred',
-   Queue = 'Queue',
-   Subscribed = 'Subscribed',
-}
 
 const PodcastsPreview = () => {
    const theme = useTheme()
@@ -88,21 +95,40 @@ const PodcastsPreview = () => {
    const globalCss = useGlobalCss()
    const twitter = info.me.social.find((x) => x.name === 'Twitter')
    const displayCount = 6
-   const [visibleTab, setVisibleTab] = useState<Tab>(Tab.Starred)
-   const [podcastData, setData] = useState({
+   const [tabs, setTabs] = useState<Tab[]>([])
+   const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Starred)
+   const [podcastData, setData] = useState<PodcastData>({
       queue: [],
       podcasts: [],
       starred: [],
+      appearances: [],
    })
    useEffect(() => {
       getPodcastInfo().then((data) => {
          setData({ ...data })
+         setTabs([
+            {
+               title: `Stared`,
+               count: data.starred?.length,
+               value: TabEnum.Starred,
+            },
+            {
+               title: `In Queue`,
+               count: data.queue?.length,
+               value: TabEnum.Queue,
+            },
+            {
+               title: `Subscribed`,
+               count: data.podcasts?.length,
+               value: TabEnum.Subscribed,
+            },
+         ])
       })
    }, [])
 
    const windowSize = useWindowSize()
    const largeScreen =
-      windowSize.windowWidth > theme.breakpoints.values.sm ? true : false
+      windowSize.width > theme.breakpoints.values.sm ? true : false
    return (
       <SiteSection bg="light">
          <h2>
@@ -113,44 +139,32 @@ const PodcastsPreview = () => {
             <Link to="/podcasts">{podcastData.podcasts.length}</Link> podcasts
             with {podcastData.queue.length} currently in my podcasts listening
             queue. Podcasts are a great way to keep up with the latest around
-            the industry. They are also a great way not to go insane duing long
+            the industry. They are also a great way not to go insane during long
             commutes. Below is a list of {podcastData.starred.length} podcasts
             episodes that I have starred over the years. Hope you enjoy. If you
             know of other podcasts you would recommend please send me your
             suggestions at <a href={twitter.link}>{twitter.username}</a>
          </p>
          <div className={css.tabs}>
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Starred)}
-            >
-               Starred{' '}
-               <span className={css.count}>({podcastData.starred.length})</span>
-               <span className={css.divider}></span>
-            </span>{' '}
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Queue)}
-            >
-               In Queue{' '}
-               <span className={css.count}>
-                  ({podcastData.queue?.length || 0})
-               </span>
-               <span className={css.divider}></span>
-            </span>{' '}
-            <span
-               className={css.tabHeader}
-               onClick={(e) => setVisibleTab(Tab.Subscribed)}
-            >
-               Subscribed{' '}
-               <span className={css.count}>
-                  ({podcastData.podcasts?.length || 0})
-               </span>
-               <span className={css.divider}></span>
-            </span>
+            {tabs.map((tab) => {
+               const isActive = tab.value === visibleTab
+               const headerCss = isActive
+                  ? css.tabHeader
+                  : [css.tabHeader, css.mutedText].join(' ')
+               return (
+                  <span
+                     className={headerCss}
+                     onClick={(e) => setVisibleTab(tab.value)}
+                  >
+                     {tab.title}
+                     <span className={css.count}> ({tab.count})</span>
+                     {isActive && <span className={css.divider}></span>}
+                  </span>
+               )
+            })}
          </div>
 
-         {visibleTab === Tab.Queue && (
+         {visibleTab === TabEnum.Queue && (
             <div className={css.container}>
                {podcastData.queue
                   .slice(0, displayCount)
@@ -189,7 +203,7 @@ const PodcastsPreview = () => {
                   ))}
             </div>
          )}
-         {visibleTab === Tab.Subscribed && (
+         {visibleTab === TabEnum.Subscribed && (
             <div className={css.container}>
                {podcastData.podcasts
                   .slice(0, displayCount)
@@ -201,7 +215,7 @@ const PodcastsPreview = () => {
                   ))}
             </div>
          )}
-         {visibleTab === Tab.Starred && (
+         {visibleTab === TabEnum.Starred && (
             <div className={css.container}>
                {podcastData.starred
                   .slice(0, displayCount)

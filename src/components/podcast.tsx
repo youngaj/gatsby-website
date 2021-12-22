@@ -17,6 +17,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       '& div': {
          textAlign: 'left',
       },
+      [theme.breakpoints.down('sm')]: {
+         gridTemplateColumns: '1fr',
+         '& div': {
+            textAlign: 'center',
+         },
+      },
    },
    title: {
       marginBottom: theme.spacing(2),
@@ -56,7 +62,7 @@ const Podcast = ({ data }) => {
                <a href={show.url}>{show.title}</a>
             </div>
             <p className={[css.mutedText, css.pt20, css.subTitle].join(' ')}>
-               Lastest Episode: {dayjs(show.lastEpisodePublished).fromNow()}
+               Latest Episode: {dayjs(show.lastEpisodePublished).fromNow()}
             </p>
             <p>
                {show.displayFullDetails || show.description.length < 200 ? (

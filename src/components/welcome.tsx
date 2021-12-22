@@ -7,7 +7,7 @@ import { sharedStyles } from '../styles/global'
 import { info } from '../data/info'
 
 import ImageOverlay from './imageOverlay'
-import useWindowSize from '../utils/useWindowSize'
+import { useWindowSize } from '../hooks/useWindowSize'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -23,9 +23,7 @@ const Welcome = () => {
 
    //-- leave room for the menu on larger screens
    const heroHeight =
-      dimensions.windowWidth > 600
-         ? dimensions.windowHeight - 75
-         : dimensions.windowHeight
+      dimensions.width > 600 ? dimensions.height - 75 : dimensions.height
 
    const imageCss = {
       text: {

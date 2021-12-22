@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 
 import { sharedStyles } from '../../styles/global'
-import SiteSection from '../presntation/siteSection'
-import SubHeading from '../presntation/subHeading'
-import CenterDivider from '../presntation/centerDivider'
+import SiteSection from '../presentation/siteSection'
+import SubHeading from '../presentation/subHeading'
+import CenterDivider from '../presentation/centerDivider'
 import StyledButton from '../styledButton'
 import { Link } from 'gatsby'
 import DevGroupSession from '../devGroupSession'
@@ -41,7 +41,7 @@ const DevGroupPreview = ({ sessions }) => {
             Attending developer meet ups are a great way of expanding your
             knowledge and skills. But many of us have family and other
             obligations outside of work so I created and hosted a bi-weekly NASA
-            wide developer group that ran for over 8 years. Below are an excert
+            wide developer group that ran for over 8 years. Below are excerpts
             from those sessions.
          </p>
          <span>

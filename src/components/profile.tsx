@@ -6,11 +6,11 @@ import { sharedStyles } from '../styles/global'
 
 import { info } from '../data/info'
 import dayjs from 'dayjs'
-import useWindowSize from '../utils/useWindowSize'
+import { useWindowSize } from '../hooks/useWindowSize'
 import ContactDetail from './contactDetails'
-import Divider from './presntation/divider'
-import SubHeading from './presntation/subHeading'
-import SiteSection from './presntation/siteSection'
+import Divider from './presentation/divider'
+import SubHeading from './presentation/subHeading'
+import SiteSection from './presentation/siteSection'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -74,21 +74,21 @@ const Profile = () => {
                <p className={css.mutedText}>
                   As of April 2020 I joined the Focus Organization at Capital
                   One where I have the pleasure of leading leading 2 teams as a
-                  Senior Software Egineering Manager.
+                  Senior Software Engineering Manager.
                </p>
                <p className={css.mutedText}>
                   Formerly I spent 16 years at NASA's Goddard Space Flight
-                  Center as the Application Development Lead for the PAAC
+                  Center as the Application Development Lead for the PAAC V
                   contract, where I crafted a number of cool (and sometimes
                   important but not so cool) projects. I also coached developers
                   as well introduced, setup and operated engineering principles
                   and tools such as agile, automated testing, Continuous
-                  Integration, Continous Delivery and more.
+                  Integration, Continuos Delivery and more.
                </p>
                <p className={css.mutedText}>
                   In addition I ran a bi-weekly developer meetup at NASA, where
                   we discussed various development topics ranging from AWS
-                  lessons learned, microservices architecture, and Imposter
+                  lessons learned, microservice architecture, and Imposter
                   Syndrome to knowing how to say "No" to a customer and having
                   them say "thank you" afterwards.
                </p>
@@ -99,7 +99,7 @@ const Profile = () => {
                </p>{' '}
                <ContactDetail />
             </div>
-            {dimensions.windowWidth > theme.breakpoints.values.md && (
+            {dimensions.width > theme.breakpoints.values.md && (
                <div>
                   <Img
                      fluid={data.profile.childImageSharp.fluid}

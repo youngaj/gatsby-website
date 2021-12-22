@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 
 import { sharedStyles } from '../../styles/global'
-import SiteSection from '../presntation/siteSection'
-import SubHeading from '../presntation/subHeading'
+import SiteSection from '../presentation/siteSection'
+import SubHeading from '../presentation/subHeading'
 import { Link } from 'gatsby'
 import StyledButton from '../styledButton'
-import CenterDivider from '../presntation/centerDivider'
+import CenterDivider from '../presentation/centerDivider'
 import BlogPost from '../BlogPost'
 
 const useStyles = makeStyles((theme: Theme) => ({
