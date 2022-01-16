@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: '2px',
       width: '150px',
    },
+   strikeThrough: { textDecoration: 'line-through' },
 }))
 
 const Uses = () => {
@@ -211,12 +212,6 @@ const Uses = () => {
                      be styled to make it clear the code shouldn't be there Any
                      other comment styles you'd like can be specified in the
                      settings
-                  </dd>
-                  <dt>Bracket Pair Colorizer</dt>
-                  <dd>
-                     This extension allows matching brackets to be identified
-                     with colours. The user can define which characters to
-                     match, and which colours to use.
                   </dd>
                   <dt>Remote Development</dt>
                   <dd>
