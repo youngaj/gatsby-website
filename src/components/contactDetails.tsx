@@ -52,7 +52,10 @@ const ContactDetail = () => {
                ))}
             </div>
             <div className={css.buttonArea}>
-               <a href="/Andre_Young_Resume.pdf" target="_blank">
+               <a
+                  href="/Andre_Young_Resume.pdf"
+                  download="Andre Young Resume.pdf"
+               >
                   <StyledButton>
                      <CloudDownloadIcon />
                      &nbsp; Download Resume
