@@ -103,6 +103,7 @@ const PodcastsPreview = () => {
       starred: [],
       appearances: [],
    })
+
    useEffect(() => {
       getPodcastInfo().then((data) => {
          setData({ ...data })
@@ -129,6 +130,8 @@ const PodcastsPreview = () => {
    const windowSize = useWindowSize()
    const largeScreen =
       windowSize.width > theme.breakpoints.values.sm ? true : false
+   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
+
    return (
       <SiteSection bg="light">
          <h2>
@@ -189,9 +192,8 @@ const PodcastsPreview = () => {
                                  style={{
                                     display: 'block',
                                     maxHeight: '200px',
-                                    //border: '1px solid yellow',
-                                    //maxWidth: '450px',
-                                    overflowY: 'auto',
+                                    overflow: 'auto',
+                                    maxWidth: episodeContainerMaxWidth,
                                  }}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,
@@ -240,9 +242,8 @@ const PodcastsPreview = () => {
                                  style={{
                                     display: 'block',
                                     maxHeight: '200px',
-                                    //border: '1px solid yellow',
-                                    //maxWidth: '450px',
-                                    overflowY: 'auto',
+                                    overflow: 'auto',
+                                    maxWidth: episodeContainerMaxWidth,
                                  }}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,

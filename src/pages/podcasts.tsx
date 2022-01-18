@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    episodeBlock: {
       display: 'block',
       maxHeight: '200px',
-      overflowY: 'auto',
+      overflow: 'auto',
    },
    emphasize: {
       color: colors.accent,
@@ -119,6 +119,8 @@ const PodcastPage = (props: PageProps) => {
    const windowSize = useWindowSize()
    const largeScreen =
       windowSize.width > theme.breakpoints.values.sm ? true : false
+
+   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
 
    useEffect(() => {
       getPodcastInfo().then((data) => {
@@ -219,11 +221,12 @@ const PodcastPage = (props: PageProps) => {
                               <a href={episode.url}>{episode.title}</a>
                            </h3>
                            {largeScreen && (
-                              <p
+                              <div
                                  className={[
                                     css.episodeBlock,
                                     css.mutedText,
                                  ].join(' ')}
+                                 style={{ maxWidth: episodeContainerMaxWidth }}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,
                                  }}
@@ -269,11 +272,12 @@ const PodcastPage = (props: PageProps) => {
                               <a href={episode.url}>{episode.title}</a>
                            </h3>
                            {largeScreen && (
-                              <p
+                              <div
                                  className={[
                                     css.episodeBlock,
                                     css.mutedText,
                                  ].join(' ')}
+                                 style={{ maxWidth: episodeContainerMaxWidth }}
                                  dangerouslySetInnerHTML={{
                                     __html: episode.showNotes,
                                  }}
@@ -307,14 +311,15 @@ const PodcastPage = (props: PageProps) => {
                               </p>
                            </h3>
                            {largeScreen && (
-                              <p
+                              <div
                                  className={[
                                     css.episodeBlock,
                                     css.mutedText,
                                  ].join(' ')}
+                                 style={{ maxWidth: episodeContainerMaxWidth }}
                               >
                                  {episode.description}
-                              </p>
+                              </div>
                            )}
                         </div>
                      </div>
