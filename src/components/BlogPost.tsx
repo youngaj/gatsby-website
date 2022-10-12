@@ -3,6 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
 import ColorBox from '../components/presentation/colorBox'
 import { Link } from 'gatsby'
+import { Blog } from '../data/blog'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -22,10 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const BlogPost = ({ post }) => {
+interface BlogProps {
+   post: Blog
+}
+
+const BlogPost = (props: BlogProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   console.log(post)
+   const { post } = props
    return (
       <div className={css.post}>
          <div className={css.details}>
@@ -34,15 +39,12 @@ const BlogPost = ({ post }) => {
                   <div className={[css.pt65, css.wt700].join(' ')}>
                      {post.day}
                   </div>
-                  <div>{post.frontmatter.date}</div>
+                  <div>{post.monthYear}</div>
                </div>
             </ColorBox>
             <span style={{ textAlign: 'left' }}>
-               <Link
-                  to={`/blog/mdx/${post.frontmatter.slug}`}
-                  className={css.mutedText}
-               >
-                  {post.frontmatter.title}
+               <Link to={`/blog/mdx/${post.slug}`} className={css.mutedText}>
+                  {post.title}
                </Link>
             </span>
          </div>
