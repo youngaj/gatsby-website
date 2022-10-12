@@ -1,0 +1,1 @@
+{"componentChunkName":"component---src-templates-mdx-blog-template-tsx","path":"/blog/mdx/null","result":{"errors":[{"message":"Variable \"$slug\" of non-null type \"String!\" must not be null.","locations":[{"line":1,"column":65}]}],"pageContext":{"slug":null}}}
