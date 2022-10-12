@@ -7,7 +7,17 @@ import Nav from '../components/nav'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
-   blogPost: {},
+   blogPost: {
+      maxWidth: '1440px',
+      margin: '3rem',
+   },
+   blogPostTitle: {
+      marginBottom: '1rem',
+   },
+   blogPostDate: {},
+   blogHeading: {
+      marginBottom: '3rem',
+   },
    blogPostContent: {},
 }))
 
@@ -24,18 +34,27 @@ export default function MdxBlogTemplate({ data }) {
    const theme = useTheme()
    const css = useStyles(theme)
 
-   console.log('Hello from blog template', data)
-
    const { frontmatter, html } = data.markdownRemark
    return (
       <Layout>
          <Nav active="blog" links={links}></Nav>
          <div className={css.content}>
-            <div className={css.mutedText}>MDX tempate</div>
             {frontmatter && (
                <div className={css.blogPost}>
-                  <h1>{frontmatter.title}</h1>
-                  <h2>{frontmatter.date}</h2>
+                  <div className={css.blogHeading}>
+                     <h1 className={[css.blogPostTitle, css.pt50].join(' ')}>
+                        {frontmatter.title}
+                     </h1>
+                     <span
+                        className={[
+                           css.blogPostDate,
+                           css.mutedText,
+                           css.pt22,
+                        ].join(' ')}
+                     >
+                        {frontmatter.date}
+                     </span>
+                  </div>
                   <div
                      className={[css.blogPostContent, css.mutedText].join(' ')}
                      dangerouslySetInnerHTML={{ __html: html }}

@@ -8,6 +8,7 @@ import { Link } from 'gatsby'
 import StyledButton from '../styledButton'
 import CenterDivider from '../presentation/centerDivider'
 import BlogPost from '../BlogPost'
+import { Blog } from '../../data/blog'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -21,15 +22,15 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const getSubset = (posts) => {
-   let subset = []
+const getSubset = (posts: Blog[]): Blog[] => {
+   let subset: Blog[] = []
    if (posts) {
       const today = new Date().getTime()
       subset = posts
          .filter((x) => {
             let published = false
-            if (x.frontmatter.publish) {
-               const publishedDate = new Date(x.frontmatter.publish)
+            if (x.publish) {
+               const publishedDate = new Date(x.publish)
                if (publishedDate.getTime() <= today) {
                   published = true
                }
@@ -37,16 +38,21 @@ const getSubset = (posts) => {
             console.log('Blog post:', published, x)
             return published
          })
+         .sort((a, b) => b.publish.getTime() - a.publish.getTime())
          .slice(0, 12)
    }
    return subset
 }
 
-const BlogPreview = ({ posts }) => {
+interface BlogPreviewProps {
+   posts: Blog[]
+}
+
+const BlogPreview = (props: BlogPreviewProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const [blogPosts, setBlogPosts] = useState([])
-
+   const [blogPosts, setBlogPosts] = useState<Blog[]>([])
+   const { posts } = props
    useEffect(() => {
       setBlogPosts(getSubset(posts))
    }, [posts])

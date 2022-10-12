@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface SiteSectionProps {
-   bg: BackgroundTone
+   bg?: BackgroundTone
    children?: React.ReactNode
 }
 
@@ -28,7 +28,7 @@ const SiteSection = (props: SiteSectionProps) => {
    const css = useStyles(theme)
 
    const children = props.children
-   const bg: BackgroundTone = props.bg
+   const bg: BackgroundTone = props.bg || 'light'
 
    const conditionalStyles = { backgroundColor: 'rgb(23, 23, 23)' }
    if (bg === 'dark') {

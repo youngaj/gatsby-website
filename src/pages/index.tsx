@@ -15,6 +15,8 @@ import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
 import { graphql } from 'gatsby'
 import MobileNav from '../components/mobileNav'
+import { Blog } from '../data/blog'
+import dayjs from 'dayjs'
 
 const useStyles = makeStyles((theme) => ({
    ...sharedStyles(theme),
@@ -26,7 +28,19 @@ const IndexPage = ({ data }) => {
    const sessions = data.sessions.nodes
       .slice(0, 6)
       .map((video) => formatVideo(video))
-   const blogPosts = data.blogPosts.nodes
+   const blogPosts: Blog[] = data.blogPosts.nodes.map((x) => {
+      const date = dayjs(x.frontmatter.publish)
+      const post: Blog = {
+         date: date.toDate(),
+         day: date.format('D'),
+         monthYear: date.format('MMM-YYYY'),
+         publish: new Date(x.frontmatter.publish),
+         slug: x.frontmatter.slug,
+         title: x.frontmatter.title,
+         html: x.frontmatter.html,
+      }
+      return post
+   })
    const menuItems = {
       home: { title: 'Home', target: '#home' },
       profile: { title: 'Profile', target: '#profile' },
