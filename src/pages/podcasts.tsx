@@ -4,15 +4,15 @@ import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
-import { getPodcastInfo, PodcastData } from '../utils/podcastService'
+import { getPodcastInfo } from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { colors, sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
 import SiteSection from '../components/presentation/siteSection'
 import { info } from '../data/info'
 import SubHeading from '../components/presentation/subHeading'
-import { Tab, TabEnum } from '../types'
 import { useWindowSize } from '../hooks/useWindowSize'
+import { PodcastData, Tab, TabEnum } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -181,7 +181,7 @@ const PodcastPage = (props: PageProps) => {
                   listening queue
                </a>
                . Follow along and/or send me suggestions{' '}
-               <a href={twitter.link}>{twitter.username}</a>
+               <a href={twitter?.link}>{twitter?.username}</a>
             </p>
             <div className={css.tabs}>
                {tabs.map((tab) => {

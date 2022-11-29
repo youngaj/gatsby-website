@@ -56,7 +56,7 @@ const Resume = () => {
             </h3>
             <div>
                {info.me.workExperience.map((job) => (
-                  <Job data={job}></Job>
+                  <Job jobInfo={job}></Job>
                ))}
             </div>
          </div>

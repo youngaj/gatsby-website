@@ -3,20 +3,20 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles, colors } from '../../styles/global'
 import SubHeading from '../presentation/subHeading'
 import SiteSection from '../presentation/siteSection'
-import { getPodcastInfo, PodcastData } from '../../utils/podcastService'
+import { getPodcastInfo } from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
 import { useGlobalCss } from '../../hooks/useGlobalCss'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { PodcastData, Tab, TabEnum } from '../../models'
 import Podcast from '../podcast'
-import { Tab, TabEnum } from '../../types'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
    container: {
       display: 'grid',
-      gap: '.5rem',
+      gap: '1rem',
       gridTemplateColumns: '1fr 1fr',
       [theme.breakpoints.down('sm')]: {
          gridTemplateColumns: '1fr',
@@ -25,10 +25,11 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    episode: {
       display: 'grid',
-      gridTemplateColumns: '90px 1fr',
+      gridTemplateColumns: '150px 1fr',
       gap: theme.spacing(2),
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
+      //border: `1px solid ${colors.muted}`,
+      //borderRadius: '5px',
+      //overflow: 'hidden',
       padding: theme.spacing(2),
       '& div': {
          textAlign: 'left',
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    tabs: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
-      gap: '1rem',
+      gap: '2rem',
       margin: '1rem',
       marginTop: '2rem',
       [theme.breakpoints.down('sm')]: {
@@ -146,7 +147,7 @@ const PodcastsPreview = () => {
             commutes. Below is a list of {podcastData.starred.length} podcasts
             episodes that I have starred over the years. Hope you enjoy. If you
             know of other podcasts you would recommend please send me your
-            suggestions at <a href={twitter.link}>{twitter.username}</a>
+            suggestions at <a href={twitter!.link}>{twitter!.username}</a>
          </p>
          <div className={css.tabs}>
             {tabs.map((tab) => {

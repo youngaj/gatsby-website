@@ -10,7 +10,7 @@ import { graphql } from 'gatsby'
 import DevGroupSession from '../components/devGroupSession'
 import Nav from '../components/nav'
 import Layout from '../components/layout'
-import { Video } from '../types'
+import { DevGroupVideo, YouTubeVideo } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const DevGroup = ({ data }) => {
    const theme = useTheme()
    const css = useStyles(theme)
-   const initialState = data.sessions.nodes.map((x: Video) => formatVideo(x))
+   const initialState: DevGroupVideo[] = data.sessions.nodes.map(
+      (x: YouTubeVideo) => formatVideo(x)
+   )
    const [videos, setVideos] = useState(initialState)
    useEffect(() => {
       getVideos().then((data) => {
@@ -52,7 +54,7 @@ const DevGroup = ({ data }) => {
                <SubHeading>Dev Group Sessions</SubHeading>
             </h2>
             <p className={css.mutedText}>
-               Attending developer meet ups are a great way of expanding your
+               Attending developer meet-ups are a great way of expanding your
                knowledge and skills. But many of us have family and other
                obligations outside of work so I created and hosted a bi-weekly
                NASA wide developer group that ran for over 8 years. Below are

@@ -66,24 +66,33 @@ const Profile = () => {
                </h2>
                <p>
                   Andre Young, {info.me.age} years young, born and raised in the
-                  Washington D.C. metro area. Highly motivated senior software
-                  engineering manager and tech lead with over{' '}
-                  {yearsOfExperience} years of hands on experience.
+                  Washington D.C. metro area. Deeply technical and product
+                  focused engineering leader with over {yearsOfExperience} years
+                  of hands on experience.
                </p>
                <Divider />
                <p className={css.mutedText}>
-                  As of April 2020 I joined the Focus Organization at Capital
-                  One where I have the pleasure of leading leading 2 teams as a
-                  Senior Software Engineering Manager.
+                  I joined{' '}
+                  <a href="https://www.capitalone.com/tech/software-engineering/">
+                     Capital One
+                  </a>{' '}
+                  in April 2020 where I have the pleasure of leading the
+                  Servicing Platforms Self Service organization. Our mission is
+                  to improve and streamline the internal associate experience.
+                  We are the builders for the builders. Enabling others to
+                  seamlessly and easily build innovative customer experiences.
                </p>
                <p className={css.mutedText}>
-                  Formerly I spent 16 years at NASA's Goddard Space Flight
-                  Center as the Application Development Lead for the PAAC V
-                  contract, where I crafted a number of cool (and sometimes
-                  important but not so cool) projects. I also coached developers
-                  as well introduced, setup and operated engineering principles
-                  and tools such as agile, automated testing, Continuous
-                  Integration, Continuos Delivery and more.
+                  Prior to Capital One I spent 16 years at{' '}
+                  <a href="https://www.nasa.gov/goddard/">
+                     NASA's Goddard Space Flight Center (GSFC)
+                  </a>{' '}
+                  as the Application Development Lead for the PAAC V contract.
+                  At GSFC I crafted a number of cool (and sometimes important
+                  but not so cool) projects. I coached developers of all
+                  seniorities, establishing industry best practices such as
+                  agile, automated testing, Continuous Integration, Continuos
+                  Delivery and more.
                </p>
                <p className={css.mutedText}>
                   In addition I ran a bi-weekly developer meetup at NASA, where

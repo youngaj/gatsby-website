@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import { colors, sharedStyles } from '../styles/global'
+import { sharedStyles } from '../styles/global'
 
 import SubHeading from './presentation/subHeading'
 import CenterDivider from './presentation/centerDivider'
@@ -12,12 +12,16 @@ const useStyles = makeStyles((theme: Theme) => ({
    grid: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
-      gap: '5px',
+      gap: '2rem',
+      [theme.breakpoints.down('md')]: {
+         gridTemplateColumns: '1fr 1fr',
+      },
+      [theme.breakpoints.down('xs')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
    workCard: {
       padding: '1rem',
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
    },
    projectTitle: {
       color: 'white',

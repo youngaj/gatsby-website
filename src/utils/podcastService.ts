@@ -1,41 +1,6 @@
 import axios from 'axios'
 import { info } from '../data/info'
-
-export interface PodcastData {
-   queue: Episode[]
-   podcasts: PodCast[]
-   starred: StarredEpisode[]
-   appearances: AppearanceEpisode[]
-}
-
-export interface PodCast {
-   uuid: string
-   title: string
-   url: string
-   author: string
-   description: string
-   lastEpisodePublished: Date
-}
-export interface Episode {
-   uuid: string
-   podcast: string
-   showNotes: string
-   title: string
-   url: string
-}
-export interface StarredEpisode extends Episode {
-   published: Date
-   size: string
-   episodeNumber: number
-   duration: number
-   podcastTitle: string
-   podcastUuid: string
-}
-
-export interface AppearanceEpisode extends StarredEpisode {
-   topic: string
-   description: string
-}
+import { PodcastData, AppearanceEpisode } from '../models/podcast'
 
 export const getPodcastInfo = async (): Promise<PodcastData> => {
    const response = await axios.get(
@@ -56,9 +21,9 @@ export const getPodcastInfo = async (): Promise<PodcastData> => {
          )
          const appearance: AppearanceEpisode = {
             ...x,
-            description: episodeInfo.description,
-            topic: episodeInfo.topic,
-            url: episodeInfo.url,
+            description: episodeInfo?.description || x.showNotes,
+            topic: episodeInfo?.topic || x.title,
+            url: episodeInfo?.url || x.showNotes,
             published: new Date(x.published),
          }
          return appearance

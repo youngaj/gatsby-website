@@ -3,7 +3,7 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
 import ColorBox from '../components/presentation/colorBox'
 import { Link } from 'gatsby'
-import { Blog } from '../data/blog'
+import { Blog } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
