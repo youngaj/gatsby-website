@@ -8,7 +8,6 @@ import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
 import { useGlobalCss } from '../../hooks/useGlobalCss'
-import { useWindowSize } from '../../hooks/useWindowSize'
 import { PodcastData, Tab, TabEnum } from '../../models'
 import Podcast from '../podcast'
 import PodCastEpisode from '../podcastEpisode'
@@ -105,11 +104,6 @@ const PodcastsPreview = () => {
          ])
       })
    }, [])
-
-   const windowSize = useWindowSize()
-   const largeScreen =
-      windowSize.width > theme.breakpoints.values.sm ? true : false
-   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
 
    return (
       <SiteSection bg="light">
