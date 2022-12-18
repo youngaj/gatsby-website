@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import { Episode } from '../models'
+import { Episode, StarredEpisode } from '../models'
 import { colors, sharedStyles } from '../styles/global'
 import { useWindowSize } from '../hooks/useWindowSize'
 
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 interface PodcastEpisodeProps {
-   episode: Episode
+   episode: Episode | StarredEpisode
 }
 
 const PodCastEpisode = (props: PodcastEpisodeProps) => {
@@ -59,8 +59,8 @@ const PodCastEpisode = (props: PodcastEpisodeProps) => {
       <div className={css.episode}>
          <div>
             <img
-               src={`https://static.pocketcasts.com/discover/images/130/${episode.podcast}.jpg`}
-               alt="{episode.title}"
+               src={`https://static.pocketcasts.com/discover/images/130/${episode.podcast?.uuid}.jpg`}
+               alt={`Podcast logo for ${episode.podcast?.title || 'episode'}`}
                className={css.episodeIcon}
             />
          </div>

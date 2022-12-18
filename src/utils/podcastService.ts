@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { info } from '../data/info'
-import { PodcastData, AppearanceEpisode } from '../models/podcast'
+import { PodcastData, AppearanceEpisode, PodCast } from '../models/podcast'
 
 export const getPodcastInfo = async (): Promise<PodcastData> => {
    const response = await axios.get(
@@ -13,6 +13,16 @@ export const getPodcastInfo = async (): Promise<PodcastData> => {
       (x) => (x.lastEpisodePublished = new Date(x.lastEpisodePublished))
    )
    const appearanceIds = info.me.podcastAppearances.map((x) => x.uuid)
+   data.queue = data.queue.map((x) => {
+      const podcastUuid =
+         typeof x.podcast === 'string' ? x.podcast : x.podcast?.uuid
+      x.podcast = _getPodcast(data.podcasts, podcastUuid)
+      return x
+   })
+   data.starred = data.starred.map((x) => {
+      x.podcast = _getPodcast(data.podcasts, x.podcastUuid)
+      return x
+   })
    data.appearances = data.starred
       .filter((x) => appearanceIds.includes(x.uuid))
       .map((x) => {
@@ -44,4 +54,11 @@ export const getShowNotes = async (episodeUuid) => {
    )
    const notes = response.data
    return notes
+}
+function _getPodcast(
+   podcasts: PodCast[],
+   podcastUuid?: string
+): PodCast | undefined {
+   const podcast = podcasts.find((x) => x.uuid === podcastUuid)
+   return podcast
 }

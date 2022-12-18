@@ -16,7 +16,8 @@ export interface PodCast {
 
 export interface Episode {
    uuid: string
-   podcast: string
+   podcastUuid: string
+   podcast?: PodCast
    showNotes: string
    title: string
    url: string
@@ -28,7 +29,6 @@ export interface StarredEpisode extends Episode {
    episodeNumber: number
    duration: number
    podcastTitle: string
-   podcastUuid: string
 }
 
 export interface AppearanceEpisode extends StarredEpisode {
