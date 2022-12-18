@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
-import { sharedStyles } from '../styles/global'
+import { colors, sharedStyles } from '../styles/global'
 
 import SubHeading from './presentation/subHeading'
 import CenterDivider from './presentation/centerDivider'
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: 'white',
       paddingBottom: '1rem',
    },
+   projectDescription: {
+      color: colors.muted,
+      marginBottom: '1rem',
+   },
+   codeInfo: {},
 }))
 
 const LatestWork = () => {
@@ -55,9 +60,13 @@ const LatestWork = () => {
                   >
                      {project.title}
                   </h3>
-                  <div className={css.mutedText}>{project.description}</div>
+                  <div className={css.projectDescription}>
+                     {project.description}
+                  </div>
                   {project.code && (
-                     <a href={project.code.url}>{project.code.url}</a>
+                     <div className={css.codeInfo}>
+                        <a href={project.code.url}>{project.code.url}</a>
+                     </div>
                   )}
                </div>
             ))}

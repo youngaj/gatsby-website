@@ -3,6 +3,7 @@ slug: 'office-politics'
 date: '2022-10-02'
 title: 'Office Politics is not a level playing field'
 publish: '2022-10-10'
+summary: 'Like it or not office politics is an essential part of organizational life and is a key avenue to success.  Unfortunately the playing field is not level for all people.'
 tags: 'leadership, planning'
 ---
 

@@ -94,6 +94,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'block',
       maxHeight: '200px',
       overflow: 'auto',
+      paddingRight: `1rem`,
+      color: colors.muted,
    },
    emphasize: {
       color: colors.accent,
@@ -150,18 +152,9 @@ const PodcastPage = (props: PageProps) => {
       })
    }, [])
 
-   const links = {
-      home: { title: 'Home', target: '/' },
-      profile: { title: 'Profile', target: '/#profile' },
-      resume: { title: 'Resume', target: '/#resume' },
-      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
-      devGroup: { title: 'Dev Group', target: '/#devGroup' },
-      blog: { title: 'Blog', target: '/#blog' },
-   }
-
    return (
       <Layout>
-         <Nav active="podcasts" links={links}></Nav>
+         <Nav active="podcasts"></Nav>
          <SiteSection bg="dark">
             <SubHeading>Podcasts</SubHeading>
             <p className={css.mutedText}>

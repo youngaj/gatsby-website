@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gap: '1rem',
       gridTemplateColumns: '1fr 1fr',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
          gridTemplateColumns: '1fr',
          margin: 'auto',
       },
@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'grid',
       gridTemplateColumns: '150px 1fr',
       gap: theme.spacing(2),
-      //border: `1px solid ${colors.muted}`,
-      //borderRadius: '5px',
-      //overflow: 'hidden',
       padding: theme.spacing(2),
       '& div': {
          textAlign: 'left',
@@ -38,6 +35,13 @@ const useStyles = makeStyles((theme: Theme) => ({
          gridTemplateColumns: '1fr',
          marginBottom: theme.spacing(2),
       },
+   },
+   episodeBlock: {
+      display: 'block',
+      maxHeight: '200px',
+      overflow: 'auto',
+      paddingRight: `1rem`,
+      color: colors.muted,
    },
    episodeTitle: {
       marginBottom: '2rem',
@@ -54,11 +58,11 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    tabs: {
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gap: '2rem',
       margin: '1rem',
       marginTop: '2rem',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
          gridTemplateColumns: '1fr',
       },
    },
@@ -88,6 +92,9 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
+   topic: {
+      marginTop: theme.spacing(2),
+   },
 }))
 
 const PodcastsPreview = () => {
@@ -109,6 +116,11 @@ const PodcastsPreview = () => {
       getPodcastInfo().then((data) => {
          setData({ ...data })
          setTabs([
+            {
+               title: `Appearances`,
+               count: data.appearances?.length,
+               value: TabEnum.Appearances,
+            },
             {
                title: `Stared`,
                count: data.starred?.length,
@@ -168,6 +180,44 @@ const PodcastsPreview = () => {
             })}
          </div>
 
+         {visibleTab === TabEnum.Appearances && (
+            <div className={css.container}>
+               {podcastData.appearances.map((episode, index) => (
+                  <div
+                     key={`appearance-episode-${episode.title}-${index}`}
+                     className={css.episode}
+                  >
+                     <div>
+                        <img
+                           src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
+                           alt="{episode.title}"
+                           className={css.episodeIcon}
+                        />
+                     </div>
+                     <div style={{ marginLeft: theme.spacing(2) }}>
+                        <h3 className={css.episodeTitle}>
+                           <a href={episode.url}>{episode.title}</a>
+                           <p className={[css.topic].join(' ')}>
+                              <span className={css.mutedText}>Topic:</span>{' '}
+                              {episode.topic}
+                           </p>
+                        </h3>
+                        {largeScreen && (
+                           <div
+                              className={[css.episodeBlock, css.mutedText].join(
+                                 ' '
+                              )}
+                              style={{ maxWidth: episodeContainerMaxWidth }}
+                           >
+                              {episode.description}
+                           </div>
+                        )}
+                     </div>
+                  </div>
+               ))}
+            </div>
+         )}
+
          {visibleTab === TabEnum.Queue && (
             <div className={css.container}>
                {podcastData.queue
@@ -190,10 +240,8 @@ const PodcastsPreview = () => {
                            </h3>
                            {largeScreen && (
                               <div
+                                 className={css.episodeBlock}
                                  style={{
-                                    display: 'block',
-                                    maxHeight: '200px',
-                                    overflow: 'auto',
                                     maxWidth: episodeContainerMaxWidth,
                                  }}
                                  dangerouslySetInnerHTML={{
@@ -240,10 +288,8 @@ const PodcastsPreview = () => {
                            </h3>
                            {largeScreen && (
                               <div
+                                 className={css.episodeBlock}
                                  style={{
-                                    display: 'block',
-                                    maxHeight: '200px',
-                                    overflow: 'auto',
                                     maxWidth: episodeContainerMaxWidth,
                                  }}
                                  dangerouslySetInnerHTML={{

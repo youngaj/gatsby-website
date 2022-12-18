@@ -15,11 +15,12 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
    details: {
       display: 'grid',
-      gridTemplateColumns: '1fr 3fr',
+      gridTemplateColumns: '90px 3fr',
       gridGap: theme.spacing(2),
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
       padding: theme.spacing(2),
+   },
+   dateText: {
+      color: 'white',
    },
 }))
 
@@ -34,19 +35,27 @@ const BlogPost = (props: BlogProps) => {
    return (
       <div className={css.post}>
          <div className={css.details}>
-            <ColorBox>
-               <div>
-                  <div className={[css.pt65, css.wt700].join(' ')}>
-                     {post.day}
+            <Link to={`/blog/mdx/${post.slug}`} className={css.dateText}>
+               <ColorBox>
+                  <div>
+                     <div className={[css.pt65, css.wt700].join(' ')}>
+                        {post.day}
+                     </div>
+                     <div>{post.monthYear}</div>
                   </div>
-                  <div>{post.monthYear}</div>
-               </div>
-            </ColorBox>
-            <span style={{ textAlign: 'left' }}>
-               <Link to={`/blog/mdx/${post.slug}`} className={css.mutedText}>
+               </ColorBox>
+            </Link>
+            <div style={{ textAlign: 'left' }}>
+               <Link
+                  to={`/blog/mdx/${post.slug}`}
+                  className={[css.pt26].join(' ')}
+               >
                   {post.title}
                </Link>
-            </span>
+               <p className={[css.mutedText, css.pt22].join(' ')}>
+                  {post.summary}
+               </p>
+            </div>
          </div>
       </div>
    )

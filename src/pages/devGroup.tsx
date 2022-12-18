@@ -37,18 +37,9 @@ const DevGroup = ({ data }) => {
       })
    }, [])
 
-   const links = {
-      home: { title: 'Home', target: '/' },
-      profile: { title: 'Profile', target: '/#profile' },
-      resume: { title: 'Resume', target: '/#resume' },
-      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
-      devGroup: { title: 'Dev Group', target: '/#devGroup' },
-      blog: { title: 'Blog', target: '/#blog' },
-   }
-
    return (
       <Layout>
-         <Nav active="devGroup" links={links} />
+         <Nav active="devGroup" />
          <SiteSection bg="dark">
             <h2>
                <SubHeading>Dev Group Sessions</SubHeading>

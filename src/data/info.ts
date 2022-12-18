@@ -84,26 +84,28 @@ export const info: Info = {
       ],
       projects: [
          {
-            title: 'Commercial Real Estate Management (CREM)',
-            description: 'Improve rent collection and property management',
-         },
-         {
-            title: 'OneStream & Snowflake',
-            description:
-               'Gain insights into the Focus Platform by recording events via OneStream (Kafka) into Snowflake and internal C1 data lake.',
-         },
-         {
             title: 'Conveyor Belt (CB)',
             description:
-               'Meta-platform to enable internal development teams to onboard and easily use internal platforms.  Drives down cycle times and ensures governance by preventing intents without the appropriate approvals from being deployed into protected environments.',
+               'A low code meta-platform to enable internal development teams to onboard and easily use internal Capital One platforms.  The focus of the project is to improve the internal associate experience and decrease cycle times while ensuring appropriate governance and traceabiity for intents leveraging key Capital One platforms.',
          },
          {
-            title: 'Website',
-            description: 'Gatsby redesign of this website',
+            title: 'Personal Portfolio',
+            description:
+               'Hand crafted gatsby redesign of this website using Typescript, Azure Functions and more.  Checkout the repo at the link below.',
             code: {
                repo: 'gatsby-website',
                url: 'https://github.com/youngaj/gatsby-website',
             },
+         },
+         {
+            title: 'OneStream & Snowflake',
+            description:
+               'This project allowed product owners and partner teams to gain insights into the Focus Platform by producing a stream of events via OneStream (Kafka) into Snowflake and internal Capital One data lake.',
+         },
+         {
+            title: 'Commercial Real Estate Management (CREM)',
+            description:
+               'Skunkworks project to leverage internal Capital One platforms to improve rent collection and property management.',
          },
       ],
       podcastAppearances: [

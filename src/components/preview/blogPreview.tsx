@@ -8,39 +8,24 @@ import { Link } from 'gatsby'
 import StyledButton from '../styledButton'
 import CenterDivider from '../presentation/centerDivider'
 import BlogPost from '../BlogPost'
-import { Blog } from '../../data/blog'
+import { Blog } from '../../models'
+import { filterUnPublishedBlogPosts } from '../../utils/blogPostService'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
    container: {
       display: 'grid',
       gridGap: theme.spacing(2),
-      gridTemplateColumns: '1fr 1fr 1fr',
-      [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr 1fr',
+      [theme.breakpoints.down('xs')]: {
          gridTemplateColumns: '1fr',
       },
    },
 }))
 
 const getSubset = (posts: Blog[]): Blog[] => {
-   let subset: Blog[] = []
-   if (posts) {
-      const today = new Date().getTime()
-      subset = posts
-         .filter((x) => {
-            let published = false
-            if (x.publish) {
-               const publishedDate = new Date(x.publish)
-               if (publishedDate.getTime() <= today) {
-                  published = true
-               }
-            }
-            console.log('Blog post:', published, x)
-            return published
-         })
-         .sort((a, b) => b.publish.getTime() - a.publish.getTime())
-         .slice(0, 12)
-   }
+   let subset: Blog[] = filterUnPublishedBlogPosts(posts)
+   subset = subset.slice(0, 12)
    return subset
 }
 
