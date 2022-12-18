@@ -11,6 +11,8 @@ import { useGlobalCss } from '../../hooks/useGlobalCss'
 import { useWindowSize } from '../../hooks/useWindowSize'
 import { PodcastData, Tab, TabEnum } from '../../models'
 import Podcast from '../podcast'
+import PodCastEpisode from '../podcastEpisode'
+import PodCastAppearance from '../podcastAppearance'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -21,39 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.down('xs')]: {
          gridTemplateColumns: '1fr',
          margin: 'auto',
-      },
-   },
-   episode: {
-      display: 'grid',
-      gridTemplateColumns: '150px 1fr',
-      gap: theme.spacing(2),
-      padding: theme.spacing(2),
-      '& div': {
-         textAlign: 'left',
-      },
-      [theme.breakpoints.down('sm')]: {
-         gridTemplateColumns: '1fr',
-         marginBottom: theme.spacing(2),
-      },
-   },
-   episodeBlock: {
-      display: 'block',
-      maxHeight: '200px',
-      overflow: 'auto',
-      paddingRight: `1rem`,
-      color: colors.muted,
-   },
-   episodeTitle: {
-      marginBottom: '2rem',
-      [theme.breakpoints.down('sm')]: {
-         textAlign: 'center',
-      },
-   },
-   episodeIcon: {
-      width: '100%',
-      minWidth: '80px',
-      [theme.breakpoints.down('sm')]: {
-         width: '100%',
       },
    },
    tabs: {
@@ -91,9 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.down('sm')]: {
          display: 'none',
       },
-   },
-   topic: {
-      marginTop: theme.spacing(2),
    },
 }))
 
@@ -183,37 +149,10 @@ const PodcastsPreview = () => {
          {visibleTab === TabEnum.Appearances && (
             <div className={css.container}>
                {podcastData.appearances.map((episode, index) => (
-                  <div
+                  <PodCastAppearance
+                     episode={episode}
                      key={`appearance-episode-${episode.title}-${index}`}
-                     className={css.episode}
-                  >
-                     <div>
-                        <img
-                           src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                           alt="{episode.title}"
-                           className={css.episodeIcon}
-                        />
-                     </div>
-                     <div style={{ marginLeft: theme.spacing(2) }}>
-                        <h3 className={css.episodeTitle}>
-                           <a href={episode.url}>{episode.title}</a>
-                           <p className={[css.topic].join(' ')}>
-                              <span className={css.mutedText}>Topic:</span>{' '}
-                              {episode.topic}
-                           </p>
-                        </h3>
-                        {largeScreen && (
-                           <div
-                              className={[css.episodeBlock, css.mutedText].join(
-                                 ' '
-                              )}
-                              style={{ maxWidth: episodeContainerMaxWidth }}
-                           >
-                              {episode.description}
-                           </div>
-                        )}
-                     </div>
-                  </div>
+                  ></PodCastAppearance>
                ))}
             </div>
          )}
@@ -223,34 +162,10 @@ const PodcastsPreview = () => {
                {podcastData.queue
                   .slice(0, displayCount)
                   .map((episode, index) => (
-                     <div
+                     <PodCastEpisode
+                        episode={episode}
                         key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcast}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={css.episodeBlock}
-                                 style={{
-                                    maxWidth: episodeContainerMaxWidth,
-                                 }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     ></PodCastEpisode>
                   ))}
             </div>
          )}
@@ -271,34 +186,10 @@ const PodcastsPreview = () => {
                {podcastData.starred
                   .slice(0, displayCount)
                   .map((episode, index) => (
-                     <div
-                        key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={css.episodeBlock}
-                                 style={{
-                                    maxWidth: episodeContainerMaxWidth,
-                                 }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     <PodCastEpisode
+                        episode={episode}
+                        key={`starred-episode-${episode.title}-${index}`}
+                     ></PodCastEpisode>
                   ))}
             </div>
          )}

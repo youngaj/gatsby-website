@@ -11,8 +11,9 @@ import Podcast from '../components/podcast'
 import SiteSection from '../components/presentation/siteSection'
 import { info } from '../data/info'
 import SubHeading from '../components/presentation/subHeading'
-import { useWindowSize } from '../hooks/useWindowSize'
 import { PodcastData, Tab, TabEnum } from '../models'
+import PodCastEpisode from '../components/podcastEpisode'
+import PodCastAppearance from '../components/podcastAppearance'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -25,35 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
          margin: 'auto',
       },
    },
-   episode: {
-      display: 'grid',
-      gridTemplateColumns: '90px 1fr',
-      gap: theme.spacing(2),
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
-      padding: theme.spacing(2),
-      '& div': {
-         textAlign: 'left',
-      },
-      [theme.breakpoints.down('sm')]: {
-         gridTemplateColumns: '1fr',
-         marginBottom: theme.spacing(2),
-      },
-   },
-   episodeTitle: {
-      marginBottom: '2rem',
-      [theme.breakpoints.down('sm')]: {
-         textAlign: 'center',
-      },
-   },
-   episodeIcon: {
-      width: '100%',
-      minWidth: '80px',
-      [theme.breakpoints.down('sm')]: {
-         width: '100%',
-      },
-   },
-
    tabs: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
@@ -90,19 +62,6 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
-   episodeBlock: {
-      display: 'block',
-      maxHeight: '200px',
-      overflow: 'auto',
-      paddingRight: `1rem`,
-      color: colors.muted,
-   },
-   emphasize: {
-      color: colors.accent,
-   },
-   topic: {
-      marginTop: theme.spacing(2),
-   },
 }))
 
 const PodcastPage = (props: PageProps) => {
@@ -118,11 +77,6 @@ const PodcastPage = (props: PageProps) => {
    })
    const [tabs, setTabs] = useState<Tab[]>([])
    const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Appearances)
-   const windowSize = useWindowSize()
-   const largeScreen =
-      windowSize.width > theme.breakpoints.values.sm ? true : false
-
-   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
 
    useEffect(() => {
       getPodcastInfo().then((data) => {
@@ -198,35 +152,10 @@ const PodcastPage = (props: PageProps) => {
             {visibleTab === TabEnum.Queue && (
                <div className={css.container}>
                   {podcastData.queue.map((episode, index) => (
-                     <div
+                     <PodCastEpisode
+                        episode={episode}
                         key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcast}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     ></PodCastEpisode>
                   ))}
                </div>
             )}
@@ -249,73 +178,20 @@ const PodcastPage = (props: PageProps) => {
             {visibleTab === TabEnum.Starred && (
                <div className={css.container}>
                   {podcastData.starred.map((episode, index) => (
-                     <div
-                        key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     <PodCastEpisode
+                        episode={episode}
+                        key={`starred-episode-${episode.title}-${index}`}
+                     ></PodCastEpisode>
                   ))}
                </div>
             )}
             {visibleTab === TabEnum.Appearances && (
                <div className={css.container}>
                   {podcastData.appearances.map((episode, index) => (
-                     <div
+                     <PodCastAppearance
+                        episode={episode}
                         key={`appearance-episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                              <p className={[css.topic].join(' ')}>
-                                 <span className={css.mutedText}>Topic:</span>{' '}
-                                 {episode.topic}
-                              </p>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                              >
-                                 {episode.description}
-                              </div>
-                           )}
-                        </div>
-                     </div>
+                     ></PodCastAppearance>
                   ))}
                </div>
             )}
