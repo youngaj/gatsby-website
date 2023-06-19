@@ -3,6 +3,7 @@ export interface PodcastData {
    podcasts: PodCast[]
    starred: StarredEpisode[]
    appearances: AppearanceEpisode[]
+   stats?: PodcastListeningStats
 }
 
 export interface PodCast {
@@ -12,6 +13,15 @@ export interface PodCast {
    author: string
    description: string
    lastEpisodePublished: Date
+}
+
+export interface PodcastListeningStats {
+   timeIntroSkipping: number
+   timeListened: number
+   timeSilenceRemoval: number
+   timeSkipping: number
+   timeVariableSpeed: number
+   timesStartedAt: Date
 }
 
 export interface Episode {

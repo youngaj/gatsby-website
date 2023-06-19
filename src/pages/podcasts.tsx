@@ -4,7 +4,11 @@ import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
-import { getPodcastInfo } from '../utils/podcastService'
+import {
+   getPodcastInfo,
+   _getListeningStartDate,
+   _getListeningTimeInHours,
+} from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { colors, sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
@@ -62,6 +66,21 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
+   podcastNumber: {
+      fontSize: '1.3rem',
+      fontWeight: 'bold',
+      fontStyle: 'italics',
+   },
+   podcastText: {
+      textAlign: 'left',
+      color: colors.muted,
+      margin: 'auto',
+      maxWidth: '80%',
+      '& p': {
+         marginBottom: '1rem',
+         lineHeight: '1.6rem',
+      },
+   },
 }))
 
 const PodcastPage = (props: PageProps) => {
@@ -106,30 +125,74 @@ const PodcastPage = (props: PageProps) => {
       })
    }, [])
 
+   const podcastStartDate = _getListeningStartDate(
+      podcastData.stats?.timesStartedAt
+   )
+   const listeningTime = _getListeningTimeInHours(
+      podcastData.stats?.timeListened
+   )
    return (
       <Layout>
          <Nav active="podcasts"></Nav>
          <SiteSection bg="dark">
             <SubHeading>Podcasts</SubHeading>
-            <p className={css.mutedText}>
-               I subscribe to{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Subscribed)}>
-                  {podcastData.podcasts.length}
-               </a>{' '}
-               podcasts and have appeared on{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Appearances)}>
-                  {podcastData.appearances.length}
-               </a>{' '}
-               episodes thus far. Podcasts are a great way to keep up with the
-               latest around the industry. They are also a great way avoid going
-               insane during long commutes. You will also find the podcast that
-               are currently in my{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Queue)}>
-                  listening queue
-               </a>
-               . Follow along and/or send me suggestions{' '}
-               <a href={twitter?.link}>{twitter?.username}</a>
-            </p>
+
+            <div className={css.podcastText}>
+               <p>
+                  I subscribe to{' '}
+                  <a
+                     onClick={(e) => setVisibleTab(TabEnum.Subscribed)}
+                     className={css.podcastNumber}
+                  >
+                     {podcastData.podcasts.length}
+                  </a>{' '}
+                  podcasts with{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Queue)}
+                  >
+                     {podcastData.queue.length}
+                  </a>{' '}
+                  currently in my podcasts listening queue.{' '}
+                  {podcastData.stats && (
+                     <>
+                        Since {podcastStartDate}, I have listened to over{' '}
+                        <span className={css.podcastNumber}>
+                           {' '}
+                           {listeningTime}
+                        </span>{' '}
+                        hours of podcasts.{' '}
+                     </>
+                  )}
+               </p>
+               <p>
+                  I started my podcast journey to make better use of my time
+                  during long commutes to the office. Since then my love of this
+                  medium has grown considerably and I know listen even without a
+                  daily commute. They are a great way to keep up with the latest
+                  around the industry. Below is a list of{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Starred)}
+                  >
+                     {podcastData.starred.length}
+                  </a>{' '}
+                  podcasts episodes that I have starred over the years. You can
+                  also find the{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Appearances)}
+                  >
+                     {podcastData.appearances.length}
+                  </a>{' '}
+                  episodes on which I was a guest.
+               </p>
+               <p>
+                  I hope you enjoy as much as I have. If you know of other
+                  podcasts you would recommend please send me your suggestions
+                  at <a href={twitter!.link}>{twitter!.username}</a>
+               </p>
+            </div>
             <div className={css.tabs}>
                {tabs.map((tab) => {
                   const isActive = tab.value === visibleTab

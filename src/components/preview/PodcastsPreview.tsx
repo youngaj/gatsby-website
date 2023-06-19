@@ -3,7 +3,11 @@ import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import { sharedStyles, colors } from '../../styles/global'
 import SubHeading from '../presentation/subHeading'
 import SiteSection from '../presentation/siteSection'
-import { getPodcastInfo } from '../../utils/podcastService'
+import {
+   getPodcastInfo,
+   _getListeningStartDate,
+   _getListeningTimeInHours,
+} from '../../utils/podcastService'
 import StyledButton from '../styledButton'
 import { info } from '../../data/info'
 import { Link } from 'gatsby'
@@ -12,6 +16,7 @@ import { PodcastData, Tab, TabEnum } from '../../models'
 import Podcast from '../podcast'
 import PodCastEpisode from '../podcastEpisode'
 import PodCastAppearance from '../podcastAppearance'
+import dayjs from 'dayjs'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -60,6 +65,20 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
+   podcastNumber: {
+      fontSize: '1.3rem',
+      fontWeight: 'bold',
+      fontStyle: 'italics',
+   },
+   podcastText: {
+      textAlign: 'left',
+      color: colors.muted,
+      margin: 'auto',
+      maxWidth: '80%',
+      '& p': {
+         marginBottom: '1rem',
+      },
+   },
 }))
 
 const PodcastsPreview = () => {
@@ -105,22 +124,57 @@ const PodcastsPreview = () => {
       })
    }, [])
 
+   const podcastStartDate = _getListeningStartDate(
+      podcastData.stats?.timesStartedAt
+   )
+   const listeningTime = _getListeningTimeInHours(
+      podcastData.stats?.timeListened
+   )
    return (
       <SiteSection bg="light">
          <h2>
             <SubHeading>Podcasts</SubHeading>
          </h2>
-         <p className={globalCss.mutedText}>
-            I subscribe to{' '}
-            <Link to="/podcasts">{podcastData.podcasts.length}</Link> podcasts
-            with {podcastData.queue.length} currently in my podcasts listening
-            queue. Podcasts are a great way to keep up with the latest around
-            the industry. They are also a great way not to go insane during long
-            commutes. Below is a list of {podcastData.starred.length} podcasts
-            episodes that I have starred over the years. Hope you enjoy. If you
-            know of other podcasts you would recommend please send me your
-            suggestions at <a href={twitter!.link}>{twitter!.username}</a>
-         </p>
+         <div className={css.podcastText}>
+            <p>
+               I subscribe to{' '}
+               <Link to="/podcasts" className={css.podcastNumber}>
+                  {podcastData.podcasts.length}
+               </Link>{' '}
+               podcasts with{' '}
+               <span className={css.podcastNumber}>
+                  {podcastData.queue.length}
+               </span>{' '}
+               currently in my podcasts listening queue.{' '}
+               {podcastData.stats && (
+                  <>
+                     Since {podcastStartDate}, I have listened to over{' '}
+                     <span className={css.podcastNumber}> {listeningTime}</span>{' '}
+                     hours of podcasts.{' '}
+                  </>
+               )}
+            </p>
+            <p>
+               I started my podcast journey to make better use of my time during
+               long commutes to the office. I love listening to podcasts! They
+               are a great way to keep up with the latest around the industry.
+               Below is a list of{' '}
+               <span className={css.podcastNumber}>
+                  {podcastData.starred.length}
+               </span>{' '}
+               podcasts episodes that I have starred over the years. You can
+               also find the{' '}
+               <span className={css.podcastNumber}>
+                  {podcastData.appearances.length}
+               </span>{' '}
+               episodes on which I was a guest.
+            </p>
+            <p>
+               I hope you enjoy as much as I have. If you know of other podcasts
+               you would recommend please send me your suggestions at{' '}
+               <a href={twitter!.link}>{twitter!.username}</a>
+            </p>
+         </div>
          <div className={css.tabs}>
             {tabs.map((tab) => {
                const isActive = tab.value === visibleTab

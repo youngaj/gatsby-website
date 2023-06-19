@@ -1,4 +1,5 @@
 import axios from 'axios'
+import dayjs from 'dayjs'
 import { info } from '../data/info'
 import { PodcastData, AppearanceEpisode, PodCast } from '../models/podcast'
 
@@ -55,10 +56,27 @@ export const getShowNotes = async (episodeUuid) => {
    const notes = response.data
    return notes
 }
+
 function _getPodcast(
    podcasts: PodCast[],
    podcastUuid?: string
 ): PodCast | undefined {
    const podcast = podcasts.find((x) => x.uuid === podcastUuid)
    return podcast
+}
+
+export const _getListeningTimeInHours = (
+   timeInSeconds: number | undefined
+): number => {
+   if (!timeInSeconds) return 0
+   const timeInHours = Math.floor(timeInSeconds / 60 / 60)
+   return timeInHours
+}
+
+export const _getListeningStartDate = (
+   dateStr: string | Date | undefined
+): string => {
+   const date = dayjs(dateStr)
+   const monthYear = date.format('MMMM YYYY')
+   return monthYear
 }

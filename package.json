@@ -36,14 +36,14 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "dev": "gatsby develop",
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && gatsby build",
+    "dev": "SET NODE_OPTIONS=--openssl-legacy-provider && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "start": "npm run dev",
+    "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && gatsby serve",
+    "clean": "SET NODE_OPTIONS=--openssl-legacy-provider && gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+    "deploy": "SET NODE_OPTIONS=--openssl-legacy-provider && gatsby build --prefix-paths && gh-pages -d public"
   },
   "repository": {
     "type": "git",
