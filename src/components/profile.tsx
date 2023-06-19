@@ -45,7 +45,7 @@ const Profile = () => {
    const yearsOfExperience = dayjs().diff('1999-06-01', 'years')
    const data = useStaticQuery(graphql`
       query {
-         profile: file(relativePath: { eq: "profile-1.jpg" }) {
+         profile: file(relativePath: { eq: "headshot_without_background.png" }) {
             childImageSharp {
                fluid {
                   ...GatsbyImageSharpFluid
@@ -65,10 +65,11 @@ const Profile = () => {
                   </SubHeading>
                </h2>
                <p>
-                  Andre Young, {info.me.age} years young, born and raised in the
-                  Washington D.C. metro area. Highly motivated senior software
-                  engineering manager and tech lead with over{' '}
-                  {yearsOfExperience} years of hands on experience.
+                  I am a thoughtful and strategic thinker with {yearsOfExperience} years of experience,
+                  capable of mapping a sustainable path from problems to outcome focused solutions 
+                  that scale and are resilient over time. I am an active listener that challenges, 
+                  empowers and inspires the next generation of problem solving leaders through 
+                  hands-on mentorship, coaching and knowledge sharing. 
                </p>
                <Divider />
                <p className={css.mutedText}>
