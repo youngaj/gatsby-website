@@ -5,7 +5,7 @@ import { PodcastData, AppearanceEpisode, PodCast } from '../models/podcast'
 
 export const getPodcastInfo = async (): Promise<PodcastData> => {
    const response = await axios.get(
-      'https://andrepodcasts.azurewebsites.net/api/PodcastQueue'
+      'https://andrewebsitedata.azurewebsites.net/api/PodcastInfo'
    )
 
    const data: PodcastData = response.data
