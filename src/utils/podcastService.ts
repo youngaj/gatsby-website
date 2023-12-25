@@ -49,14 +49,6 @@ export const getStarredEpisodes = async () => {
    return data.starred
 }
 
-export const getShowNotes = async (episodeUuid) => {
-   const response = await axios.get(
-      `https://podcast-api.pocketcasts.com/episode/show_notes/${episodeUuid}`
-   )
-   const notes = response.data
-   return notes
-}
-
 function _getPodcast(
    podcasts: PodCast[],
    podcastUuid?: string
