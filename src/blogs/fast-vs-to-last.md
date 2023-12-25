@@ -4,6 +4,7 @@ date: '2022-09-30'
 title: 'Build it fast or Build it to last'
 publish: '2022-10-02'
 tags: 'planning, architecture'
+summary: 'When building software we often have to chose between building it fast or building it to last.  Both have their place.  In this blog post we explore when to chose to build fast and when to chose to build it to last.'
 ---
 
 I had a few moments to reflect this morning and wanted to share a thought that came to mind. This thought has its genesis in a number of conversations, situations and decisions that my teams at work have been faced with recently. Examples of these include compliance and vulnerability management, large application platform migrations, and application architecture and UI refresh planning for critical systems.

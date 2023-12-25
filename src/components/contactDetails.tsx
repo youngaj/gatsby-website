@@ -1,5 +1,5 @@
 import React from 'react'
-import { sharedStyles } from '../styles/global'
+import { colors, sharedStyles } from '../styles/global'
 
 import StyledButton from '../components/styledButton'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(4),
       marginBottom: theme.spacing(16),
    },
+   contactDetails: {
+      color: colors.muted,
+      lineHeight: '1rem',
+      '& p': {
+         marginBottom: '.2rem',
+      },
+   },
 }))
 
 const ContactDetail = () => {
@@ -34,8 +41,8 @@ const ContactDetail = () => {
    return (
       <div>
          <h3 className={css.heading}>Contact Details</h3>
-         <div>
-            <div className={css.mutedText}>
+         <div className={css.contactDetails}>
+            <div>
                <p>
                   {info.me.firstName} {info.me.lastName}
                </p>

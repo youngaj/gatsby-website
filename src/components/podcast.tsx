@@ -3,16 +3,17 @@ import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
 import * as dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { PodCast } from '../models'
 dayjs.extend(relativeTime)
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
    podcastBlock: {
       display: 'grid',
-      gridGap: theme.spacing(2),
-      gridTemplateColumns: '1fr 2fr',
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
+      gridGap: theme.spacing(1),
+      gridTemplateColumns: '150px 1fr',
+      //border: `1px solid ${colors.muted}`,
+      borderRadius: '5px',
       padding: theme.spacing(2),
       '& div': {
          textAlign: 'left',
@@ -39,11 +40,19 @@ const shorten = (text, length) => {
    return substr
 }
 
-const Podcast = ({ data }) => {
+interface PodcastProps {
+   data: PodCast
+}
+
+interface PodcastNode extends PodCast {
+   displayFullDetails?: boolean
+}
+
+const Podcast = (props: PodcastProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
 
-   const [show, setShow] = useState(data)
+   const [show, setShow] = useState<PodcastNode>(props.data)
    const showDetails = (show) => {
       show.displayFullDetails = true
       setShow({ ...show })

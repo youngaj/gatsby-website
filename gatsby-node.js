@@ -2,31 +2,21 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
    const { createPage } = actions
 
    const blogPostTemplate = require.resolve(`./src/templates/blogTemplate.tsx`)
-   const mdxBlogPostTemplate = require.resolve(
-      `./src/templates/MdxBlogTemplate.tsx`
-   )
+   const mdxBlogPostTemplate = require.resolve(`./src/templates/MdxBlogTemplate.tsx`)
 
    const result = await graphql(`
       {
-         allMarkdownRemark(
-            sort: { order: DESC, fields: [frontmatter___date] }
-            limit: 1000
-         ) {
-            edges {
-               node {
-                  frontmatter {
-                     slug
-                  }
-               }
-            }
-         }
-         blogPosts: allMdx {
+         blogPosts: allMarkdownRemark {
             nodes {
                frontmatter {
                   title
                   slug
                   date
+                  publish
+                  summary
+                  tags
                }
+               html
             }
          }
       }
@@ -38,7 +28,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       return
    }
 
-   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+   result.data.blogPosts.nodes.forEach(node => {
+      console.log(`creating page: ${node.frontmatter.title}`)
       createPage({
          path: `blog/${node.frontmatter.slug}`,
          component: blogPostTemplate,
@@ -47,9 +38,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             slug: node.frontmatter.slug,
          },
       })
-   })
-
-   result.data.blogPosts.nodes.forEach(node => {
       createPage({
          path: `blog/mdx/${node.frontmatter.slug}`,
          component: mdxBlogPostTemplate,

@@ -1,5 +1,5 @@
-export const getSubset = (items: [], num: number) => {
-   let subset = []
+export function getSubset<T>(items: Array<T>, num: number) {
+   let subset: Array<T> = []
    if (items) {
       subset = items.slice(0, num)
    }

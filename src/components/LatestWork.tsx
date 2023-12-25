@@ -12,17 +12,26 @@ const useStyles = makeStyles((theme: Theme) => ({
    grid: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
-      gap: '5px',
+      gap: '2rem',
+      [theme.breakpoints.down('md')]: {
+         gridTemplateColumns: '1fr 1fr',
+      },
+      [theme.breakpoints.down('xs')]: {
+         gridTemplateColumns: '1fr',
+      },
    },
    workCard: {
       padding: '1rem',
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
    },
    projectTitle: {
       color: 'white',
       paddingBottom: '1rem',
    },
+   projectDescription: {
+      color: colors.muted,
+      marginBottom: '1rem',
+   },
+   codeInfo: {},
 }))
 
 const LatestWork = () => {
@@ -51,9 +60,13 @@ const LatestWork = () => {
                   >
                      {project.title}
                   </h3>
-                  <div className={css.mutedText}>{project.description}</div>
+                  <div className={css.projectDescription}>
+                     {project.description}
+                  </div>
                   {project.code && (
-                     <a href={project.code.url}>{project.code.url}</a>
+                     <div className={css.codeInfo}>
+                        Repo: <a href={project.code.url}>{project.code.url}</a>
+                     </div>
                   )}
                </div>
             ))}

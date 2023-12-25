@@ -21,15 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
    blogPostContent: {},
 }))
 
-const links = {
-   home: { title: 'Home', target: '/' },
-   profile: { title: 'Profile', target: '/#profile' },
-   resume: { title: 'Resume', target: '/#resume' },
-   podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
-   devGroup: { title: 'Dev Group', target: '/#devGroup' },
-   blog: { title: 'Blog', target: '/#blog' },
-}
-
 export default function MdxBlogTemplate({ data }) {
    const theme = useTheme()
    const css = useStyles(theme)
@@ -37,7 +28,7 @@ export default function MdxBlogTemplate({ data }) {
    const { frontmatter, html } = data.markdownRemark
    return (
       <Layout>
-         <Nav active="blog" links={links}></Nav>
+         <Nav active="blog"></Nav>
          <div className={css.content}>
             {frontmatter && (
                <div className={css.blogPost}>

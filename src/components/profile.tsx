@@ -8,9 +8,9 @@ import { info } from '../data/info'
 import dayjs from 'dayjs'
 import { useWindowSize } from '../hooks/useWindowSize'
 import ContactDetail from './contactDetails'
-import Divider from './presentation/divider'
 import SubHeading from './presentation/subHeading'
 import SiteSection from './presentation/siteSection'
+import CenterDivider from './presentation/centerDivider'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: '15px',
       '& p': {
          marginBottom: '10px',
+         lineHeight: '1.5rem',
       },
    },
 }))
@@ -45,7 +46,9 @@ const Profile = () => {
    const yearsOfExperience = dayjs().diff('1999-06-01', 'years')
    const data = useStaticQuery(graphql`
       query {
-         profile: file(relativePath: { eq: "headshot_without_background.png" }) {
+         profile: file(
+            relativePath: { eq: "headshot_without_background.png" }
+         ) {
             childImageSharp {
                fluid {
                   ...GatsbyImageSharpFluid
@@ -65,38 +68,59 @@ const Profile = () => {
                   </SubHeading>
                </h2>
                <p>
-                  I am a thoughtful and strategic thinker with {yearsOfExperience} years of experience,
-                  capable of mapping a sustainable path from problems to outcome focused solutions 
-                  that scale and are resilient over time. I am an active listener that challenges, 
-                  empowers and inspires the next generation of problem solving leaders through 
-                  hands-on mentorship, coaching and knowledge sharing. 
+                  I am a thoughtful and strategic thinker with{' '}
+                  {yearsOfExperience} years of experience, capable of mapping
+                  sustainable paths from problems to outcome focused solutions
+                  that scale and are resilient over time. I am an active
+                  listener that challenges, empowers and inspires the next
+                  generation of problem solving leaders through hands-on
+                  mentorship, coaching and knowledge sharing.
                </p>
-               <Divider />
+               <CenterDivider />
                <p className={css.mutedText}>
-                  As of April 2020 I joined the Focus Organization at Capital
-                  One where I have the pleasure of leading leading 2 teams as a
-                  Senior Software Engineering Manager.
+                  I joined{' '}
+                  <a
+                     href="https://www.capitalone.com/tech/software-engineering/"
+                     target="_blank"
+                  >
+                     Capital One
+                  </a>{' '}
+                  in April 2020 where I have the pleasure of leading the
+                  Servicing Platforms Self Service organization. Our mission is
+                  to improve and streamline the internal associate experience.
+                  We are <i>the builders for the builders</i>, enabling others
+                  to seamlessly and easily build innovative customer
+                  experiences.
                </p>
                <p className={css.mutedText}>
-                  Formerly I spent 16 years at NASA's Goddard Space Flight
-                  Center as the Application Development Lead for the PAAC V
-                  contract, where I crafted a number of cool (and sometimes
-                  important but not so cool) projects. I also coached developers
-                  as well introduced, setup and operated engineering principles
-                  and tools such as agile, automated testing, Continuous
-                  Integration, Continuos Delivery and more.
+                  Prior to Capital One I spent 16 years at{' '}
+                  <a href="https://www.nasa.gov/goddard/" target="_blank">
+                     NASA's Goddard Space Flight Center (GSFC)
+                  </a>{' '}
+                  as the Application Development Lead for the PAAC V contract.
+                  At GSFC I crafted a number of cool (and sometimes important
+                  but not so cool) projects. I coached developers of all
+                  seniorities, establishing industry best practices such as
+                  agile, automated testing, Continuous Integration, Continuous
+                  Delivery and more.
                </p>
                <p className={css.mutedText}>
-                  In addition I ran a bi-weekly developer meetup at NASA, where
-                  we discussed various development topics ranging from AWS
-                  lessons learned, microservice architecture, and Imposter
-                  Syndrome to knowing how to say "No" to a customer and having
-                  them say "thank you" afterwards.
+                  In addition I ran a bi-weekly{' '}
+                  <a
+                     href="https://www.youtube.com/@andreyoung4442/featured"
+                     target="_blank"
+                  >
+                     developer meetup
+                  </a>{' '}
+                  at NASA, where we discussed various development topics ranging
+                  from AWS lessons learned, microservice architecture, and
+                  Imposter Syndrome to knowing how to say "No" to a customer and
+                  having them say "thank you" afterwards.
                </p>
                <p className={css.mutedText}>
                   I love growing teams, coaching, development, learning and
-                  sharing the things I've learned with anyone willing to listen.
-                  See my resume and other interests below.
+                  sharing the things I've learned. See my resume and other
+                  interests below.
                </p>{' '}
                <ContactDetail />
             </div>

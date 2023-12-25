@@ -35,7 +35,7 @@ const Nav = (props) => {
       resume: { title: 'Resume', target: '/#resume' },
       podcasts: { title: 'Podcasts', target: '/podcasts' },
       devGroup: { title: 'Dev Group', target: '/devGroup' },
-      blog: { title: 'Blog', target: '/blogs' },
+      blog: { title: 'Blog', target: '/blog' },
       uses: { title: 'Uses', target: '/uses' },
    }
    const initialMenuItems = links

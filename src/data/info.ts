@@ -1,56 +1,5 @@
 import dayjs from 'dayjs'
-interface Info {
-   me: AboutMeInfo
-   nasa: NASAInfo
-}
-
-interface AboutMeInfo {
-   firstName: string
-   lastName: string
-   email: string
-   age: number
-   workExperience: WorkExperience[]
-   social: Social[]
-   projects: Project[]
-   podcastAppearances: PodcastAppearance[]
-}
-
-interface WorkExperience {
-   company: string
-   title: string
-   start: string
-   end: string
-   responsibilities: string[]
-}
-
-interface Social {
-   name: string
-   username: string
-   link: string
-}
-
-interface Project {
-   title: string
-   description: string
-   code?: Code
-}
-
-interface Code {
-   repo: string
-   url: string
-}
-
-interface PodcastAppearance {
-   uuid: string
-   podcastName: string
-   topic: string
-   description?: string
-   url?: string
-}
-
-interface NASAInfo {
-   lastDay: string
-}
+import { Info } from '../models'
 
 export const info: Info = {
    me: {
@@ -135,26 +84,49 @@ export const info: Info = {
       ],
       projects: [
          {
-            title: 'Commercial Real Estate Management (CREM)',
-            description: 'Improve rent collection and property management',
+            title: 'Podcast Info',
+            description: `I love podcast and want to share what I'm "subscribed" to, what I've "started", and what I have "queued" so I created the Azure Function to retrieve that information so that I can display it on this site.`,
+            code: {
+               repo: 'Azure Functions',
+               url: 'https://github.com/youngaj/AzureFunctions',
+            },
          },
          {
-            title: 'OneStream & Snowflake',
+            title: 'Personal Portfolio',
             description:
-               'Gain insights into the Focus Platform by recording events via OneStream (Kafka) into Snowflake and internal C1 data lake.',
-         },
-         {
-            title: 'Conveyor Belt (CB)',
-            description:
-               'Meta-platform to enable internal development teams to onboard and easily use internal platforms.  Drives down cycle times and ensures governance by preventing intents without the appropriate approvals from being deployed into protected environments.',
-         },
-         {
-            title: 'Website',
-            description: 'Gatsby redesign of this website',
+               'Hand crafted gatsby redesign of this website using Typescript, Azure Functions and more.  Checkout the repo at the link below.',
             code: {
                repo: 'gatsby-website',
                url: 'https://github.com/youngaj/gatsby-website',
             },
+         },
+         {
+            title: 'ITSMF Capstone Project',
+            description: `In 2023 I graduated from the ITSMF Management Academy. As a part of this program I lead a team of diverse leaders to create a website that would capture the attention of young minority students with the goal of increasing STEM engagement.  The results of the project can be seen at https://youngaj.github.io/capstone/.`,
+            code: {
+               repo: 'Capstone',
+               url: 'https://github.com/youngaj/capstone',
+            },
+         },
+         {
+            title: 'RulesLab',
+            description: `Similar to the Conveyor Belt project RulesLab aspires to be the Decision Engine platform for Capital One.  Utilizing DMN along with an intuitive interface this project has the potential to process millions of transactions per day.`,
+         },
+
+         {
+            title: 'Conveyor Belt (CB)',
+            description:
+               'A low code meta-platform to enable internal development teams to onboard and easily use internal Capital One platforms.  The focus of the project is to improve the internal associate experience and decrease cycle times while ensuring appropriate governance and traceability for intents leveraging key Capital One platforms.',
+         },
+         {
+            title: 'OneStream & Snowflake',
+            description:
+               'This project allowed product owners and partner teams to gain insights into the Focus Platform by producing a stream of events via OneStream (Kafka) into Snowflake and internal Capital One data lake.',
+         },
+         {
+            title: 'Commercial Real Estate Management (CREM)',
+            description:
+               'Skunkworks project to leverage internal Capital One platforms to improve rent collection and property management.',
          },
       ],
       podcastAppearances: [

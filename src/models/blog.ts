@@ -5,5 +5,7 @@ export interface Blog {
    publish: Date
    slug: string
    title: string
+   summary?: string
+   tags?: string[]
    html: string
 }

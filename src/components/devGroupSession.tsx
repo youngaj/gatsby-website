@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { sharedStyles, colors } from '../styles/global'
 import ColorBox from '../components/presentation/colorBox'
+import { DevGroupVideo } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -21,13 +22,21 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const DevGroupSession = ({ session }) => {
+interface DevGroupSessionProps {
+   session: DevGroupVideo
+}
+
+const DevGroupSession = (props: DevGroupSessionProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
+   const session = props.session
    return (
       <div className={css.session}>
          <div>
-            <img src={session.thumbnails.medium.url} alt="{session.title}" />
+            <img
+               src={session.thumbnails.medium.url}
+               alt={session.description}
+            />
          </div>
          <div className={css.details}>
             <ColorBox>

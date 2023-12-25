@@ -4,15 +4,20 @@ import { PageProps } from 'gatsby'
 
 import Layout from '../components/layout'
 import Nav from '../components/nav'
-import { getPodcastInfo, PodcastData } from '../utils/podcastService'
+import {
+   getPodcastInfo,
+   _getListeningStartDate,
+   _getListeningTimeInHours,
+} from '../utils/podcastService'
 import { makeStyles, Theme, useTheme } from '@material-ui/core'
 import { colors, sharedStyles } from '../styles/global'
 import Podcast from '../components/podcast'
 import SiteSection from '../components/presentation/siteSection'
 import { info } from '../data/info'
 import SubHeading from '../components/presentation/subHeading'
-import { Tab, TabEnum } from '../types'
-import { useWindowSize } from '../hooks/useWindowSize'
+import { PodcastData, Tab, TabEnum } from '../models'
+import PodCastEpisode from '../components/podcastEpisode'
+import PodCastAppearance from '../components/podcastAppearance'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -25,35 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
          margin: 'auto',
       },
    },
-   episode: {
-      display: 'grid',
-      gridTemplateColumns: '90px 1fr',
-      gap: theme.spacing(2),
-      border: `1px solid ${colors.muted}`,
-      borderRadius: '10px',
-      padding: theme.spacing(2),
-      '& div': {
-         textAlign: 'left',
-      },
-      [theme.breakpoints.down('sm')]: {
-         gridTemplateColumns: '1fr',
-         marginBottom: theme.spacing(2),
-      },
-   },
-   episodeTitle: {
-      marginBottom: '2rem',
-      [theme.breakpoints.down('sm')]: {
-         textAlign: 'center',
-      },
-   },
-   episodeIcon: {
-      width: '100%',
-      minWidth: '80px',
-      [theme.breakpoints.down('sm')]: {
-         width: '100%',
-      },
-   },
-
    tabs: {
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
@@ -90,16 +66,20 @@ const useStyles = makeStyles((theme: Theme) => ({
          display: 'none',
       },
    },
-   episodeBlock: {
-      display: 'block',
-      maxHeight: '200px',
-      overflow: 'auto',
+   podcastNumber: {
+      fontSize: '1.3rem',
+      fontWeight: 'bold',
+      fontStyle: 'italics',
    },
-   emphasize: {
-      color: colors.accent,
-   },
-   topic: {
-      marginTop: theme.spacing(2),
+   podcastText: {
+      textAlign: 'left',
+      color: colors.muted,
+      margin: 'auto',
+      maxWidth: '80%',
+      '& p': {
+         marginBottom: '1rem',
+         lineHeight: '1.6rem',
+      },
    },
 }))
 
@@ -116,11 +96,6 @@ const PodcastPage = (props: PageProps) => {
    })
    const [tabs, setTabs] = useState<Tab[]>([])
    const [visibleTab, setVisibleTab] = useState<TabEnum>(TabEnum.Appearances)
-   const windowSize = useWindowSize()
-   const largeScreen =
-      windowSize.width > theme.breakpoints.values.sm ? true : false
-
-   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
 
    useEffect(() => {
       getPodcastInfo().then((data) => {
@@ -150,39 +125,74 @@ const PodcastPage = (props: PageProps) => {
       })
    }, [])
 
-   const links = {
-      home: { title: 'Home', target: '/' },
-      profile: { title: 'Profile', target: '/#profile' },
-      resume: { title: 'Resume', target: '/#resume' },
-      podcasts: { title: 'Podcasts', target: '/#podcastQueue' },
-      devGroup: { title: 'Dev Group', target: '/#devGroup' },
-      blog: { title: 'Blog', target: '/#blog' },
-   }
-
+   const podcastStartDate = _getListeningStartDate(
+      podcastData.stats?.timesStartedAt
+   )
+   const listeningTime = _getListeningTimeInHours(
+      podcastData.stats?.timeListened
+   )
    return (
       <Layout>
-         <Nav active="podcasts" links={links}></Nav>
+         <Nav active="podcasts"></Nav>
          <SiteSection bg="dark">
             <SubHeading>Podcasts</SubHeading>
-            <p className={css.mutedText}>
-               I subscribe to{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Subscribed)}>
-                  {podcastData.podcasts.length}
-               </a>{' '}
-               podcasts and have appeared on{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Appearances)}>
-                  {podcastData.appearances.length}
-               </a>{' '}
-               episodes thus far. Podcasts are a great way to keep up with the
-               latest around the industry. They are also a great way avoid going
-               insane during long commutes. You will also find the podcast that
-               are currently in my{' '}
-               <a onClick={(e) => setVisibleTab(TabEnum.Queue)}>
-                  listening queue
-               </a>
-               . Follow along and/or send me suggestions{' '}
-               <a href={twitter.link}>{twitter.username}</a>
-            </p>
+
+            <div className={css.podcastText}>
+               <p>
+                  I subscribe to{' '}
+                  <a
+                     onClick={(e) => setVisibleTab(TabEnum.Subscribed)}
+                     className={css.podcastNumber}
+                  >
+                     {podcastData.podcasts.length}
+                  </a>{' '}
+                  podcasts with{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Queue)}
+                  >
+                     {podcastData.queue.length}
+                  </a>{' '}
+                  currently in my podcasts listening queue.{' '}
+                  {podcastData.stats && (
+                     <>
+                        Since {podcastStartDate}, I have listened to over{' '}
+                        <span className={css.podcastNumber}>
+                           {' '}
+                           {listeningTime}
+                        </span>{' '}
+                        hours of podcasts.{' '}
+                     </>
+                  )}
+               </p>
+               <p>
+                  I started my podcast journey to make better use of my time
+                  during long commutes to the office. Since then my love of this
+                  medium has grown considerably and I know listen even without a
+                  daily commute. They are a great way to keep up with the latest
+                  around the industry. Below is a list of{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Starred)}
+                  >
+                     {podcastData.starred.length}
+                  </a>{' '}
+                  podcasts episodes that I have starred over the years. You can
+                  also find the{' '}
+                  <a
+                     className={css.podcastNumber}
+                     onClick={(e) => setVisibleTab(TabEnum.Appearances)}
+                  >
+                     {podcastData.appearances.length}
+                  </a>{' '}
+                  episodes on which I was a guest.
+               </p>
+               <p>
+                  I hope you enjoy as much as I have. If you know of other
+                  podcasts you would recommend please send me your suggestions
+                  at <a href={twitter!.link}>{twitter!.username}</a>
+               </p>
+            </div>
             <div className={css.tabs}>
                {tabs.map((tab) => {
                   const isActive = tab.value === visibleTab
@@ -205,35 +215,10 @@ const PodcastPage = (props: PageProps) => {
             {visibleTab === TabEnum.Queue && (
                <div className={css.container}>
                   {podcastData.queue.map((episode, index) => (
-                     <div
+                     <PodCastEpisode
+                        episode={episode}
                         key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcast}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     ></PodCastEpisode>
                   ))}
                </div>
             )}
@@ -256,73 +241,20 @@ const PodcastPage = (props: PageProps) => {
             {visibleTab === TabEnum.Starred && (
                <div className={css.container}>
                   {podcastData.starred.map((episode, index) => (
-                     <div
-                        key={`episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                                 dangerouslySetInnerHTML={{
-                                    __html: episode.showNotes,
-                                 }}
-                              />
-                           )}
-                        </div>
-                     </div>
+                     <PodCastEpisode
+                        episode={episode}
+                        key={`starred-episode-${episode.title}-${index}`}
+                     ></PodCastEpisode>
                   ))}
                </div>
             )}
             {visibleTab === TabEnum.Appearances && (
                <div className={css.container}>
                   {podcastData.appearances.map((episode, index) => (
-                     <div
+                     <PodCastAppearance
+                        episode={episode}
                         key={`appearance-episode-${episode.title}-${index}`}
-                        className={css.episode}
-                     >
-                        <div>
-                           <img
-                              src={`https://static.pocketcasts.com/discover/images/130/${episode.podcastUuid}.jpg`}
-                              alt="{episode.title}"
-                              className={css.episodeIcon}
-                           />
-                        </div>
-                        <div style={{ marginLeft: theme.spacing(2) }}>
-                           <h3 className={css.episodeTitle}>
-                              <a href={episode.url}>{episode.title}</a>
-                              <p className={[css.topic].join(' ')}>
-                                 <span className={css.mutedText}>Topic:</span>{' '}
-                                 {episode.topic}
-                              </p>
-                           </h3>
-                           {largeScreen && (
-                              <div
-                                 className={[
-                                    css.episodeBlock,
-                                    css.mutedText,
-                                 ].join(' ')}
-                                 style={{ maxWidth: episodeContainerMaxWidth }}
-                              >
-                                 {episode.description}
-                              </div>
-                           )}
-                        </div>
-                     </div>
+                     ></PodCastAppearance>
                   ))}
                </div>
             )}
