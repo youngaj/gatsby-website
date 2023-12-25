@@ -84,9 +84,12 @@ export const info: Info = {
       ],
       projects: [
          {
-            title: 'Conveyor Belt (CB)',
-            description:
-               'A low code meta-platform to enable internal development teams to onboard and easily use internal Capital One platforms.  The focus of the project is to improve the internal associate experience and decrease cycle times while ensuring appropriate governance and traceabiity for intents leveraging key Capital One platforms.',
+            title: 'Podcast Info',
+            description: `I love podcast and want to share what I'm "subscribed" to, what I've "started", and what I have "queued" so I created the Azure Function to retrieve that information so that I can display it on this site.`,
+            code: {
+               repo: 'Azure Functions',
+               url: 'https://github.com/youngaj/AzureFunctions',
+            },
          },
          {
             title: 'Personal Portfolio',
@@ -96,6 +99,24 @@ export const info: Info = {
                repo: 'gatsby-website',
                url: 'https://github.com/youngaj/gatsby-website',
             },
+         },
+         {
+            title: 'ITSMF Capstone Project',
+            description: `In 2023 I graduated from the ITSMF Management Academy. As a part of this program I lead a team of diverse leaders to create a website that would capture the attention of young minority students with the goal of increasing STEM engagement.  The results of the project can be seen at https://youngaj.github.io/capstone/.`,
+            code: {
+               repo: 'Capstone',
+               url: 'https://github.com/youngaj/capstone',
+            },
+         },
+         {
+            title: 'RulesLab',
+            description: `Similar to the Conveyor Belt project RulesLab aspires to be the Decision Engine platform for Capital One.  Utilizing DMN along with an intuitive interface this project has the potential to process millions of transactions per day.`,
+         },
+
+         {
+            title: 'Conveyor Belt (CB)',
+            description:
+               'A low code meta-platform to enable internal development teams to onboard and easily use internal Capital One platforms.  The focus of the project is to improve the internal associate experience and decrease cycle times while ensuring appropriate governance and traceability for intents leveraging key Capital One platforms.',
          },
          {
             title: 'OneStream & Snowflake',

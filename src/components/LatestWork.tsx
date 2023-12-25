@@ -65,7 +65,7 @@ const LatestWork = () => {
                   </div>
                   {project.code && (
                      <div className={css.codeInfo}>
-                        <a href={project.code.url}>{project.code.url}</a>
+                        Repo: <a href={project.code.url}>{project.code.url}</a>
                      </div>
                   )}
                </div>
