@@ -11,10 +11,21 @@ export const info: Info = {
          {
             company: 'Capital One',
             title: 'Senior Manager, Software Engineering',
-            start: '2020-04',
+            start: '2020-12',
             end: '',
             responsibilities: [
-               'Technical lead for the Safehouse and Discovery teams.',
+               'RulesLab: Team and Technical lead (Team Norm and Team IHOP).',
+               'Talent and Performance management.',
+               'Development and coaching team members.',
+            ],
+         },
+         {
+            company: 'Capital One',
+            title: 'Senior Manager, Software Engineering',
+            start: '2020-04',
+            end: '2023-12',
+            responsibilities: [
+               'Technical lead for the Self Service Organization (Safehouse, Focus Discovery, and Tyrell Corp teams).',
                'Talent and Performance management.',
                'Development and coaching team members.',
             ],
