@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
    container: {
       display: 'grid',
       gap: '.5rem',
-      gridTemplateColumns: '1fr 1fr',
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr));',
       [theme.breakpoints.down('sm')]: {
          gridTemplateColumns: '1fr',
          margin: 'auto',

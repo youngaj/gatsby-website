@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       overflow: 'auto',
       paddingRight: `1rem`,
       color: colors.muted,
+      wordBreak: 'break-all',
+      '& img': {
+         maxWidth: '100%',
+      },
    },
    episodeTitle: {
       marginBottom: '2rem',
@@ -53,7 +57,6 @@ const PodCastEpisode = (props: PodcastEpisodeProps) => {
    const windowSize = useWindowSize()
    const largeScreen =
       windowSize.width > theme.breakpoints.values.sm ? true : false
-   const episodeContainerMaxWidth = (windowSize.height / 2) * 0.9
 
    return (
       <div className={css.episode}>
@@ -71,9 +74,6 @@ const PodCastEpisode = (props: PodcastEpisodeProps) => {
             {largeScreen && (
                <div
                   className={css.episodeBlock}
-                  style={{
-                     maxWidth: episodeContainerMaxWidth,
-                  }}
                   dangerouslySetInnerHTML={{
                      __html: episode.showNotes,
                   }}
