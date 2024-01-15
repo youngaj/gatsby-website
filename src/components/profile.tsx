@@ -10,7 +10,6 @@ import { useWindowSize } from '../hooks/useWindowSize'
 import ContactDetail from './contactDetails'
 import SubHeading from './presentation/subHeading'
 import SiteSection from './presentation/siteSection'
-import CenterDivider from './presentation/centerDivider'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -19,15 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: '20px',
    },
    container: {
-      display: 'grid',
-      msGridColumns: '1fr',
-      gridTemplateColumns: '1fr',
-      textAlign: 'center',
-      [theme.breakpoints.up('md')]: {
-         textAlign: 'left',
-         msGridColumns: '1fr 1fr',
-         gridTemplateColumns: '1fr 1fr',
-      },
+      textAlign: 'left',
       marginLeft: '54px',
       marginRight: '54px',
       paddingLeft: '15px',
@@ -36,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) => ({
          marginBottom: '10px',
          lineHeight: '1.5rem',
       },
+   },
+   profilePicture: {
+      width: '60%',
+      float: 'right',
    },
 }))
 
@@ -67,32 +62,36 @@ const Profile = () => {
                      Hello, My name is {info.me.firstName}.
                   </SubHeading>
                </h2>
+               {dimensions.width > theme.breakpoints.values.md && (
+                  <Img
+                     fluid={data.profile.childImageSharp.fluid}
+                     alt={'Profile picture'}
+                     className={css.profilePicture}
+                  />
+               )}
                <p>
                   I am a thoughtful and strategic thinker with{' '}
-                  {yearsOfExperience} years of experience, capable of mapping
-                  sustainable paths from problems to outcome focused solutions
-                  that scale and are resilient over time. I am an active
-                  listener that challenges, empowers and inspires the next
-                  generation of problem solving leaders through hands-on
-                  mentorship, coaching and knowledge sharing.
+                  {yearsOfExperience} years of experience, capable of leading
+                  teams to deliver customer focused solutions that scale and are
+                  resilient over time. I am an active listener that challenges,
+                  empowers and inspires the next generation of problem solving
+                  leaders through hands-on mentorship, coaching and knowledge
+                  sharing.
                </p>
-               <CenterDivider />
-               <p className={css.mutedText}>
-                  I joined{' '}
+               <p>
+                  As of December 10th, 2023 I have joined the RulesLab
+                  organization as a technical leader in the Design and
+                  Management tower. Our goal is to create the premier
+                  Decisioning platform at{' '}
                   <a
                      href="https://www.capitalone.com/tech/software-engineering/"
                      target="_blank"
                   >
                      Capital One
                   </a>{' '}
-                  in April 2020 where I have the pleasure of leading the
-                  Servicing Platforms Self Service organization. Our mission is
-                  to improve and streamline the internal associate experience.
-                  We are <i>the builders for the builders</i>, enabling others
-                  to seamlessly and easily build innovative customer
-                  experiences.
+                  .
                </p>
-               <p className={css.mutedText}>
+               <p>
                   Prior to Capital One I spent 16 years at{' '}
                   <a href="https://www.nasa.gov/goddard/" target="_blank">
                      NASA's Goddard Space Flight Center (GSFC)
@@ -104,7 +103,7 @@ const Profile = () => {
                   agile, automated testing, Continuous Integration, Continuous
                   Delivery and more.
                </p>
-               <p className={css.mutedText}>
+               <p>
                   In addition I ran a bi-weekly{' '}
                   <a
                      href="https://www.youtube.com/@andreyoung4442/featured"
@@ -117,21 +116,13 @@ const Profile = () => {
                   Imposter Syndrome to knowing how to say "No" to a customer and
                   having them say "thank you" afterwards.
                </p>
-               <p className={css.mutedText}>
+               <p>
                   I love growing teams, coaching, development, learning and
                   sharing the things I've learned. See my resume and other
                   interests below.
                </p>{' '}
                <ContactDetail />
             </div>
-            {dimensions.width > theme.breakpoints.values.md && (
-               <div>
-                  <Img
-                     fluid={data.profile.childImageSharp.fluid}
-                     alt={'Profile picture'}
-                  />
-               </div>
-            )}
          </div>
       </SiteSection>
    )
