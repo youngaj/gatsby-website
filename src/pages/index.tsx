@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Layout from '../components/layout'
@@ -30,33 +30,56 @@ const IndexPage = ({ data }) => {
       .map((video) => formatVideo(video))
    const blogPosts: Blog[] = data.blogPosts.nodes.map((x) => formatBlogPosts(x))
    const menuItems = {
-      home: { title: 'Home', target: '#home' },
+      home: { title: 'Home', target: '#welcome' },
       profile: { title: 'Profile', target: '#profile' },
       resume: { title: 'Resume', target: '#resume' },
-      podcasts: { title: 'Podcasts', target: '#podcastQueue' },
+      podcasts: { title: 'Podcasts', target: '#podcast' },
       devGroup: { title: 'Dev Group', target: '#devGroup' },
       blog: { title: 'Blog', target: '#blog' },
       uses: { title: 'Uses', target: '/uses' },
    }
+   const refs = {
+      welcome: useRef(null),
+      profile: useRef(null),
+      skills: useRef(null),
+      resume: useRef(null),
+      podcast: useRef(null),
+      devGroup: useRef(null),
+      blog: useRef(null),
+   }
+
+   //-- scroll to hashtag
+   setTimeout(() => {
+      if (location.hash && document) {
+         const target = location.hash.replace('#', '')
+         const ref = refs[target]
+         if (ref) {
+            window.scrollTo({
+               top: ref.current.offsetTop,
+               behavior: 'smooth',
+            })
+         }
+      }
+   })
 
    return (
       <Layout>
          <SEO title="Andre Young" />
          <MobileNav links={menuItems} />
-         <a id="home"></a>
+         <a id="welcome" ref={refs['welcome']}></a>
          <Welcome />
          <Nav links={menuItems} />
-         <a id="profile" name="profile"></a>
+         <a id="profile" ref={refs['profile']}></a>
          <Profile />
-         <a id="skills"></a>
+         <a id="work" ref={refs['work']}></a>
          <LatestWork />
-         <a id="resume" name="resume"></a>
+         <a id="resume" ref={refs['resume']}></a>
          <Resume />
-         <a id="podcastQueue" name="podcastQueue"></a>
+         <a id="podcast" ref={refs['podcast']}></a>
          <PodcastsPreview />
-         <a id="devGroup" name="devGroup"></a>
+         <a id="devGroup" ref={refs['devGroup']}></a>
          <DevGroupPreview sessions={sessions} />
-         <a id="blog" name="blog"></a>
+         <a id="blog" ref={refs['blog']}></a>
          <BlogPreview posts={blogPosts} />
       </Layout>
    )
