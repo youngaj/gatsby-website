@@ -203,6 +203,7 @@ const PodcastPage = (props: PageProps) => {
                      <span
                         className={headerCss}
                         onClick={(e) => setVisibleTab(tab.value)}
+                        key={`tab_${tab.title}`}
                      >
                         {tab.title}
                         <span className={css.count}> ({tab.count})</span>

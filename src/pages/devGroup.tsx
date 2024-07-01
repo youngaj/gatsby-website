@@ -55,8 +55,11 @@ const DevGroup = ({ data }) => {
                <CenterDivider />
             </span>
             <div className={css.container}>
-               {videos.map((session, index) => (
-                  <DevGroupSession session={session} />
+               {videos.map((session) => (
+                  <DevGroupSession
+                     session={session}
+                     key={`devGroupSession_${session.id}`}
+                  />
                ))}
             </div>
          </SiteSection>

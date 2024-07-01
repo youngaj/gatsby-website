@@ -185,6 +185,7 @@ const PodcastsPreview = () => {
                   <span
                      className={headerCss}
                      onClick={(e) => setVisibleTab(tab.value)}
+                     key={`tab_${tab.value}`}
                   >
                      {tab.title}
                      <span className={css.count}> ({tab.count})</span>

@@ -58,7 +58,7 @@ const BlogListPage = ({ data }) => {
             </span>
             <div className={css.container}>
                {posts.map((session, index) => (
-                  <div>
+                  <div key={`blogPost_${index}`}>
                      <BlogPost post={session} />
                   </div>
                ))}

@@ -52,7 +52,7 @@ const LatestWork = () => {
          </span>
          <div className={css.grid}>
             {info.me.projects.map((project) => (
-               <div className={css.workCard}>
+               <div className={css.workCard} key={`project_${project.title}`}>
                   <h3
                      className={[css.projectTitle, css.pt30, css.wt100].join(
                         ' '

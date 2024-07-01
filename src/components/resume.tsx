@@ -55,8 +55,8 @@ const Resume = () => {
                1999 - Now
             </h3>
             <div>
-               {info.me.workExperience.map((job) => (
-                  <Job jobInfo={job}></Job>
+               {info.me.workExperience.map((job, index) => (
+                  <Job jobInfo={job} key={`job_${index}`}></Job>
                ))}
             </div>
          </div>
