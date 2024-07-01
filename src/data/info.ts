@@ -11,12 +11,13 @@ export const info: Info = {
          {
             company: 'Capital One',
             title: 'Senior Manager, Software Engineering',
-            start: '2020-12',
+            start: '2023-12',
             end: '',
             responsibilities: [
-               'RulesLab: Team and Technical lead (Team Norm and Team IHOP).',
+               'Team Lead for 2 of the 4 teams that make up the Design and Management pillar (Control Plane) of the RulesLab organization. RulesLab is the declared platform for rule execution within the Card Tech organization at Capital One, responsible for critical steps in the acquisition’s process. As a technical leader on the Control Plane I am responsible for the self service and management capabilities for the platform.',
                'Talent and Performance management.',
                'Development and coaching team members.',
+               'Capacity planning and working closely with multiple product partners to deliver against the feature roadmap',
             ],
          },
          {
