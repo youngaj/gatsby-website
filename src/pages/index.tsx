@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Layout from '../components/layout'
@@ -15,7 +15,7 @@ import { sharedStyles } from '../styles/global'
 import { formatVideo } from '../utils/devGroupService'
 import { graphql } from 'gatsby'
 import MobileNav from '../components/mobileNav'
-import { Blog } from '../models'
+import { Blog, PageMenu, PageMenuLinks } from '../models'
 import { formatBlogPosts } from '../utils/blogPostService'
 
 const useStyles = makeStyles((theme) => ({
@@ -29,15 +29,31 @@ const IndexPage = ({ data }) => {
       .slice(0, 6)
       .map((video) => formatVideo(video))
    const blogPosts: Blog[] = data.blogPosts.nodes.map((x) => formatBlogPosts(x))
-   const menuItems = {
-      home: { title: 'Home', target: '#welcome' },
-      profile: { title: 'Profile', target: '#profile' },
-      resume: { title: 'Resume', target: '#resume' },
-      podcasts: { title: 'Podcasts', target: '#podcast' },
-      devGroup: { title: 'Dev Group', target: '#devGroup' },
+   const menuItems: PageMenuLinks = {
+      home: { title: 'Home', target: '#welcome', scrollTo: smoothScrollTo },
+      profile: {
+         title: 'Profile',
+         target: '#profile',
+         scrollTo: smoothScrollTo,
+      },
+      resume: { title: 'Resume', target: '#resume', scrollTo: smoothScrollTo },
+      podcasts: {
+         title: 'Podcasts',
+         target: '#podcast',
+         scrollTo: smoothScrollTo,
+      },
+      devGroup: {
+         title: 'Dev Group',
+         target: '#devGroup',
+         scrollTo: smoothScrollTo,
+      },
       blog: { title: 'Blog', target: '#blog' },
       uses: { title: 'Uses', target: '/uses' },
    }
+   const navMenu: PageMenu = {
+      links: menuItems,
+   }
+
    const refs = {
       welcome: useRef(null),
       profile: useRef(null),
@@ -49,26 +65,32 @@ const IndexPage = ({ data }) => {
    }
 
    //-- scroll to hashtag
-   setTimeout(() => {
-      if (location.hash && document) {
-         const target = location.hash.replace('#', '')
-         const ref = refs[target]
-         if (ref) {
-            window.scrollTo({
-               top: ref.current.offsetTop,
-               behavior: 'smooth',
-            })
+   useEffect(() => {
+      setTimeout(() => {
+         if (location.hash && document) {
+            const target = location.hash.replace('#', '')
+            smoothScrollTo(target)
          }
-      }
+      })
    })
+
+   function smoothScrollTo(target: string) {
+      const ref = refs[target]
+      if (ref) {
+         window.scrollTo({
+            top: ref.current.offsetTop,
+            behavior: 'smooth',
+         })
+      }
+   }
 
    return (
       <Layout>
          <SEO title="Andre Young" />
-         <MobileNav links={menuItems} />
+         <MobileNav menu={navMenu} active="home" />
          <a id="welcome" ref={refs['welcome']}></a>
          <Welcome />
-         <Nav links={menuItems} />
+         <Nav menu={navMenu} active="home" />
          <a id="profile" ref={refs['profile']}></a>
          <Profile />
          <a id="work" ref={refs['work']}></a>

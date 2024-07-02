@@ -4,6 +4,7 @@ import { sharedStyles } from '../styles/global'
 
 import { Button } from '@material-ui/core'
 import { useWindowSize } from '../hooks/useWindowSize'
+import { PageMenu, PageMenuItem, PageMenuLinks } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -23,12 +24,17 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const Nav = (props) => {
+interface NavProps {
+   menu: PageMenu
+   active: string
+}
+
+const Nav = (props: NavProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const [active, setActive] = useState(props.active)
    const windowSize = useWindowSize()
-   const links = props.links
+   const links = props.menu?.links
    const defaultMenuOptions = {
       home: { title: 'Home', target: '/' },
       profile: { title: 'Profile', target: '/#profile' },
@@ -38,32 +44,38 @@ const Nav = (props) => {
       blog: { title: 'Blog', target: '/blog' },
       uses: { title: 'Uses', target: '/uses' },
    }
-   const initialMenuItems = links
+   const initialMenuItems: PageMenuLinks = links
       ? { ...defaultMenuOptions, ...links }
       : defaultMenuOptions
    if (active) {
-      initialMenuItems[active].active = true
+      initialMenuItems[active].isActive = true
    }
 
    const [menuItems, setMenuItems] = useState(initialMenuItems)
 
-   const selectLink = (selectedKey: string) => {
+   const selectLink = (selectedKey: string, menuItem: PageMenuItem) => {
       let selectionFound = false
       setActive(selectedKey)
 
       Object.keys(menuItems).map((key) => {
          if (key === selectedKey) {
-            menuItems[key].active = true
+            menuItems[key].isActive = true
             selectionFound = true
          } else {
-            menuItems[key].active = false
+            menuItems[key].isActive = false
          }
       })
 
       if (!selectionFound) {
-         menuItems.home.active = true
+         menuItems.home.isActive = true
       }
       setMenuItems({ ...menuItems })
+
+      console.log('trying to execute smooth scroll')
+      if (!!menuItem.scrollTo) {
+         const target = menuItem.target.replace('#', '')
+         menuItem.scrollTo(target)
+      }
    }
 
    return (
@@ -80,7 +92,7 @@ const Nav = (props) => {
                <div className={[css.container, css.content].join(' ')}>
                   {Object.keys(menuItems).map((key) => {
                      const item = menuItems[key]
-                     const color = item.active ? 'secondary' : 'primary'
+                     const color = item.isActive ? 'secondary' : 'primary'
                      return (
                         <div
                            key={`nav-${item.title}`}
@@ -90,8 +102,8 @@ const Nav = (props) => {
                            }}
                         >
                            <a
-                              href={`${item.target}`}
-                              onClick={() => selectLink(key)}
+                              href={!item.scrollTo ? '' : `${item.target}`}
+                              onClick={() => selectLink(key, item)}
                            >
                               <Button color={color}>{item.title}</Button>
                            </a>

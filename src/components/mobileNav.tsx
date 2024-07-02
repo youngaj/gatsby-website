@@ -6,6 +6,7 @@ import { Button, Menu, MenuItem } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 
 import { useWindowSize } from '../hooks/useWindowSize'
+import { PageMenu, PageMenuLinks } from '../models'
 
 const useStyles = makeStyles((theme: Theme) => ({
    ...sharedStyles(theme),
@@ -21,12 +22,17 @@ const useStyles = makeStyles((theme: Theme) => ({
    },
 }))
 
-const MobileNav = (props) => {
+interface MobileNavProps {
+   menu: PageMenu
+   active: string
+}
+
+const MobileNav = (props: MobileNavProps) => {
    const theme = useTheme()
    const css = useStyles(theme)
    const [active, setActive] = useState(props.active)
-   const links = props.links
-   const defaultMenuOptions = {
+   const links = props.menu.links
+   const defaultMenuOptions: PageMenuLinks = {
       home: { title: 'Home', target: '/' },
       profile: { title: 'Profile', target: '/#profile' },
       resume: { title: 'Resume', target: '/#resume' },
@@ -46,22 +52,23 @@ const MobileNav = (props) => {
    const handleClose = () => {
       setAnchorEl(null)
    }
-   const menuItems = links
+   const menuItems: PageMenuLinks = links
       ? { ...defaultMenuOptions, ...links }
       : defaultMenuOptions
 
+   console.log(`active is`, active)
    if (active) {
-      menuItems[active].active = 'true'
+      menuItems[active].isActive = true
    } else {
-      menuItems.home.active = 'true'
+      menuItems.home.isActive = true
    }
 
    const selectLink = (key: string) => {
       setActive(key)
       if (key) {
-         menuItems[key].active = 'true'
+         menuItems[key].isActive = true
       } else {
-         menuItems.home.active = 'true'
+         menuItems.home.isActive = true
       }
    }
 
@@ -86,7 +93,7 @@ const MobileNav = (props) => {
                >
                   {Object.keys(menuItems).map((key) => {
                      const item = menuItems[key]
-                     const color = item.active ? 'secondary' : 'primary'
+                     const color = item.isActive ? 'secondary' : 'primary'
                      return (
                         <div
                            key={`nav-${item.title}`}
